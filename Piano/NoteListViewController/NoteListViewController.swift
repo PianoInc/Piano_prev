@@ -104,7 +104,7 @@ class NoteListViewController: UIViewController {
     private func setupNavigationBar() {
         //TODO: 네비게이션 바 세팅
         navigationItem.title = type.string
-        navigationItem.setRightBarButtonItems(type.rightBarItems, animated: true)
+        navigationItem.setRightBarButtonItems(type.rightBarItems(self), animated: true)
     }
     
     private func updateCollectionViewInset() {
@@ -154,18 +154,20 @@ extension NoteListViewController {
                 return "잠긴 메모"
             }
         }
-        
-        var rightBarItems: [UIBarButtonItem] {
-            switch self {
-            case .all, .custom:
-                let item1 = UIBarButtonItem(image: #imageLiteral(resourceName: "attachment"), style: .plain, target: self, action: #selector(NoteListViewController.tapAttachment))
-                item1.tintColor = .black
-                let item2 = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(NoteListViewController.tapSearch))
-                item2.tintColor = .black
-                return [item1, item2]
-            case .deleted, .locked:
-                let item1 = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(NoteListViewController.tapEdit))
-                return [item1]
+    
+        var rightBarItems: ((UIViewController) -> [UIBarButtonItem]) {
+            return {vc in
+                switch self {
+                case .all, .custom:
+                    let item1 = UIBarButtonItem(image: #imageLiteral(resourceName: "attachment"), style: .plain, target: vc, action: #selector(NoteListViewController.tapAttachment))
+                    item1.tintColor = .black
+                    let item2 = UIBarButtonItem(barButtonSystemItem: .search, target: vc, action: #selector(NoteListViewController.tapSearch))
+                    item2.tintColor = .black
+                    return [item1, item2]
+                case .deleted, .locked:
+                    let item1 = UIBarButtonItem(barButtonSystemItem: .edit, target: vc, action: #selector(NoteListViewController.tapEdit))
+                    return [item1]
+                }
             }
         }
         
@@ -207,6 +209,6 @@ extension NoteListViewController {
     }
     
     @objc func tapSearch() {
-        performSegue(withIdentifier: NoteListViewController.identifier, sender: nil)
+        performSegue(withIdentifier: SearchViewController.identifier, sender: nil)
     }
 }
