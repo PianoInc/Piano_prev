@@ -40,3 +40,5 @@ public typealias CollectionViewDelegate = UICollectionViewDelegate
 public typealias CollectionViewDelegateFlowLayout = UICollectionViewDelegateFlowLayout
 public typealias CollectionViewDataSourcePrefetching = UICollectionViewDataSourcePrefetching
 public typealias CollectionViewLayout = UICollectionViewLayout
+public typealias StringDrawingOptions = NSStringDrawingOptions
+

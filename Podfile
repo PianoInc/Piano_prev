@@ -10,10 +10,8 @@ end
 # Pods for Piano
 target 'Piano' do
     use_frameworks!
-    common
-    pod 'SwiftyJSON'
-    pod 'FBSDKLoginKit'
     pod 'CryptoSwift'
+    common
 end
 
 # Pods for widget
