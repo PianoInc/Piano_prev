@@ -19,8 +19,9 @@ class DeletedNoteCell: UICollectionViewCell, CollectionDataAcceptable {
             guard let data = self.data as? Note else { return }
             footnoteLabel.text = data.footnote
             shareImageView.isHidden = !data.type.isShared
-            titleLabel.text = data.title
-            subTitleLabel.text = data.subTitle
+            let firstLineText = data.content.firstLineText(font: titleLabel.font, width: titleLabel.bounds.width)
+            titleLabel.text = firstLineText
+            subTitleLabel.text = data.content.sub(firstLineText.count...)
         }
     }
     
