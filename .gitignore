@@ -1,0 +1,6 @@
+Pods
+*.lock
+*.xcuserdatad
+*/xcuserdata/*
+.idea/*
+Piano.xcworkspace/xcshareddata
