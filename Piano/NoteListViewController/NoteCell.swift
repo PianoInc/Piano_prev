@@ -11,17 +11,15 @@ import UIKit
 struct Note: CollectionDatable {
     
     let type: NoteViewController.NoteType
-    let title: String
-    let subTitle: String
+    let content: String
     let footnote: String
    
     var sectionTitle: String?
     var sectionIdentifier: String?
     
-    init(type: NoteViewController.NoteType, title: String, subTitle: String, footnote: String, sectionTitle: String? = nil, sectionIdentifier: String? = nil) {
+    init(type: NoteViewController.NoteType, content: String, footnote: String, sectionTitle: String? = nil, sectionIdentifier: String? = nil) {
         self.type = type
-        self.title = title
-        self.subTitle = subTitle
+        self.content = content
         self.footnote = footnote
         self.sectionTitle = sectionTitle
         self.sectionIdentifier = sectionIdentifier
@@ -69,8 +67,10 @@ class NoteCell: UICollectionViewCell, CollectionDataAcceptable {
             guard let data = self.data as? Note else { return }     
             footnoteLabel.text = data.footnote
             shareImageView.isHidden = !data.type.isShared
-            titleLabel.text = data.title
-            subTitleLabel.text = data.subTitle
+            let firstLineText = data.content.firstLineText(font: titleLabel.font, width: titleLabel.bounds.width)
+            titleLabel.text = firstLineText
+            subTitleLabel.text = data.content.sub(firstLineText.count...)
+            
         }
     }
     

@@ -58,41 +58,6 @@ open class DynamicTextView: UITextView {
     open override func awakeAfter(using aDecoder: NSCoder) -> Any? {
         
         let newTextView = DynamicTextView(frame: self.frame)
-
-        //get constraints
-        var constraints: Array<NSLayoutConstraint> = []
-        self.constraints.forEach {
-            let firstItem: AnyObject!, secondItem: AnyObject!
-
-            if let unwrappedFirst = $0.firstItem as? DynamicTextView, unwrappedFirst == self {
-                firstItem = self
-            } else {
-                firstItem = $0.firstItem
-            }
-
-            if let unwrappedSecond = $0.secondItem as? DynamicTextView, unwrappedSecond == self {
-                secondItem = self
-            } else {
-                secondItem = $0.secondItem
-            }
-
-            constraints.append(
-                    NSLayoutConstraint(item: firstItem,
-                            attribute: $0.firstAttribute,
-                            relatedBy: $0.relation,
-                            toItem: secondItem,
-                            attribute: $0.secondAttribute,
-                            multiplier: $0.multiplier,
-                            constant: $0.constant))
-        }
-
-
-
-        newTextView.addConstraints(constraints)
-        newTextView.autoresizingMask = self.autoresizingMask
-        newTextView.translatesAutoresizingMaskIntoConstraints = self.translatesAutoresizingMaskIntoConstraints
-
-
         newTextView.autocorrectionType = self.autocorrectionType
         newTextView.attributedText = self.attributedText
         newTextView.backgroundColor = self.backgroundColor
