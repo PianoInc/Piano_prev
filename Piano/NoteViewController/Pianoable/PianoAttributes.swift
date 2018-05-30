@@ -46,15 +46,22 @@ enum PianoAttributes: Int {
             newAttr[.underlineStyle] = 1
             newAttr[.underlineColor] = ColorManager.shared.underLine()
             
-        case .header1: break
-             
-        case .header2: break
+        case .header1:
+            let fontAttribute = PianoFontAttribute(traits: [], sizeCategory: .title1)
+            newAttr[.pianoFontInfo] = fontAttribute
+            newAttr[.font] = fontAttribute.getFont()
             
-        case .header3: break
+        case .header2:
+            let fontAttribute = PianoFontAttribute(traits: [], sizeCategory: .title2)
+            newAttr[.pianoFontInfo] = fontAttribute
+            newAttr[.font] = fontAttribute.getFont()
             
+        case .header3:
+            let fontAttribute = PianoFontAttribute(traits: [], sizeCategory: .title3)
+            newAttr[.pianoFontInfo] = fontAttribute
+            newAttr[.font] = fontAttribute.getFont()
             
         }
-        
         
         return newAttr
         
@@ -85,11 +92,21 @@ enum PianoAttributes: Int {
             newAttr[.underlineStyle] = 0
             
             
-        case .header1: break
+        case .header1, .header2, .header3:
+            let sizeCategory: FontSizeCategory
             
-        case .header2: break
+            switch self {
+                case .header1: sizeCategory = .title1
+                case .header2: sizeCategory = .title2
+                case .header3: sizeCategory = .title3
+                default: return newAttr
+            }
             
-        case .header3: break
+            guard let fontAttribute = newAttr[.pianoFontInfo] as? PianoFontAttribute,
+                fontAttribute.sizeCategory == sizeCategory else {return newAttr}
+            
+            newAttr[.pianoFontInfo] = nil
+            newAttr[.font] = PianoFontAttribute.standard().getFont()
             
         }
         
