@@ -369,7 +369,6 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="MNb-fc-rw6" secondAttribute="bottom" id="7ub-JN-wA1"/>
                 <constraint firstAttribute="trailing" secondItem="MNb-fc-rw6" secondAttribute="trailing" id="Sc0-6X-Kza"/>

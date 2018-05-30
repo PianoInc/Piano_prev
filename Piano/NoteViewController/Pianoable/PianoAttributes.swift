@@ -47,7 +47,7 @@ enum PianoAttributes: Int {
             newAttr[.underlineColor] = ColorManager.shared.underLine()
             
         case .header1: break
-            
+             
         case .header2: break
             
         case .header3: break
