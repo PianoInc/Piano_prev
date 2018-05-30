@@ -103,6 +103,15 @@ class CloudManager {
                 if self?.userID != recordID {
                     self?.icloudIDChanged(with: recordID)
                 }
+                
+                //Ask for discoverability!
+                CKContainer.default().requestApplicationPermission(.userDiscoverability, completionHandler: { (status, error) in
+                    if error != nil {
+                        print(error!)
+                    } else {
+                        
+                    }
+                })
             }
         }
     }
@@ -118,10 +127,6 @@ class CloudManager {
         
         privateDatabase.handleNotification()
         sharedDatabase.handleNotification()
-        
-        CKContainer.default().discoverUserIdentity(withUserRecordID: recordID) { (identity, error) in
-
-        }
     }
     
     @objc private func accountDidChange(_ notification: Notification) {
