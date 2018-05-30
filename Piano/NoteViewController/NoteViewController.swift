@@ -8,6 +8,8 @@
 
 import UIKit
 import DynamicTextEngine_iOS
+import RealmSwift
+import CloudKit
 
 class NoteViewController: UIViewController {
     
@@ -34,6 +36,33 @@ class NoteViewController: UIViewController {
     func textViewBecomeFirstResponderIfNeeded() {
         if type.becomeFirstResponder {
             //textView.becomeFirstResponder
+        }
+    }
+    
+    private func setLastModifiedString(for noteID: String) {
+        guard let realm = try? Realm(),
+            let noteModel = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) else {return}
+        
+        let coder = NSKeyedUnarchiver(forReadingWith: noteModel.ckMetaData)
+        coder.requiresSecureCoding = true
+        guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
+        coder.finishDecoding()
+        let modifiedDateString = noteModel.isModified.timeFormat
+        
+        if let lastUser = record.lastModifiedUserRecordID, CloudManager.shared.userID != lastUser {
+            
+            CKContainer.default().discoverUserIdentity(withUserRecordID: lastUser) { (identity, error) in
+                if let nameComponent = identity?.nameComponents {
+                    let name = (nameComponent.givenName ?? "") + (nameComponent.familyName ?? "")
+                    
+                    let modified = "\(name)님이 \(modifiedDateString)에 마지막으로 수정했습니다."
+                } else {
+                    // default string
+                }
+            }
+            
+        } else {
+            let modified = "\(modifiedDateString)에 마지막으로 수정했습니다."
         }
     }
 
