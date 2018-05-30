@@ -79,6 +79,7 @@ class FontManager {
         
         if !font.fontDescriptor.matrix.c.isZero {
             traits.insert(.italic)
+            font.fontDescriptor.withSymbolicTraits(<#T##symbolicTraits: UIFontDescriptorSymbolicTraits##UIFontDescriptorSymbolicTraits#>)
             //TODO: check
         }
         if font.fontDescriptor.symbolicTraits.contains(.traitBold) {

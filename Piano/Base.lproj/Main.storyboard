@@ -434,20 +434,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m05-Sm-d8W">
-                                <rect key="frame" x="0.0" y="41" width="375" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m05-Sm-d8W">
+                                <rect key="frame" x="0.0" y="20" width="315" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="10" vertical="0.0"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="S6c-gg-WHW" id="Fsq-U8-bXS"/>
-                                </connections>
                             </searchBar>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vyK-cw-h0A">
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Ly-ra-e0T">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WPx-bT-3Dt">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5Z-CZ-Rhm">
+                                <rect key="frame" x="315" y="20" width="60" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="hQz-ec-GNp"/>
+                                </constraints>
+                                <state key="normal" title="취소"/>
+                                <connections>
+                                    <action selector="cancelButtonTouched:" destination="S6c-gg-WHW" eventType="touchUpInside" id="jyb-x1-ocN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vyK-cw-h0A" firstAttribute="leading" secondItem="VFV-uP-oXp" secondAttribute="leading" id="2u5-CA-sz7"/>
+                            <constraint firstItem="VFV-uP-oXp" firstAttribute="bottom" secondItem="vyK-cw-h0A" secondAttribute="bottom" id="AkC-Lh-oCF"/>
+                            <constraint firstItem="y5Z-CZ-Rhm" firstAttribute="centerY" secondItem="m05-Sm-d8W" secondAttribute="centerY" id="V4X-GH-e1l"/>
+                            <constraint firstItem="vyK-cw-h0A" firstAttribute="top" secondItem="m05-Sm-d8W" secondAttribute="bottom" id="cXt-Qp-Ebq"/>
+                            <constraint firstItem="m05-Sm-d8W" firstAttribute="leading" secondItem="VFV-uP-oXp" secondAttribute="leading" id="hgp-ag-U2X"/>
+                            <constraint firstItem="m05-Sm-d8W" firstAttribute="top" secondItem="VFV-uP-oXp" secondAttribute="top" id="irw-02-tkp"/>
+                            <constraint firstItem="y5Z-CZ-Rhm" firstAttribute="leading" secondItem="m05-Sm-d8W" secondAttribute="trailing" id="jHw-Pv-pkV"/>
+                            <constraint firstItem="y5Z-CZ-Rhm" firstAttribute="trailing" secondItem="VFV-uP-oXp" secondAttribute="trailing" id="kiW-mR-85u"/>
+                            <constraint firstItem="VFV-uP-oXp" firstAttribute="trailing" secondItem="vyK-cw-h0A" secondAttribute="trailing" id="mka-xG-ZAD"/>
+                            <constraint firstItem="y5Z-CZ-Rhm" firstAttribute="height" secondItem="m05-Sm-d8W" secondAttribute="height" id="zHw-62-KHH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="VFV-uP-oXp"/>
                     </view>
                     <navigationItem key="navigationItem" id="Muf-HM-2MV"/>
                     <connections>
+                        <outlet property="collectionView" destination="vyK-cw-h0A" id="Krx-7I-W7a"/>
+                        <outlet property="searchBar" destination="m05-Sm-d8W" id="8qU-1E-ucj"/>
                         <outlet property="searchDisplayController" destination="6vw-fZ-a08" id="WUa-nC-mmB"/>
                     </connections>
                 </viewController>
@@ -455,14 +499,13 @@
                 <searchDisplayController id="6vw-fZ-a08">
                     <connections>
                         <outlet property="delegate" destination="S6c-gg-WHW" id="0hK-Tb-1cH"/>
-                        <outlet property="searchBar" destination="m05-Sm-d8W" id="F9w-p0-iFa"/>
                         <outlet property="searchContentsController" destination="S6c-gg-WHW" id="Pjb-le-tOA"/>
                         <outlet property="searchResultsDataSource" destination="S6c-gg-WHW" id="owf-26-Qee"/>
                         <outlet property="searchResultsDelegate" destination="S6c-gg-WHW" id="edL-gx-clk"/>
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2494" y="-1267"/>
+            <point key="canvasLocation" x="2493.5999999999999" y="-1267.0164917541231"/>
         </scene>
         <!--모든 메모-->
         <scene sceneID="mQT-kv-xNv">
@@ -1421,7 +1464,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LSJ-mK-hSP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LSJ-mK-hSP" customClass="DynamicTextView" customModule="DynamicTextEngine_iOS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -1448,6 +1491,9 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="LSJ-mK-hSP" id="13Z-du-hU7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06p-KC-JOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -85,6 +85,11 @@ class CloudManager {
     
     func requestUserInfo() {
         let container = CKContainer.default()
+//        container.requestApplicationPermission(.userDiscoverability) { (status, error) in
+//            switch status {
+//                
+//            }
+//        }
         container.fetchUserRecordID() { [weak self] recordID, error in
             if error != nil {
                 if let ckError = error as? CKError, ckError.isSpecificErrorCode(code: .notAuthenticated) {
@@ -113,6 +118,10 @@ class CloudManager {
         
         privateDatabase.handleNotification()
         sharedDatabase.handleNotification()
+        
+        CKContainer.default().discoverUserIdentity(withUserRecordID: recordID) { (identity, error) in
+
+        }
     }
     
     @objc private func accountDidChange(_ notification: Notification) {

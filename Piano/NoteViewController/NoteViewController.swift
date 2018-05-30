@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import DynamicTextEngine_iOS
 
 class NoteViewController: UIViewController {
     
     var type: NoteType!
-
+    @IBOutlet weak var textView: DynamicTextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
