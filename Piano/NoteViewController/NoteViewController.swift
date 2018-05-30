@@ -10,6 +10,8 @@ import UIKit
 
 class NoteViewController: UIViewController {
     
+    
+    @IBOutlet weak var textView: PianoTextView!
     var type: NoteType!
 
     override func viewDidLoad() {
@@ -132,7 +134,7 @@ extension NoteViewController {
     }
     
     @objc func tapPiano() {
-        
+        textView.beginPiano()
     }
     
     @objc func tapShare() {
