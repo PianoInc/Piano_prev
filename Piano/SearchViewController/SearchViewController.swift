@@ -19,11 +19,13 @@ class SearchViewController: UIViewController {
     let disposeBag = DisposeBag()
     var noteFilteredResults: Results<RealmNoteModel>?
     var notificationToken: NotificationToken?
+    var searchText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setObserver()
+        subscribeToSearchBar()
     }
 
     private func setObserver() {
@@ -40,6 +42,9 @@ class SearchViewController: UIViewController {
             }
         }
         
+    }
+    
+    private func subscribeToSearchBar() {
         searchBar.rx.text.asObservable().map{$0 ?? ""}
             .filter{ !$0.isEmpty }
             .debounce(1.0, scheduler: MainScheduler.instance)
@@ -50,14 +55,21 @@ class SearchViewController: UIViewController {
         searchBar.rx.text.asObservable().map{ ($0 ?? "").isEmpty }
             .bind(to: collectionView.rx.isHidden)
             .disposed(by: disposeBag)
-        
     }
     
     func update(with searchText: String) {
-        print(searchText)
+        self.searchText = searchText
+        guard let realm = try? Realm() else { fatalError() }
+        
+        noteFilteredResults = realm.objects(RealmNoteModel.self)
+            .filter("isInTrash = false AND content CONTAINS[cd] %@", searchText)
+        
+        setObserver()
     }
     
     @IBAction func cancelButtonTouched(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+//TODO: Note structure 활용해서 collectionview 만들기
