@@ -39,7 +39,17 @@ class NoteListViewController: UIViewController {
             let realm = try! Realm()
             let objects = realm.objects(RealmNoteModel.self)
             
+            //section 1: 캘린더 정보 (구독하고, 캘린더 데이터가 있을 경우에만 보여줌)
+            //TODO: 지오한테 물어봐서 개발하기
+            //        if tempSubscription && tempCalendar {
+            //            let noteCalendar: [CollectionDatable] = [NoteCalendar(title: "로즈데이", startDate: Date(), endDate: Date(), sectionTitle: "예정")]
+            //            dataSource.append(noteCalendar)
+            //        } else {
+            //            dataSource.append([])
+            //        }
             
+            
+            //section 2: 고정 메모
             let holdResults = objects.filter("isPinned = true AND isInTrash = false").sorted(byKeyPath: "isModified", ascending: false)
             let holdNotes: [Note] = holdResults.map({ (noteModel) -> Note in
                 var shared = noteModel.isInSharedDB
@@ -57,6 +67,7 @@ class NoteListViewController: UIViewController {
             })
             dataSource.append(holdNotes)
             
+            //section 3: 오늘 날짜
             let normalResults = objects.filter("isPinned = false AND isInTrash = false").sorted(byKeyPath: "isModified", ascending: false)
             let normalNotes: [Note] = normalResults.map({ (noteModel) -> Note in
                 var shared = noteModel.isInSharedDB
@@ -75,6 +86,10 @@ class NoteListViewController: UIViewController {
             
             dataSource.append(normalNotes)
             
+            
+            //section 4: 어제 날짜
+            
+            
         case .custom(let categoryStr):
             //section 0: 새 메모 작성
             //TODO: description에 대한 모델 대입하기
@@ -91,18 +106,6 @@ class NoteListViewController: UIViewController {
             let noteCreate: [CollectionDatable] = [NoteCreate(type: .create, title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
             dataSource.append(noteCreate)
         }
-        
-        //section 1: 예정(구독하고, 캘린더 데이터가 있을 경우에만 보여줌)
-//        //TODO: 구독 체크
-//        if tempSubscription && tempCalendar {
-//            let noteCalendar: [CollectionDatable] = [NoteCalendar(title: "로즈데이", startDate: Date(), endDate: Date(), sectionTitle: "예정")]
-//            dataSource.append(noteCalendar)
-//        } else {
-//            dataSource.append([])
-//        }
-
-        //section 2: 고정된 메모
-        //TODO: 해당 카테고리 이면서 hold된 메모들 fetch하여 나타내기
 
         
         //section 3: 일반 메모들
