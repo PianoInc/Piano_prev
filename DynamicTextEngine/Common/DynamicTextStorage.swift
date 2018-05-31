@@ -70,38 +70,11 @@ class DynamicTextStorage: NSTextStorage {
                 endEditing()
                 return
             }
-            
-
-            if let card = PianoCard(
-                text: string,
-                selectedRange: NSMakeRange(cursorLocation, 0)) {
-                
-                //카드가 있다면 붙여주기
-                let attachment = card.attachment()
-                //개행을 추가해 붙이기
-                let newLine = "\n"
-                
-                //붙이기
-//                backingStore.replaceCharacters(in: <#T##NSRange#>, with: <#T##NSAttributedString#>)
-                
-                
-                endEditing()
-                return
-            }
-            
-            //create card logic
-            //            if let card = PianoCard(bullet 생성자처럼 값 대입) {
-            //                attachCard(...)
-            //                endEditing()
-            //            }
-            
-            
         }
         
         //패러그랲 붙여주고, 그 패러그랲 서식검사하고 이 순서로 가기
         let mutableAttrString = NSMutableAttributedString(attributedString: attrString)
         mutableAttrString.addAttributes(FormAttributes.defaultAttributes, range: NSMakeRange(0, mutableAttrString.length))
-//        let mutableAttrString = NSMutableAttributedString(string: attrString.string, attributes: FormAttributes.defaultAttributes)
         var paraRange = (mutableAttrString.string as NSString).paragraphRange(for: NSMakeRange(0, 0))
         
         repeat {

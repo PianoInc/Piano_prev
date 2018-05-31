@@ -9,6 +9,7 @@
 import UIKit
 
 class PianoSegmentControl: UIView {
+    static let height: CGFloat = 120
     @IBOutlet weak var textColorImageView: UIImageView!
     @IBOutlet weak var textColorLabel: UILabel!
     @IBOutlet weak var highlighterImageView: UIImageView!
@@ -70,32 +71,33 @@ class PianoSegmentControl: UIView {
     
     @IBAction func tapColor(_ sender: Any) {
         changeState(selectedImageView: textColorImageView, selectedLabel: textColorLabel)
-        pianoView?.effectStr = textColorLabel.text
+        pianoView?.attributes = .foregroundColor
     }
     
     @IBAction func tapHighlighter(_ sender: Any) {
         changeState(selectedImageView: highlighterImageView, selectedLabel: highlighterLabel)
-        pianoView?.effectStr = highlighterLabel.text
+        pianoView?.attributes = .backgroundColor
     }
     
     @IBAction func tapBold(_ sender: Any) {
         changeState(selectedImageView: boldImageView, selectedLabel: boldLabel)
-        pianoView?.effectStr = boldLabel.text
+        pianoView?.attributes = .bold
     }
     
     @IBAction func tapItalic(_ sender: Any) {
         changeState(selectedImageView: italicImageView, selectedLabel: italicLabel)
-        pianoView?.effectStr = italicLabel.text
+        pianoView?.attributes = .italic
     }
     
     @IBAction func tapStrikethrough(_ sender: Any) {
         changeState(selectedImageView: strikethroughImageView, selectedLabel: strikethroughLabel)
-        pianoView?.effectStr = strikethroughLabel.text
+        pianoView?.attributes = .strikeThrough
     }
     
     @IBAction func tapUnderline(_ sender: Any) {
         changeState(selectedImageView: underlineImageView, selectedLabel: underlineLabel)
-        pianoView?.effectStr = underlineLabel.text
+        pianoView?.attributes = .underline
+        
     }
     
     @IBAction func tapHeader(_ sender: Any) {
@@ -113,7 +115,18 @@ class PianoSegmentControl: UIView {
         }
         
         changeState(selectedImageView: headerImageView, selectedLabel: headerLabel)
-        pianoView?.effectStr = headerLabel.text
+        if let str = headerLabel.text?.replacingOccurrences(of: "머리말", with: ""), let num = Int(str) {
+            switch num {
+            case 1:
+                pianoView?.attributes = .header1
+            case 2:
+                pianoView?.attributes = .header2
+            case 3:
+                pianoView?.attributes = .header3
+            default:
+                ()
+            }
+        }
         
     }
     

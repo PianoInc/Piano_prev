@@ -105,10 +105,9 @@ enum Style {
         case .underlineStyle:
             guard let value = attribute.value as? Int, value == 1 else {return nil}
             self = .underline
-        case .font:
-            guard let font = attribute.value as? UIFont,
-                    FontManager.shared.fontAttribute(for: font) != PianoFontAttribute.standard() else {return nil}
-            self = .font(FontManager.shared.fontAttribute(for: font))
+        case .pianoFontInfo:
+            guard let fontAttribute = attribute.value as? PianoFontAttribute else {return nil}
+            self = .font(fontAttribute)
         case .attachment:
             guard let attachment = attribute.value as? CardAttachment else {return nil}
             self = .attachment(attachment.cellIdentifier, attachment.idForModel)

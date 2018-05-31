@@ -16,6 +16,7 @@ class FontManager {
 
     private var customFont = UIFont.systemFont(ofSize: 17)
     private var customBoldFont = UIFont.boldSystemFont(ofSize: 17)
+    private var customExtraBoldFont = UIFont.systemFont(ofSize: 17, weight: .heavy)
 
     private func getFontDescriptor() -> UIFontDescriptor {
         return customFont.fontDescriptor
@@ -47,6 +48,10 @@ class FontManager {
         }
     }
     
+    private func getDescriptor(by size: FontSizeCategory) -> UIFontDescriptor {
+        return size == .title1 ? customExtraBoldFont.fontDescriptor: customBoldFont.fontDescriptor
+    }
+    
     private func getOffsetFromSize() -> CGFloat {
         switch PianoNoteSizeInspector.shared.get() {
         case .verySmall: return -8.0
@@ -60,40 +65,19 @@ class FontManager {
     private func getSize(from category: FontSizeCategory) -> CGFloat{
         let offset = getOffsetFromSize()
         switch category {
-            case .title1: return 24.0 + offset
-            case .title2: return 22.0 + offset
-            case .title3: return 20.0 + offset
+            case .title1: return 45.0 + offset
+            case .title2: return 30.0 + offset
+            case .title3: return 22.0 + offset
             case .body: return 17.0 + offset
         }
     }
 
     func font(for attribute: PianoFontAttribute) -> UIFont {
-        let descriptor = getDescriptor(from: attribute.traits)
+        
         let size = getSize(from: attribute.sizeCategory)
+        let descriptor = attribute.sizeCategory == .body ? getDescriptor(from: attribute.traits)
+            : getDescriptor(by: attribute.sizeCategory)
 
         return UIFont(descriptor: descriptor, size: size)
-    }
-
-    func fontAttribute(for font: UIFont) -> PianoFontAttribute {
-        var traits: FontTraits = []
-        
-        if !font.fontDescriptor.matrix.c.isZero {
-            traits.insert(.italic)
-            //TODO: check
-        }
-        if font.fontDescriptor.symbolicTraits.contains(.traitBold) {
-            traits.insert(.bold)
-        }
-
-        var size = FontSizeCategory.body
-
-        for sizeCategory in ([.body, .title1, .title2, .title3] as [FontSizeCategory]) {
-            if font.pointSize == getSize(from: sizeCategory) {
-                size = sizeCategory
-                break
-            }
-        }
-
-        return PianoFontAttribute(traits: traits, sizeCategory: size)
     }
 }

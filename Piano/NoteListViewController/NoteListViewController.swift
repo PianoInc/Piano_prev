@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
+import CloudKit
 
 class NoteListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var type: CategoryType!
-    //temp
+//    //temp
     var tempSubscription = true
     var tempCalendar = true
     var tempHold = true
@@ -22,71 +24,93 @@ class NoteListViewController: UIViewController {
         //TODO: type을 바라보며 데이터 소스 세팅하기
         
         guard let type = self.type else { return []}
+        var dataSource: [[CollectionDatable]] = []
+        
+        
         switch type {
         case .all:
-            ()
+            
+            //section 0: 새 메모 작성
+            //TODO: description에 대한 모델 대입하기
+            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create, title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
+            dataSource.append(noteCreate)
+            
+            
+            let realm = try! Realm()
+            let objects = realm.objects(RealmNoteModel.self)
+            
+            //section 1: 캘린더 정보 (구독하고, 캘린더 데이터가 있을 경우에만 보여줌)
+            //TODO: 지오한테 물어봐서 개발하기
+            //        if tempSubscription && tempCalendar {
+            //            let noteCalendar: [CollectionDatable] = [NoteCalendar(title: "로즈데이", startDate: Date(), endDate: Date(), sectionTitle: "예정")]
+            //            dataSource.append(noteCalendar)
+            //        } else {
+            //            dataSource.append([])
+            //        }
+            
+            
+            //section 2: 고정 메모
+            let holdResults = objects.filter("isPinned = true AND isInTrash = false").sorted(byKeyPath: "isModified", ascending: false)
+            let holdNotes: [Note] = holdResults.map({ (noteModel) -> Note in
+                var shared = noteModel.isInSharedDB
+                if shared == false,
+                    let shareRecordName = noteModel.shareRecordName,
+                    let shareModel = realm.object(ofType: RealmCKShare.self, forPrimaryKey: shareRecordName),
+                    let share = CKShare.unarchieve(from: shareModel.shareData) as? CKShare {
+                    shared = share.participants.count > 1
+                }
+                
+                let content = noteModel.content.prefix(50)
+                let str = String(content)
+                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                return Note(type: NoteViewController.NoteType.open(NoteViewController.NoteInfo(id: noteModel.id, isShared: shared)),content: str, footnote: dateStr, sectionTitle: "고정된 메모", sectionIdentifier: NotePeriodReusableView.identifier)
+            })
+            dataSource.append(holdNotes)
+            
+            //section 3: 오늘 날짜
+            let normalResults = objects.filter("isPinned = false AND isInTrash = false").sorted(byKeyPath: "isModified", ascending: false)
+            let normalNotes: [Note] = normalResults.map({ (noteModel) -> Note in
+                var shared = noteModel.isInSharedDB
+                if shared == false,
+                    let shareRecordName = noteModel.shareRecordName,
+                    let shareModel = realm.object(ofType: RealmCKShare.self, forPrimaryKey: shareRecordName),
+                    let share = CKShare.unarchieve(from: shareModel.shareData) as? CKShare {
+                    shared = share.participants.count > 1
+                }
+                
+                let title = noteModel.content.prefix(50)
+                let str = String(title)
+                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                return Note(type: NoteViewController.NoteType.open(NoteViewController.NoteInfo(id: noteModel.id, isShared: shared)), content: str, footnote: dateStr, sectionTitle: "오늘", sectionIdentifier: NotePeriodReusableView.identifier)
+            })
+            
+            dataSource.append(normalNotes)
+            
+            
+            //section 4: 어제 날짜
+            
+            
         case .custom(let categoryStr):
-            ()
+            //section 0: 새 메모 작성
+            //TODO: description에 대한 모델 대입하기
+            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create, title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
+            
+            dataSource.append(noteCreate)
+            
+            
         case .deleted:
             ()
         case .locked:
-            ()
-        }
-        
-        var dataSource: [[CollectionDatable]] = []
-        
-        //section 0: 새 메모 작성
-        //TODO: description에 대한 모델 대입하기
-        let noteCreate: [CollectionDatable] = [NoteCreate(type: .create(NoteViewController.NoteInfo(id: "newID", isShared: false)), title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
-        
-        dataSource.append(noteCreate)
-        
-        //section 1: 예정(구독하고, 캘린더 데이터가 있을 경우에만 보여줌)
-        //TODO: 구독 체크
-        if tempSubscription && tempCalendar {
-            let noteCalendar: [CollectionDatable] = [NoteCalendar(title: "로즈데이", startDate: Date(), endDate: Date(), sectionTitle: "예정")]
-            dataSource.append(noteCalendar)
-        } else {
-            dataSource.append([])
+            //section 0: 새 메모 작성
+            //TODO: description에 대한 모델 대입하기
+            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create, title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
+            dataSource.append(noteCreate)
         }
 
-        //section 2: 고정된 메모
-        //TODO: 해당 카테고리 이면서 hold된 메모들 fetch하여 나타내기
-        if tempHold {
-            let holdNotes: [Note] = [
-                
-                Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "일기", subTitle: "오늘의 일기는 매우매우 슬픈 내용이다", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "고정된 메모", sectionIdentifier: NotePeriodReusableView.identifier),
-                Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: false)), title: "피아노 일정", subTitle: "출시까지 앞으로 2주", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "고정된 메모", sectionIdentifier: NotePeriodReusableView.identifier)]
-            dataSource.append(holdNotes)
-        } else {
-            dataSource.append([])
-        }
-        
         
         //section 3: 일반 메모들
         //TODO: 여기에 realm Note모델 50~100개 limit으로 해서 넣기
         //방식: 오늘날짜, 어제날짜, 그제 ~ 일주일 전 날짜, 한달전(1월까지), 년도수
-        
-        let todayNotes: [Note] = [
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "오늘", subTitle: "오늘의 일기", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "오늘", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "일정3232", subTitle: "출시까지 앞으로 2주3232", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "오늘", sectionIdentifier: NotePeriodReusableView.identifier)]
-        dataSource.append(todayNotes)
-        
-        let yesterdayNotes: [Note] = [
-            Note(type: .trash(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "어제자 일기", subTitle: "배가 너무 너무 고프다", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "피아노 업데이트 계획", subTitle: "어마어마 하다 정말", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "어제자 일기", subTitle: "배가 너무 너무 고프다", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "피아노 업데이트 계획", subTitle: "어마어마 하다 정말", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "어제자 일기", subTitle: "배가 너무 너무 고프다", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "피아노 업데이트 계획", subTitle: "어마어마 하다 정말", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "어제자 일기", subTitle: "배가 너무 너무 고프다", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "피아노 업데이트 계획", subTitle: "어마어마 하다 정말", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "어제자 일기", subTitle: "배가 너무 너무 고프다", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "피아노 업데이트 계획", subTitle: "어마어마 하다 정말", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "어제자 일기", subTitle: "배가 너무 너무 고프다", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier),
-            Note(type: .open(NoteViewController.NoteInfo(id: "id", isShared: true)), title: "피아노 업데이트 계획", subTitle: "어마어마 하다 정말", footnote: DateFormatter.formatter.string(from: Date()), sectionTitle: "어제", sectionIdentifier: NotePeriodReusableView.identifier)]
-        
-        dataSource.append(yesterdayNotes)
         
         return dataSource
         

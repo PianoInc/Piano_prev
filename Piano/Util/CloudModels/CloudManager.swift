@@ -85,6 +85,11 @@ class CloudManager {
     
     func requestUserInfo() {
         let container = CKContainer.default()
+//        container.requestApplicationPermission(.userDiscoverability) { (status, error) in
+//            switch status {
+//                
+//            }
+//        }
         container.fetchUserRecordID() { [weak self] recordID, error in
             if error != nil {
                 if let ckError = error as? CKError, ckError.isSpecificErrorCode(code: .notAuthenticated) {
@@ -98,6 +103,15 @@ class CloudManager {
                 if self?.userID != recordID {
                     self?.icloudIDChanged(with: recordID)
                 }
+                
+                //Ask for discoverability!
+                CKContainer.default().requestApplicationPermission(.userDiscoverability, completionHandler: { (status, error) in
+                    if error != nil {
+                        print(error!)
+                    } else {
+                        
+                    }
+                })
             }
         }
     }
