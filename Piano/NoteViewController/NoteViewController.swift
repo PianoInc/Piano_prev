@@ -151,10 +151,90 @@ extension NoteViewController {
 //MARK: TextView
 extension NoteViewController {
     private func setupTextView() {
+        textView.delegate = self
         if type.textViewEditable {
             
         }
     }
+}
+
+extension NoteViewController: UITextViewDelegate {
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        //네비게이션바에 타이핑용 아이템들 세팅하기
+//        setNavigationItemsForTyping()
+//    }
+//
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        //내비게이션바에 디폴트 아이템들 세팅하기
+//        setNavigationItemsForDefault()
+//    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        guard let textView = scrollView as? PianoTextView,
+            !textView.isEditable else { return }
+        textView.attachControl()
+        
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        guard let textView = scrollView as? PianoTextView,
+            !textView.isEditable,
+            !decelerate else { return }
+        textView.attachControl()
+        
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        guard let textView = scrollView as? PianoTextView,
+            !textView.isEditable else { return }
+        textView.detachControl()
+        
+    }
+    
+    
+    
+    func textViewDidChange(_ textView: UITextView) {
+        (textView as? AutoCompletable)?.showAutoCompleteTableViewIfNeeded()
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        (textView as? AutoCompletable)?.hideAutoCompleteTableViewIfNeeded()
+    }
+    
+    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//
+//        if text == "\n" {
+//            if let attachment = DynamicAttachment(text: textView.text, selectedRange: textView.selectedRange) {
+//
+//                if attachment.type == .image {
+//
+//                    guard let realm = try? Realm(), let noteRecordName = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID)?.recordName else { return true }
+//
+//                    let imageModel = RealmImageModel.getNewModel(noteRecordName: noteRecordName, image: UIImage(named: "imagePlus")!)
+//                    ModelManager.saveNew(model: imageModel)
+//                    let cardAttachment = CardAttachment(idForModel: imageModel.id, cellIdentifier: PianoTextImageCell.reuseIdentifier)
+//                    let cardAttrString = NSAttributedString(attachment: cardAttachment)
+//
+//                    //                    let cardAttrString = NSAttributedString(string: "")
+//                    textView.textStorage.replaceCharacters(in: attachment.paraRange, with: cardAttrString)
+//                    //1은 개행때문에 사라진 length
+//                    textView.selectedRange.location += ( cardAttrString.length - attachment.paraRange.length + 3)
+//                    textView.resignFirstResponder()
+//                    //                    showImagePicker()
+//                    return false
+//
+//                }
+//
+//
+//            }
+//        }
+//        return true
+//
+//    }
 }
 
 

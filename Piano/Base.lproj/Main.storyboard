@@ -673,7 +673,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44i-l0-nER">
-                                                    <rect key="frame" x="158" y="7" width="65" height="112"/>
+                                                    <rect key="frame" x="148" y="7" width="65" height="112"/>
                                                     <color key="backgroundColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <inset key="contentEdgeInsets" minX="23.5" minY="0.0" maxX="23.5" maxY="0.0"/>
                                                     <state key="normal" image="lock">
@@ -689,7 +689,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3e-Qb-3Dt">
-                                                    <rect key="frame" x="222.5" y="7" width="65" height="112"/>
+                                                    <rect key="frame" x="218" y="7" width="65" height="112"/>
                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.6588235294" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="contentEdgeInsets" minX="23.5" minY="0.0" maxX="23.5" maxY="0.0"/>
                                                     <state key="normal" image="changeCategory">
@@ -746,6 +746,7 @@
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="MGT-ce-0vI" secondAttribute="trailing" constant="20" id="EHf-hV-APd"/>
                                                         <constraint firstAttribute="bottom" secondItem="DXh-zR-htl" secondAttribute="bottom" constant="12" id="S3Z-2j-bcN"/>
@@ -772,7 +773,7 @@
                                         <constraints>
                                             <constraint firstItem="a9F-nx-7k0" firstAttribute="top" secondItem="2FE-WZ-KsL" secondAttribute="top" constant="7" id="0e6-3e-RXX"/>
                                             <constraint firstAttribute="bottom" secondItem="DYi-e9-FAB" secondAttribute="bottom" constant="7" id="6Df-Bm-nfi"/>
-                                            <constraint firstItem="a9F-nx-7k0" firstAttribute="leading" secondItem="P3e-Qb-3Dt" secondAttribute="trailing" id="A1y-T2-ruS"/>
+                                            <constraint firstItem="a9F-nx-7k0" firstAttribute="leading" secondItem="P3e-Qb-3Dt" secondAttribute="trailing" constant="5" id="A1y-T2-ruS"/>
                                             <constraint firstItem="mJp-HA-h8O" firstAttribute="top" secondItem="2FE-WZ-KsL" secondAttribute="top" constant="7" id="AAt-B5-Ezz"/>
                                             <constraint firstAttribute="trailing" secondItem="DYi-e9-FAB" secondAttribute="trailing" constant="7" id="Dwt-69-jLB"/>
                                             <constraint firstItem="P3e-Qb-3Dt" firstAttribute="top" secondItem="2FE-WZ-KsL" secondAttribute="top" constant="7" id="DzY-8d-ixv"/>
@@ -781,7 +782,7 @@
                                             <constraint firstAttribute="bottom" secondItem="mJp-HA-h8O" secondAttribute="bottom" constant="7" id="NWf-gS-e8d"/>
                                             <constraint firstItem="DYi-e9-FAB" firstAttribute="top" secondItem="2FE-WZ-KsL" secondAttribute="top" constant="7" id="bFO-i7-BlL"/>
                                             <constraint firstItem="DYi-e9-FAB" firstAttribute="leading" secondItem="2FE-WZ-KsL" secondAttribute="leading" constant="7" id="f8b-RR-O3i"/>
-                                            <constraint firstItem="P3e-Qb-3Dt" firstAttribute="leading" secondItem="44i-l0-nER" secondAttribute="trailing" id="flt-DR-ujk"/>
+                                            <constraint firstItem="P3e-Qb-3Dt" firstAttribute="leading" secondItem="44i-l0-nER" secondAttribute="trailing" constant="5" id="flt-DR-ujk"/>
                                             <constraint firstItem="44i-l0-nER" firstAttribute="top" secondItem="2FE-WZ-KsL" secondAttribute="top" constant="7" id="kSh-jm-xSm"/>
                                             <constraint firstItem="mJp-HA-h8O" firstAttribute="leading" secondItem="2FE-WZ-KsL" secondAttribute="leading" constant="7" id="p1g-Yh-fEz"/>
                                             <constraint firstAttribute="bottom" secondItem="44i-l0-nER" secondAttribute="bottom" constant="7" id="vxB-P4-J7i"/>
@@ -795,6 +796,8 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="footnoteLabel" destination="NX2-ek-fRU" id="wFQ-01-03V"/>
+                                            <outlet property="innerViewLeadingConstraint" destination="f8b-RR-O3i" id="nDh-n3-KJN"/>
+                                            <outlet property="innerViewTrailingConstraint" destination="Dwt-69-jLB" id="T8C-tA-fgq"/>
                                             <outlet property="shareImageView" destination="MGT-ce-0vI" id="LKX-Ck-x95"/>
                                             <outlet property="subTitleLabel" destination="DXh-zR-htl" id="p42-wj-9sH"/>
                                             <outlet property="titleLabel" destination="Sqt-61-8fQ" id="fk1-KT-Eue"/>

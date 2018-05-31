@@ -15,6 +15,24 @@ class AutoCompleteTableView: UITableView {
     let cellHeight: CGFloat = 40
     let minimumHeight: CGFloat = 130
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        layer.shadowColor = Color.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowRadius = 10
+        layer.masksToBounds = false
+        
+//        backgroundNode.backgroundColor = .white
+//        backgroundNode.isLayerBacked = true
+//        backgroundNode.cornerRadius = 13
+//        backgroundNode.shadowColor = UIColor(hex8: "56565626").cgColor
+//        backgroundNode.shadowOffset = CGSize(width: 0, height: 1)
+//        backgroundNode.shadowRadius = 2.5
+//        backgroundNode.shadowOpacity = 1
+    }
+    
     internal func setPosition(textView: UITextView, at caretRect: CGRect) {
         
         //가로 좌표 결정
