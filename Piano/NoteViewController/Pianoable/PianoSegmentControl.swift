@@ -9,6 +9,7 @@
 import UIKit
 
 class PianoSegmentControl: UIView {
+    static let height: CGFloat = 120
     @IBOutlet weak var textColorImageView: UIImageView!
     @IBOutlet weak var textColorLabel: UILabel!
     @IBOutlet weak var highlighterImageView: UIImageView!

@@ -51,6 +51,7 @@ class PianoTextView: DynamicTextView {
     private func setup() {
         textContainer.lineFragmentPadding = 0
         tag = PianoTextView.identifier.hashValue
+        layoutManager.delegate = self
     }
     
     func getScreenShot() -> UIImage {
@@ -99,4 +100,24 @@ extension PianoTextView {
         textStorage.addAttribute(.foregroundColor, value: FormAttributes.defaultColor, range: NSMakeRange(0, textStorage.length))
         foregroundAttributes.forEach { textStorage.add(attribute: $0) }
     }
+}
+
+extension PianoTextView: NSLayoutManagerDelegate {
+    func layoutManager(_ layoutManager: NSLayoutManager, shouldSetLineFragmentRect lineFragmentRect: UnsafeMutablePointer<CGRect>, lineFragmentUsedRect: UnsafeMutablePointer<CGRect>, baselineOffset: UnsafeMutablePointer<CGFloat>, in textContainer: NSTextContainer, forGlyphRange glyphRange: NSRange) -> Bool {
+
+        lineFragmentRect.pointee = lineFragmentRect.pointee.insetBy(dx: 0, dy: 2.5)
+        lineFragmentUsedRect.pointee = lineFragmentUsedRect.pointee.insetBy(dx: 0, dy: 2.5)
+        
+        return true
+    }
+    
+    func layoutManager(_ layoutManager: NSLayoutManager, lineSpacingAfterGlyphAt glyphIndex: Int, withProposedLineFragmentRect rect: CGRect) -> CGFloat {
+        return 10
+    }
+    
+    
+//    override func caretRect(for position: UITextPosition) -> CGRect {
+//        var rect = super.caretRect(for: position)
+//        return rect.insetBy(dx: 0, dy: 10)
+//    }
 }

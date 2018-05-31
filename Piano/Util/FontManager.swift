@@ -65,9 +65,9 @@ class FontManager {
     private func getSize(from category: FontSizeCategory) -> CGFloat{
         let offset = getOffsetFromSize()
         switch category {
-            case .title1: return 60.0 + offset
-            case .title2: return 45.0 + offset
-            case .title3: return 35.0 + offset
+            case .title1: return 45.0 + offset
+            case .title2: return 30.0 + offset
+            case .title3: return 22.0 + offset
             case .body: return 17.0 + offset
         }
     }

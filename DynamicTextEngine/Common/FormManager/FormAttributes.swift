@@ -22,7 +22,7 @@ public class FormAttributes {
     public static var punctuationColor: Color = Color.lightGray
     public static var effectColor: Color = Color.point
     public static var alignment: TextAlignment = TextAlignment.natural
-    public static var lineSpacing: CGFloat = 5
+    public static var lineSpacing: CGFloat = 0
 
     public static var defaultFont: Font = Font.preferredFont(forTextStyle: .body)
     
@@ -100,8 +100,7 @@ public class FormAttributes {
                                .strikethroughStyle: 0,
                                .kern: 0,
                                .font: defaultFont,
-                               .backgroundColor: Color.clear,
-                               .baselineOffset: -lineSpacing
+                               .backgroundColor: Color.clear
             ] as [NSAttributedStringKey : Any]
         if !keepParagraphStyle {
             paragraphStyle[.paragraphStyle] = defaultParagraphStyle
@@ -116,7 +115,6 @@ public class FormAttributes {
                  NSAttributedStringKey.strikethroughStyle.rawValue : 0,
                  NSAttributedStringKey.kern.rawValue : 0,
                  NSAttributedStringKey.font.rawValue : defaultFont,
-                 NSAttributedStringKey.baselineOffset.rawValue: -lineSpacing,
                  NSAttributedStringKey.paragraphStyle.rawValue: defaultParagraphStyle
         ]
         

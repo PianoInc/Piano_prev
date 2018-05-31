@@ -31,6 +31,30 @@ class DynamicLayoutManager: NSLayoutManager {
 
         super.drawGlyphs(forGlyphRange: glyphsToShow, at: origin)
     }
+    
+//    override func fillBackgroundRectArray(_ rectArray: UnsafePointer<CGRect>, count rectCount: Int, forCharacterRange charRange: NSRange, color: UIColor) {
+//
+//        let glyphRange = self.glyphRange(forCharacterRange: NSMakeRange(charRange.upperBound-1, 1), actualCharacterRange: nil)
+//
+//
+//        let rect = boundingRect(forGlyphRange: glyphRange, in: textContainers.first!)
+//
+//        if rect.maxX == UIScreen.main.bounds.width {
+//            return
+//        }
+//        print(rectArray.pointee.maxX, rect.maxX)
+////        if rect.origin.x + rect.size.width < rectArray.pointee.origin.x + rectArray.pointee.size.width {
+////            print("야")
+////        } else if rect.origin.x + rect.size.width == rectArray.pointee.origin.x + rectArray.pointee.size.width {
+////
+////        } else {
+////            print("맨")
+////        }
+//
+//
+////        print("rectArray.pointee: \(rectArray.pointee), rectCount: \(rectCount), charRange: \(charRange)")
+//        super.fillBackgroundRectArray(rectArray, count: rectCount, forCharacterRange: charRange, color: color)
+//    }
 
     
 }

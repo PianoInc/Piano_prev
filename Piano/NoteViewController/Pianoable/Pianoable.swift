@@ -66,6 +66,11 @@ extension Pianoable {
     private func setAttributes(with results: [PianoResult]) {
         
         results.forEach { (result) in
+            if let color = result.attrs[.backgroundColor] as? Color,
+                color == ColorManager.shared.highlightBackground()
+                    && textStorage.attributedSubstring(from: NSMakeRange(result.range.upperBound-1, 1)).string == "\n" {
+                return
+            }
             textStorage.addAttributes(result.attrs, range: result.range)
         }
         
@@ -108,6 +113,7 @@ extension Pianoable {
                 origin.y = rect.origin.y + textContainerInset.top - contentOffset.y
                 origin.y += self.frame.origin.y
                 origin.x += self.textContainerInset.left
+                origin.y -= 2.5
                 let text = String(character)
                 var attrs = attrText.attributes(at: index, effectiveRange: nil)
                 let range = NSMakeRange(range.location + index, 1)
@@ -185,7 +191,7 @@ extension Pianoable {
         view.constraints.forEach { (constraint) in
             if let identifier = constraint.identifier,
                 identifier == ConstraintIdentifier.pianoTextViewTop {
-                constraint.constant = pianoMode ? 100 : 0
+                constraint.constant = pianoMode ? PianoSegmentControl.height : 0
                 View.animate(withDuration: 0.3) {
                     view.layoutIfNeeded()
                 }

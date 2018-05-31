@@ -13,6 +13,7 @@ protocol PianoSetup {
 }
 
 extension PianoView: PianoSetup {
+    
     func setup(pianoMode: Bool, to view: UIView) {
         
         if pianoMode {
@@ -42,13 +43,14 @@ extension PianoSegmentControl: PianoSetup {
                 let textView = view.createSubviewIfNeeded(identifier: PianoTextView.identifier) as? PianoTextView else { return }
             view.insertSubview(segmentControl, belowSubview: textView)
             segmentControl.pianoView = pianoView
+            segmentControl.tapColor("")
             
             segmentControl.translatesAutoresizingMaskIntoConstraints = false
             let topAnchor = segmentControl.topAnchor.constraint(equalTo: view.topAnchor)
             topAnchor.identifier = ConstraintIdentifier.pianoSegmentControlTop
             let leadingAnchor = segmentControl.leadingAnchor.constraint(equalTo: view.leadingAnchor)
             let trailingAnchor = segmentControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            let heightAnchor = segmentControl.heightAnchor.constraint(equalToConstant: 100)
+            let heightAnchor = segmentControl.heightAnchor.constraint(equalToConstant: PianoSegmentControl.height)
             NSLayoutConstraint.activate([topAnchor, leadingAnchor, trailingAnchor, heightAnchor])
             
         } else {
@@ -57,7 +59,7 @@ extension PianoSegmentControl: PianoSetup {
                 view.constraints.forEach { (constraint) in
                     if let identifier = constraint.identifier,
                         identifier == ConstraintIdentifier.pianoSegmentControlTop {
-                        constraint.constant = pianoMode ? 0 : -100
+                        constraint.constant = pianoMode ? 0 : PianoSegmentControl.height
                         view.layoutIfNeeded()
                         return
                     }
