@@ -64,16 +64,18 @@ class PianoTextView: DynamicTextView {
 
 }
 
-//MARK: AutoCompletable
-extension PianoTextView: AutoCompletable {
+//자동완성
+extension PianoTextView {
     override var canBecomeFirstResponder: Bool {
         return true
     }
     
     override var keyCommands: [UIKeyCommand]? {
-        var commands: [UIKeyCommand] = []
-        commands.append(contentsOf: autoCompletableKeyCommands)
-        return commands
+        guard self.hasSubView(identifier: AutoCompleteCollectionView.identifier) else { return [] }
+        return [
+            KeyCommand(input: "UIKeyInputUpArrow", modifierFlags: [], action: #selector(upArrow(sender:))),
+            KeyCommand(input: "UIKeyInputDownArrow", modifierFlags: [], action: #selector(downArrow(sender:)))
+        ]
     }
 }
 

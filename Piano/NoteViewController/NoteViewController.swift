@@ -13,7 +13,7 @@ import CloudKit
 
 class NoteViewController: UIViewController {
     
-    
+    lazy var dataSource: [[CollectionDatable]] = []
     @IBOutlet weak var textView: PianoTextView!
     var type: NoteType!
     
@@ -63,6 +63,20 @@ class NoteViewController: UIViewController {
             
         } else {
             let modified = "\(modifiedDateString)에 마지막으로 수정했습니다."
+        }
+    }
+    
+    
+    func perform(autoCompleteType: AutoComplete.AutoCompleteType) {
+        switch autoCompleteType {
+        case .calendar:
+            print("일정화면을 띄우자")
+        case .drawing:
+            print("그리기화면을 띄우자")
+        case .images:
+            print("앨범을 띄우자")
+        case .map:
+            print("지도를 띄우자")
         }
     }
 
@@ -123,22 +137,33 @@ extension NoteViewController {
             case .create:
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
                 let barButton2 = UIBarButtonItem(image: #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
                 return [barButton1, barButton2]
             case .open(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
                 let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
                 return [barButton1, barButton2]
                 
             case .trash(let info):
                 let barButton1 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
                 let barButton2 = UIBarButtonItem(title: "복구하기", style: .plain, target: vc, action: #selector(NoteViewController.tapRestore))
                 let barButton3 = UIBarButtonItem(title: "영구삭제", style: .plain, target: vc, action: #selector(NoteViewController.tapCompletelyDelete))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
+                barButton3.tintColor = .black
+                
                 return [barButton1, barButton2, barButton3]
                 
             case .lock(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
                 let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
                 let barButton3 = UIBarButtonItem(title: "잠금해제", style: .plain, target: vc, action: #selector(NoteViewController.tapRestore))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
+                barButton3.tintColor = .black
                 return [barButton1, barButton2, barButton3]
                 
                 }
@@ -159,15 +184,30 @@ extension NoteViewController {
 }
 
 extension NoteViewController: UITextViewDelegate {
-//    func textViewDidBeginEditing(_ textView: UITextView) {
-//        //네비게이션바에 타이핑용 아이템들 세팅하기
-//        setNavigationItemsForTyping()
-//    }
+    var typingButtons: [UIBarButtonItem] {
+        let completeButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(NoteViewController.tapComplete(sender:)))
+        let copyAllButton = UIBarButtonItem(title: "전체복사", style: .plain, target: self, action: #selector(NoteViewController.tapCopyAll(sender:)))
+        return [completeButton, copyAllButton]
+    }
+    
+    @objc func tapComplete(sender: UIBarButtonItem) {
+        textView.resignFirstResponder()
+    }
+    
+    @objc func tapCopyAll(sender: UIBarButtonItem) {
+        
+    }
+    
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        //네비게이션바에 타이핑용 아이템들 세팅하기
+        navigationItem.setRightBarButtonItems(typingButtons, animated: true)
+    }
 //
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        //내비게이션바에 디폴트 아이템들 세팅하기
-//        setNavigationItemsForDefault()
-//    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        //내비게이션바에 디폴트 아이템들 세팅하기
+        navigationItem.setRightBarButtonItems(type.rightBarItems(self), animated: true)
+    }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
@@ -197,11 +237,11 @@ extension NoteViewController: UITextViewDelegate {
     
     
     func textViewDidChange(_ textView: UITextView) {
-        (textView as? AutoCompletable)?.showAutoCompleteTableViewIfNeeded()
+        showAutoCompleteTableViewIfNeeded(in: textView)
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        (textView as? AutoCompletable)?.hideAutoCompleteTableViewIfNeeded()
+        hideAutoCompleteTableViewIfNeeded(in: textView)
     }
     
     
@@ -235,6 +275,76 @@ extension NoteViewController: UITextViewDelegate {
 //        return true
 //
 //    }
+    
+    
+    func hideAutoCompleteTableViewIfNeeded(in textView: UITextView) {
+        textView.subView(identifier: AutoCompleteCollectionView.identifier)?.removeFromSuperview()
+    }
+    
+    
+    func showAutoCompleteTableViewIfNeeded(in textView: UITextView) {
+        
+        dataSource = []
+        
+        //#이 문단 맨 앞에 있는지, position이 있는지 판단
+        guard let range = rangeAfterSharp(textView: textView) else {
+            hideAutoCompleteTableViewIfNeeded(in: textView)
+            return }
+        
+        //커서 frame과 샾 뒤에 글자 추출
+        let matchedText = (textView.text as NSString).substring(with: range)
+        
+        if matchedText.isEmpty {
+            dataSource = [AutoComplete.all]
+            showAutoCompleteCollectionView(in: textView)
+            return
+        } else {
+            let completes = AutoComplete.all.compactMap { (complete) -> AutoComplete? in
+                return complete.type.string.hangul.contains(matchedText.hangul) ? complete : nil
+            }
+            dataSource = [completes]
+            if !dataSource.first!.isEmpty {
+                showAutoCompleteCollectionView(in: textView)
+                return
+            }
+        }
+        hideAutoCompleteTableViewIfNeeded(in: textView)
+    }
+    
+    private func rangeAfterSharp(textView: UITextView) -> NSRange? {
+        let paraRange = (textView.text as NSString).paragraphRange(for: textView.selectedRange)
+        let regex = "^\\s*(#)(?=)"
+        if let (_, range) = textView.text.detect(searchRange: paraRange, regex: regex),
+            textView.selectedRange.location >= range.location + 1 {
+            
+            return NSMakeRange(range.location + 1, textView.selectedRange.location - (range.location + 1))
+        }
+        return nil
+    }
+    
+    private func showAutoCompleteCollectionView(in textView: UITextView) {
+        
+        guard let position = textView.selectedTextRange?.end else { return }
+        let caretRect = textView.caretRect(for: position)
+        
+        if let autoCompleteCollectionView = textView.createSubviewIfNeeded(identifier: AutoCompleteCollectionView.identifier) as? AutoCompleteCollectionView {
+            
+            let cellNib = UINib(nibName: AutoCompleteCell.identifier, bundle: nil)
+            
+            autoCompleteCollectionView.register(cellNib, forCellWithReuseIdentifier: AutoCompleteCell.identifier)
+            autoCompleteCollectionView.dataSource = self
+            autoCompleteCollectionView.delegate = self
+            autoCompleteCollectionView.reloadData()
+            let indexPath = IndexPath(item: 0, section: 0)
+            autoCompleteCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+            textView.addSubview(autoCompleteCollectionView)
+            autoCompleteCollectionView.setPosition(textView: textView, at: caretRect)
+            
+        }
+        
+    }
+    
+    
 }
 
 
