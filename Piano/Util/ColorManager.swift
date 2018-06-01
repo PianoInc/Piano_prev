@@ -46,7 +46,7 @@ class ColorManager {
     
     func highlightBackground() -> UIColor {
         switch preset {
-        case .white: return UIColor(hex6: "229CFF")
+        case .white: return UIColor(hex6: "FFF000")
         }
     }
     

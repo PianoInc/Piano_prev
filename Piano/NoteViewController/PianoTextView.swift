@@ -107,14 +107,14 @@ extension PianoTextView {
 extension PianoTextView: NSLayoutManagerDelegate {
     func layoutManager(_ layoutManager: NSLayoutManager, shouldSetLineFragmentRect lineFragmentRect: UnsafeMutablePointer<CGRect>, lineFragmentUsedRect: UnsafeMutablePointer<CGRect>, baselineOffset: UnsafeMutablePointer<CGFloat>, in textContainer: NSTextContainer, forGlyphRange glyphRange: NSRange) -> Bool {
 
-        lineFragmentRect.pointee = lineFragmentRect.pointee.insetBy(dx: 0, dy: 2.5)
-        lineFragmentUsedRect.pointee = lineFragmentUsedRect.pointee.insetBy(dx: 0, dy: 2.5)
+        lineFragmentRect.pointee = lineFragmentRect.pointee.insetBy(dx: 0, dy: lineInset)
+        lineFragmentUsedRect.pointee = lineFragmentUsedRect.pointee.insetBy(dx: 0, dy: lineInset)
         
         return true
     }
     
     func layoutManager(_ layoutManager: NSLayoutManager, lineSpacingAfterGlyphAt glyphIndex: Int, withProposedLineFragmentRect rect: CGRect) -> CGFloat {
-        return 10
+        return lineSpacing
     }
     
     

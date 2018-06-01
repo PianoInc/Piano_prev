@@ -9,38 +9,40 @@
 import UIKit
 
 class PianoControl: UIControl {
-
-    public weak var pianoable: Pianoable?
-    public weak var textAnimatable: TextAnimatable?
-
+    
+    public weak var textView: PianoTextView?
+    public weak var pianoView: PianoView?
     
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         
-        guard let pianoable = self.pianoable,
-            let textAnimatable = self.textAnimatable else { return false }
-        let trigger = pianoable.preparePiano(at: touch)
-        textAnimatable.preparePiano(animatableTextsTrigger: trigger)
-        textAnimatable.playPiano(at: touch)
+        guard let textView = self.textView,
+            let pianoView = self.pianoView else { return false }
+        
+        let trigger = textView.pianoTrigger(touch: touch)
+        pianoView.setPianos(trigger: trigger)
+        pianoView.playPiano(at: touch)
         return true
         
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         
-        guard let pianoable = self.pianoable,
-            let textAnimatable = self.textAnimatable else { return }
-        textAnimatable.endPiano { (result) in
-            pianoable.endPiano(with: result)
+        guard let textView = self.textView,
+            let pianoView = self.pianoView else { return }
+        
+        pianoView.endPiano { (results) in
+            textView.endPiano(with: results)
         }
         
     }
   
     override func cancelTracking(with event: UIEvent?) {
         
-        guard let pianoable = self.pianoable,
-            let textAnimatable = self.textAnimatable else { return }
-        textAnimatable.endPiano { (result) in
-            pianoable.endPiano(with: result)
+        guard let textView = self.textView,
+            let pianoView = self.pianoView else { return }
+        
+        pianoView.endPiano { (results) in
+            textView.endPiano(with: results)
         }
         
     }

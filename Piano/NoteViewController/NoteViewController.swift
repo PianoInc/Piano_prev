@@ -139,13 +139,13 @@ extension NoteViewController {
                 let barButton2 = UIBarButtonItem(image: #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
                 barButton1.tintColor = .black
                 barButton2.tintColor = .black
-                return [barButton1, barButton2]
+                return [barButton2, barButton1]
             case .open(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
                 let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
                 barButton1.tintColor = .black
                 barButton2.tintColor = .black
-                return [barButton1, barButton2]
+                return [barButton2, barButton1]
                 
             case .trash(let info):
                 let barButton1 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
@@ -155,7 +155,7 @@ extension NoteViewController {
                 barButton2.tintColor = .black
                 barButton3.tintColor = .black
                 
-                return [barButton1, barButton2, barButton3]
+                return [barButton3, barButton2, barButton1]
                 
             case .lock(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
@@ -164,7 +164,7 @@ extension NoteViewController {
                 barButton1.tintColor = .black
                 barButton2.tintColor = .black
                 barButton3.tintColor = .black
-                return [barButton1, barButton2, barButton3]
+                return [barButton3, barButton2, barButton1]
                 
                 }
                 

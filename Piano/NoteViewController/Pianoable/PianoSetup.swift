@@ -80,8 +80,8 @@ extension PianoControl: PianoSetup {
             guard let controlView = view.createSubviewIfNeeded(identifier: PianoControl.identifier) as? PianoControl,
                 let pianoView = view.createSubviewIfNeeded(identifier: PianoView.identifier) as? PianoView,
                 let textView = view.createSubviewIfNeeded(identifier: PianoTextView.identifier) as? PianoTextView else { return }
-            controlView.textAnimatable = pianoView
-            controlView.pianoable = textView
+            controlView.pianoView = pianoView
+            controlView.textView = textView
             
             controlView.translatesAutoresizingMaskIntoConstraints = false
             let topAnchor = controlView.topAnchor.constraint(equalTo: view.topAnchor)
