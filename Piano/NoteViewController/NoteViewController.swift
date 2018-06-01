@@ -65,6 +65,20 @@ class NoteViewController: UIViewController {
             let modified = "\(modifiedDateString)에 마지막으로 수정했습니다."
         }
     }
+    
+    
+    func perform(autoCompleteType: AutoComplete.AutoCompleteType) {
+        switch autoCompleteType {
+        case .calendar:
+            print("일정화면을 띄우자")
+        case .drawing:
+            print("그리기화면을 띄우자")
+        case .images:
+            print("앨범을 띄우자")
+        case .map:
+            print("지도를 띄우자")
+        }
+    }
 
 }
 
@@ -123,22 +137,33 @@ extension NoteViewController {
             case .create:
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
                 let barButton2 = UIBarButtonItem(image: #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
                 return [barButton1, barButton2]
             case .open(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
                 let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
                 return [barButton1, barButton2]
                 
             case .trash(let info):
                 let barButton1 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
                 let barButton2 = UIBarButtonItem(title: "복구하기", style: .plain, target: vc, action: #selector(NoteViewController.tapRestore))
                 let barButton3 = UIBarButtonItem(title: "영구삭제", style: .plain, target: vc, action: #selector(NoteViewController.tapCompletelyDelete))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
+                barButton3.tintColor = .black
+                
                 return [barButton1, barButton2, barButton3]
                 
             case .lock(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
                 let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
                 let barButton3 = UIBarButtonItem(title: "잠금해제", style: .plain, target: vc, action: #selector(NoteViewController.tapRestore))
+                barButton1.tintColor = .black
+                barButton2.tintColor = .black
+                barButton3.tintColor = .black
                 return [barButton1, barButton2, barButton3]
                 
                 }
