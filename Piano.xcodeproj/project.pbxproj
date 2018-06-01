@@ -45,14 +45,7 @@
 		6CEDD16620BD205B002FB34E /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDD16520BD205A002FB34E /* ModelManager.swift */; };
 		6CEDD16920BD2077002FB34E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CEDD16820BD2077002FB34E /* CloudKit.framework */; };
 		7C1F8CE620BE22C5001B03AC /* PianoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CE520BE22C5001B03AC /* PianoTextView.swift */; };
-		7C1F8CEB20BE2AB0001B03AC /* AutoComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CE720BE2AB0001B03AC /* AutoComplete.swift */; };
-		7C1F8CEC20BE2AB0001B03AC /* PianoTextView_AutoCompletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CE820BE2AB0001B03AC /* PianoTextView_AutoCompletable.swift */; };
-		7C1F8CED20BE2AB0001B03AC /* AutoCompletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CE920BE2AB0001B03AC /* AutoCompletable.swift */; };
-		7C1F8CEE20BE2AB0001B03AC /* PianoTextView_TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CEA20BE2AB0001B03AC /* PianoTextView_TableViewDataSource.swift */; };
-		7C1F8CF420BE2ACF001B03AC /* AutoCompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CF020BE2ACF001B03AC /* AutoCompleteTableViewCell.swift */; };
-		7C1F8CF520BE2ACF001B03AC /* AutoCompleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F8CF120BE2ACF001B03AC /* AutoCompleteTableViewCell.xib */; };
-		7C1F8CF620BE2ACF001B03AC /* AutoCompleteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F8CF220BE2ACF001B03AC /* AutoCompleteTableView.xib */; };
-		7C1F8CF720BE2ACF001B03AC /* AutoCompleteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CF320BE2ACF001B03AC /* AutoCompleteTableView.swift */; };
+		7C1F8CEC20BE2AB0001B03AC /* PianoTextView_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CE820BE2AB0001B03AC /* PianoTextView_extension.swift */; };
 		7C1F8CFA20BE2D78001B03AC /* DynamicAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CF920BE2D78001B03AC /* DynamicAttachment.swift */; };
 		7C1F8CFC20BE31C9001B03AC /* NSAttributedString_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CFB20BE31C9001B03AC /* NSAttributedString_extension.swift */; };
 		7C1F8CFE20BE31EE001B03AC /* NSRange_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8CFD20BE31EE001B03AC /* NSRange_extension.swift */; };
@@ -118,6 +111,11 @@
 		7CB5E9C920BBFD0900B42A55 /* UICollectionView_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9C820BBFD0900B42A55 /* UICollectionView_extension.swift */; };
 		7CB5E9CD20BC00C600B42A55 /* DeletedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9CC20BC00C600B42A55 /* DeletedNoteCell.swift */; };
 		7CB5E9CF20BC00E800B42A55 /* LockedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9CE20BC00E800B42A55 /* LockedNoteCell.swift */; };
+		7CFC3EF720C122C5002C6E09 /* NoteViewController_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC3EF620C122C5002C6E09 /* NoteViewController_extension.swift */; };
+		7CFC3EF920C12527002C6E09 /* AutoCompleteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC3EF820C12527002C6E09 /* AutoCompleteCollectionView.swift */; };
+		7CFC3EFC20C12544002C6E09 /* AutoCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC3EFA20C12544002C6E09 /* AutoCompleteCell.swift */; };
+		7CFC3EFD20C12544002C6E09 /* AutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFC3EFB20C12544002C6E09 /* AutoCompleteCell.xib */; };
+		7CFC3EFF20C12571002C6E09 /* AutoCompleteCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFC3EFE20C12571002C6E09 /* AutoCompleteCollectionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -173,14 +171,7 @@
 		6CEDD16720BD2072002FB34E /* Piano.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Piano.entitlements; sourceTree = "<group>"; };
 		6CEDD16820BD2077002FB34E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7C1F8CE520BE22C5001B03AC /* PianoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView.swift; sourceTree = "<group>"; };
-		7C1F8CE720BE2AB0001B03AC /* AutoComplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoComplete.swift; sourceTree = "<group>"; };
-		7C1F8CE820BE2AB0001B03AC /* PianoTextView_AutoCompletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoTextView_AutoCompletable.swift; sourceTree = "<group>"; };
-		7C1F8CE920BE2AB0001B03AC /* AutoCompletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompletable.swift; sourceTree = "<group>"; };
-		7C1F8CEA20BE2AB0001B03AC /* PianoTextView_TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoTextView_TableViewDataSource.swift; sourceTree = "<group>"; };
-		7C1F8CF020BE2ACF001B03AC /* AutoCompleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTableViewCell.swift; sourceTree = "<group>"; };
-		7C1F8CF120BE2ACF001B03AC /* AutoCompleteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCompleteTableViewCell.xib; sourceTree = "<group>"; };
-		7C1F8CF220BE2ACF001B03AC /* AutoCompleteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCompleteTableView.xib; sourceTree = "<group>"; };
-		7C1F8CF320BE2ACF001B03AC /* AutoCompleteTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTableView.swift; sourceTree = "<group>"; };
+		7C1F8CE820BE2AB0001B03AC /* PianoTextView_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoTextView_extension.swift; sourceTree = "<group>"; };
 		7C1F8CF920BE2D78001B03AC /* DynamicAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicAttachment.swift; sourceTree = "<group>"; };
 		7C1F8CFB20BE31C9001B03AC /* NSAttributedString_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString_extension.swift; sourceTree = "<group>"; };
 		7C1F8CFD20BE31EE001B03AC /* NSRange_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRange_extension.swift; sourceTree = "<group>"; };
@@ -248,6 +239,11 @@
 		7CB5E9C820BBFD0900B42A55 /* UICollectionView_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView_extension.swift; sourceTree = "<group>"; };
 		7CB5E9CC20BC00C600B42A55 /* DeletedNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedNoteCell.swift; sourceTree = "<group>"; };
 		7CB5E9CE20BC00E800B42A55 /* LockedNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedNoteCell.swift; sourceTree = "<group>"; };
+		7CFC3EF620C122C5002C6E09 /* NoteViewController_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController_extension.swift; sourceTree = "<group>"; };
+		7CFC3EF820C12527002C6E09 /* AutoCompleteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteCollectionView.swift; sourceTree = "<group>"; };
+		7CFC3EFA20C12544002C6E09 /* AutoCompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteCell.swift; sourceTree = "<group>"; };
+		7CFC3EFB20C12544002C6E09 /* AutoCompleteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoCompleteCell.xib; sourceTree = "<group>"; };
+		7CFC3EFE20C12571002C6E09 /* AutoCompleteCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoCompleteCollectionView.xib; sourceTree = "<group>"; };
 		B1C004A8803023887369302C /* Pods_Piano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Piano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C60C8955B72E733BB2089CFF /* Pods-Piano.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Piano.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Piano/Pods-Piano.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -366,10 +362,7 @@
 		7C1F8CEF20BE2AB7001B03AC /* Assistable */ = {
 			isa = PBXGroup;
 			children = (
-				7C1F8CE920BE2AB0001B03AC /* AutoCompletable.swift */,
-				7C1F8CEA20BE2AB0001B03AC /* PianoTextView_TableViewDataSource.swift */,
-				7C1F8CE820BE2AB0001B03AC /* PianoTextView_AutoCompletable.swift */,
-				7C1F8CE720BE2AB0001B03AC /* AutoComplete.swift */,
+				7C1F8CE820BE2AB0001B03AC /* PianoTextView_extension.swift */,
 				7C1F8CF920BE2D78001B03AC /* DynamicAttachment.swift */,
 				7C1F8CF820BE2AD4001B03AC /* AutoCompleteTableView */,
 			);
@@ -379,10 +372,10 @@
 		7C1F8CF820BE2AD4001B03AC /* AutoCompleteTableView */ = {
 			isa = PBXGroup;
 			children = (
-				7C1F8CF320BE2ACF001B03AC /* AutoCompleteTableView.swift */,
-				7C1F8CF220BE2ACF001B03AC /* AutoCompleteTableView.xib */,
-				7C1F8CF020BE2ACF001B03AC /* AutoCompleteTableViewCell.swift */,
-				7C1F8CF120BE2ACF001B03AC /* AutoCompleteTableViewCell.xib */,
+				7CFC3EFA20C12544002C6E09 /* AutoCompleteCell.swift */,
+				7CFC3EFB20C12544002C6E09 /* AutoCompleteCell.xib */,
+				7CFC3EF820C12527002C6E09 /* AutoCompleteCollectionView.swift */,
+				7CFC3EFE20C12571002C6E09 /* AutoCompleteCollectionView.xib */,
 			);
 			path = AutoCompleteTableView;
 			sourceTree = "<group>";
@@ -590,6 +583,7 @@
 			isa = PBXGroup;
 			children = (
 				7C7C9C2C20B3BDA2004B8994 /* NoteViewController.swift */,
+				7CFC3EF620C122C5002C6E09 /* NoteViewController_extension.swift */,
 				7C1F8CE520BE22C5001B03AC /* PianoTextView.swift */,
 				7C1F8D0520BE35B1001B03AC /* PianoTextView_Pianoable.swift */,
 				7CB5E9C320BB6ED900B42A55 /* Pianoable */,
@@ -699,16 +693,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CFC3EFF20C12571002C6E09 /* AutoCompleteCollectionView.xib in Resources */,
 				7C1F8D0220BE3567001B03AC /* PianoView.xib in Resources */,
 				7C71F7CF20A729E0007DB646 /* LaunchScreen.storyboard in Resources */,
 				7C71F7CC20A729E0007DB646 /* Assets.xcassets in Resources */,
 				7C1F8D0F20BE35EE001B03AC /* PianoControl.xib in Resources */,
-				7C1F8CF520BE2ACF001B03AC /* AutoCompleteTableViewCell.xib in Resources */,
 				7CB5E9B120B9518800B42A55 /* PianoSegmentControl.xib in Resources */,
 				7C7C9C1D20B39535004B8994 /* StatusBarView.xib in Resources */,
 				7C71F7CA20A729DF007DB646 /* Main.storyboard in Resources */,
 				7C1F8D1320BE3611001B03AC /* PianoCoverView.xib in Resources */,
-				7C1F8CF620BE2ACF001B03AC /* AutoCompleteTableView.xib in Resources */,
+				7CFC3EFD20C12544002C6E09 /* AutoCompleteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,7 +762,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C1F8CF720BE2ACF001B03AC /* AutoCompleteTableView.swift in Sources */,
 				6CEDD15C20BD1D45002FB34E /* DynamicParagraphStyle.swift in Sources */,
 				6CEDD13C20BD19AD002FB34E /* CloudManager.swift in Sources */,
 				7C7C9C2620B39579004B8994 /* iOS.swift in Sources */,
@@ -785,7 +778,6 @@
 				7C7C9C4720B40586004B8994 /* CustomFormatViewController.swift in Sources */,
 				7C601E0E20B4619000A707A0 /* CategoryNotificationCell.swift in Sources */,
 				7CB5E9CD20BC00C600B42A55 /* DeletedNoteCell.swift in Sources */,
-				7C1F8CEE20BE2AB0001B03AC /* PianoTextView_TableViewDataSource.swift in Sources */,
 				6CEDD13920BD19AD002FB34E /* CloudDatabase.swift in Sources */,
 				7CB5E9B920BA997D00B42A55 /* Linkable.swift in Sources */,
 				7C64F8AC20B61EAC00FAC0E3 /* NoteCreateCell.swift in Sources */,
@@ -803,7 +795,6 @@
 				7C1F8D0420BE3573001B03AC /* Pianoable.swift in Sources */,
 				7C1F8D1420BE3611001B03AC /* TextAnimatable.swift in Sources */,
 				7C601E1020B461DF00A707A0 /* CategoryLinkCell.swift in Sources */,
-				7C1F8CEB20BE2AB0001B03AC /* AutoComplete.swift in Sources */,
 				7C7C9C1E20B39535004B8994 /* StatusBarView.swift in Sources */,
 				7C1F8D1620BE3779001B03AC /* PianoCoverView.swift in Sources */,
 				7CB5E9C720BBFC8A00B42A55 /* CategoryListViewController_extension.swift in Sources */,
@@ -813,6 +804,7 @@
 				7C415C8820BCB30000B9F8DC /* AppNavigator.swift in Sources */,
 				7C7C9C4520B402F0004B8994 /* SubscribeViewController.swift in Sources */,
 				7C64F8AE20B61F6600FAC0E3 /* NoteCalendarCell.swift in Sources */,
+				7CFC3EF720C122C5002C6E09 /* NoteViewController_extension.swift in Sources */,
 				6CEDD13B20BD19AD002FB34E /* RxCloudDatabase.swift in Sources */,
 				7C64F8A520B5B66600FAC0E3 /* CollectionDatable.swift in Sources */,
 				7CB5E9B720B9777A00B42A55 /* UIViewController_extension.swift in Sources */,
@@ -824,6 +816,7 @@
 				7C601E0C20B460EE00A707A0 /* CategoryCustomTagCell.swift in Sources */,
 				6CEDD15220BD1CF0002FB34E /* ColorManager.swift in Sources */,
 				6CEDD13F20BD19AD002FB34E /* Diff3.swift in Sources */,
+				7CFC3EFC20C12544002C6E09 /* AutoCompleteCell.swift in Sources */,
 				7C64F8B020B6200100FAC0E3 /* NoteCell.swift in Sources */,
 				6CEDD15020BD1C76002FB34E /* UIImage+resize.swift in Sources */,
 				7C1F8CFA20BE2D78001B03AC /* DynamicAttachment.swift in Sources */,
@@ -841,10 +834,9 @@
 				6CEDD11F20BD18A0002FB34E /* RealmCardDataModels.swift in Sources */,
 				6CEDD16220BD1DEE002FB34E /* AttributeModelConfigurable.swift in Sources */,
 				7C7C9C2B20B3BD84004B8994 /* CategoryListViewController.swift in Sources */,
-				7C1F8CEC20BE2AB0001B03AC /* PianoTextView_AutoCompletable.swift in Sources */,
+				7C1F8CEC20BE2AB0001B03AC /* PianoTextView_extension.swift in Sources */,
 				7CB5E9C220BB6ED100B42A55 /* PianoView.swift in Sources */,
 				7CB5E9C920BBFD0900B42A55 /* UICollectionView_extension.swift in Sources */,
-				7C1F8CF420BE2ACF001B03AC /* AutoCompleteTableViewCell.swift in Sources */,
 				6CEDD15920BD1D2D002FB34E /* CardAttachment.swift in Sources */,
 				7C415C7E20BCA99A00B9F8DC /* LicenseViewController.swift in Sources */,
 				7C7C9C1F20B39535004B8994 /* TransParentNavigationController.swift in Sources */,
@@ -852,7 +844,6 @@
 				7CB5E9AA20B9312D00B42A55 /* CategoryTitleReusableView.swift in Sources */,
 				7C79C4BB20BD70F5006249CD /* Date_extension.swift in Sources */,
 				6CEDD14720BD1A23002FB34E /* CKAsset+UIImage.swift in Sources */,
-				7C1F8CED20BE2AB0001B03AC /* AutoCompletable.swift in Sources */,
 				7C601E1220B4620500A707A0 /* CategoryExtraCell.swift in Sources */,
 				6CEDD12920BD19A6002FB34E /* FontAttribute.swift in Sources */,
 				6CEDD14820BD1A23002FB34E /* CKDatabaseScope.swift in Sources */,
@@ -864,6 +855,7 @@
 				7C1F8CFE20BE31EE001B03AC /* NSRange_extension.swift in Sources */,
 				7C71F7C520A729DF007DB646 /* AppDelegate.swift in Sources */,
 				6CEDD11E20BD18A0002FB34E /* RealmDataModel.swift in Sources */,
+				7CFC3EF920C12527002C6E09 /* AutoCompleteCollectionView.swift in Sources */,
 				6CEDD12020BD18A0002FB34E /* RealmImageObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,15 +5,9 @@
 //  Created by Kevin Kim on 27/04/2018.
 //
 import Foundation
-
+/*
 struct DynamicAttachment {
     //TODO: regexs localized ex: regexString.localized
-    
-    static let datas: [AutoComplete] = {
-        return DynamicAttachment.keywords.map{
-            return AutoComplete(keyword: $0, input: "")
-        }
-    }()
     
     static let keywords = ["사진", "링크", "주소", "연락처", "파일", "일정", "미리알림"]
     
@@ -72,3 +66,4 @@ struct DynamicAttachment {
 //        return InteractiveTextAttachment()
 //    }
 }
+ */
