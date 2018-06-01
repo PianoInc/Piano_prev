@@ -278,7 +278,7 @@ extension NoteViewController: UITextViewDelegate {
                 return complete.type.string.hangul.contains(matchedText.hangul) ? complete : nil
             }
             dataSource = [completes]
-            if !dataSource.isEmpty {
+            if !dataSource.first!.isEmpty {
                 showAutoCompleteCollectionView(in: textView)
                 return
             }
@@ -310,7 +310,7 @@ extension NoteViewController: UITextViewDelegate {
             autoCompleteCollectionView.dataSource = self
             autoCompleteCollectionView.delegate = self
             autoCompleteCollectionView.reloadData()
-            let indexPath = IndexPath(row: 0, section: 0)
+            let indexPath = IndexPath(item: 0, section: 0)
             autoCompleteCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
             textView.addSubview(autoCompleteCollectionView)
             autoCompleteCollectionView.setPosition(textView: textView, at: caretRect)
