@@ -34,7 +34,7 @@ class ColorManager {
     
     func pointForeground() -> UIColor {
         switch preset {
-        case .white: return UIColor.blue
+        case .white: return UIColor(hex6: "007aff")
         }
     }
     

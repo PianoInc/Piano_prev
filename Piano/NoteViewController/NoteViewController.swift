@@ -16,14 +16,24 @@ class NoteViewController: UIViewController {
     lazy var dataSource: [[CollectionDatable]] = []
     @IBOutlet weak var textView: PianoTextView!
     var type: NoteType!
+    var noteID: String!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let newModel = RealmNoteModel.getNewModel(content: "", categoryRecordName: "")
+        let id = newModel.id
+        ModelManager.saveNew(model: newModel)
+        noteID = id
+        textView.noteID = noteID
 
         
         setupNavigationBar()
         setupTextView()
+        
+        setTextViewContainer(view.bounds.size)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,6 +41,12 @@ class NoteViewController: UIViewController {
         
         textViewBecomeFirstResponderIfNeeded()
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let navigationController = segue.destination as? UINavigationController, let imagePickerViewController = navigationController.topViewController as? ImagePickerViewController {
+            imagePickerViewController.noteViewController = self
+        }
     }
     
     func textViewBecomeFirstResponderIfNeeded() {
@@ -66,6 +82,30 @@ class NoteViewController: UIViewController {
         }
     }
     
+    private func setTextViewContainer(_ size: CGSize) {
+        if size.width > size.height {
+            textView.textContainerInset.left = size.width / 10
+            textView.textContainerInset.right = size.width / 10
+        } else {
+            textView.textContainerInset.left = 0
+            textView.textContainerInset.right = 0
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setTextViewContainer(size)
+        
+        coordinator.animate(alongsideTransition: nil) {[weak self] (_) in
+            guard let strongSelf = self else { return }
+            
+            if !strongSelf.textView.isEditable {
+                strongSelf.textView.attachControl()
+                
+            }
+        }
+    }
+    
     
     func perform(autoCompleteType: AutoComplete.AutoCompleteType) {
         switch autoCompleteType {
@@ -74,6 +114,7 @@ class NoteViewController: UIViewController {
         case .drawing:
             print("그리기화면을 띄우자")
         case .images:
+            performSegue(withIdentifier: ImagePickerViewController.identifier, sender: nil)
             print("앨범을 띄우자")
         case .map:
             print("지도를 띄우자")
@@ -177,6 +218,10 @@ extension NoteViewController {
 extension NoteViewController {
     private func setupTextView() {
         textView.delegate = self
+        textView.DynamicDelegate = self
+        textView.DynamicDataSource = self
+        let nib = UINib(nibName: TextImageCell.identifier, bundle: nil)
+        textView.register(nib: nib, forCellReuseIdentifier: TextImageCell.identifier)
         if type.textViewEditable {
             
         }
@@ -187,6 +232,8 @@ extension NoteViewController: UITextViewDelegate {
     var typingButtons: [UIBarButtonItem] {
         let completeButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(NoteViewController.tapComplete(sender:)))
         let copyAllButton = UIBarButtonItem(title: "전체복사", style: .plain, target: self, action: #selector(NoteViewController.tapCopyAll(sender:)))
+        completeButton.tintColor = .black
+        copyAllButton.tintColor = .black
         return [completeButton, copyAllButton]
     }
     
@@ -241,46 +288,9 @@ extension NoteViewController: UITextViewDelegate {
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        hideAutoCompleteTableViewIfNeeded(in: textView)
+        (textView as? PianoTextView)?.hideAutoCompleteCollectionViewIfNeeded()
     }
-    
-    
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//
-//        if text == "\n" {
-//            if let attachment = DynamicAttachment(text: textView.text, selectedRange: textView.selectedRange) {
-//
-//                if attachment.type == .image {
-//
-//                    guard let realm = try? Realm(), let noteRecordName = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID)?.recordName else { return true }
-//
-//                    let imageModel = RealmImageModel.getNewModel(noteRecordName: noteRecordName, image: UIImage(named: "imagePlus")!)
-//                    ModelManager.saveNew(model: imageModel)
-//                    let cardAttachment = CardAttachment(idForModel: imageModel.id, cellIdentifier: PianoTextImageCell.reuseIdentifier)
-//                    let cardAttrString = NSAttributedString(attachment: cardAttachment)
-//
-//                    //                    let cardAttrString = NSAttributedString(string: "")
-//                    textView.textStorage.replaceCharacters(in: attachment.paraRange, with: cardAttrString)
-//                    //1은 개행때문에 사라진 length
-//                    textView.selectedRange.location += ( cardAttrString.length - attachment.paraRange.length + 3)
-//                    textView.resignFirstResponder()
-//                    //                    showImagePicker()
-//                    return false
-//
-//                }
-//
-//
-//            }
-//        }
-//        return true
-//
-//    }
-    
-    
-    func hideAutoCompleteTableViewIfNeeded(in textView: UITextView) {
-        textView.subView(identifier: AutoCompleteCollectionView.identifier)?.removeFromSuperview()
-    }
-    
+
     
     func showAutoCompleteTableViewIfNeeded(in textView: UITextView) {
         
@@ -288,7 +298,7 @@ extension NoteViewController: UITextViewDelegate {
         
         //#이 문단 맨 앞에 있는지, position이 있는지 판단
         guard let range = rangeAfterSharp(textView: textView) else {
-            hideAutoCompleteTableViewIfNeeded(in: textView)
+            (textView as? PianoTextView)?.hideAutoCompleteCollectionViewIfNeeded()
             return }
         
         //커서 frame과 샾 뒤에 글자 추출
@@ -308,7 +318,7 @@ extension NoteViewController: UITextViewDelegate {
                 return
             }
         }
-        hideAutoCompleteTableViewIfNeeded(in: textView)
+        (textView as? PianoTextView)?.hideAutoCompleteCollectionViewIfNeeded()
     }
     
     private func rangeAfterSharp(textView: UITextView) -> NSRange? {

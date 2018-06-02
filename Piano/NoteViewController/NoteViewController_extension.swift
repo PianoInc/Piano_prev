@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DynamicTextEngine_iOS
 
 extension NoteViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -66,4 +67,22 @@ extension NoteViewController: UICollectionViewDelegateFlowLayout {
         return dataSource[section].first?.minimumInteritemSpacing ?? 0
     }
     
+}
+
+
+extension NoteViewController: DynamicTextViewDelegate {
+    
+}
+
+extension NoteViewController: DynamicTextViewDataSource {
+    func textView(_ textView: DynamicTextView, attachmentForCell attachment: DynamicTextAttachment) -> DynamicAttachmentCell {
+        let cell = textView.dequeueReusableCell(withIdentifier: attachment.cellIdentifier)
+        if let configuarableCell = cell as? AttributeModelConfigurable,
+            let attachmentWithAttribute = attachment as? CardAttachment {
+            configuarableCell.configure(with: attachmentWithAttribute.idForModel)
+        }
+        
+        return cell
+    }
+
 }

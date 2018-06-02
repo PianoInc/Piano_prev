@@ -15,8 +15,8 @@ typealias PianoTrigger = () -> [Piano]?
 //MARK: Piano
 extension PianoTextView {
     
-    var lineSpacing: CGFloat { return 20 }
-    var lineInset: CGFloat { return 10 }
+    var lineSpacing: CGFloat { return 30 }
+    var lineInset: CGFloat { return 15 }
     
     //internal
     internal func beginPiano() {
@@ -126,6 +126,7 @@ extension PianoTextView {
         guard attributedText.length != 0 else { return nil }
         var point = touch.location(in: self)
         point.y -= textContainerInset.top
+        point.y += lineInset    //Temp: 임시코드, 이거 해결해야함
         let index = layoutManager.glyphIndex(for: point, in: textContainer)
         var lineRange = NSRange()
         let lineRect = layoutManager.lineFragmentRect(forGlyphAt: index, effectiveRange: &lineRange)
@@ -234,9 +235,16 @@ extension PianoTextView {
 //MARK: AutoComplete
 extension PianoTextView {
     
-    //    @objc func escape(sender: KeyCommand) {
-    //        hideAutoCompleteTableViewIfNeeded()
-    //    }
+    @objc func newline(sender: KeyCommand) {
+        if let collectionView = subView(identifier: AutoCompleteCollectionView.identifier) as? AutoCompleteCollectionView, let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
+            collectionView.delegate?.collectionView!(collectionView, didSelectItemAt: selectedIndexPath)
+        }
+
+    }
+    
+    @objc func escape(sender: KeyCommand) {
+        hideAutoCompleteCollectionViewIfNeeded()
+    }
     
     @objc func upArrow(sender: KeyCommand) {
         
@@ -270,6 +278,10 @@ extension PianoTextView {
         }
         
         collectionView.selectItem(at: newIndexPath, animated: false, scrollPosition: .top)
+    }
+    
+    internal func hideAutoCompleteCollectionViewIfNeeded(){
+        subView(identifier: AutoCompleteCollectionView.identifier)?.removeFromSuperview()
     }
 }
 
