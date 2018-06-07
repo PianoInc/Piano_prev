@@ -22,22 +22,91 @@ class NoteListViewController: UIViewController {
     lazy var dataSource: [[CollectionDatable]] = {
         
         //TODO: type을 바라보며 데이터 소스 세팅하기
-        
-        guard let type = self.type else { return []}
         var dataSource: [[CollectionDatable]] = []
-        
+        guard let type = self.type else { return dataSource }
         
         switch type {
         case .all:
             
             //section 0: 새 메모 작성
             //TODO: description에 대한 모델 대입하기
-            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create, title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
+            let noteCreate = [NoteCreate(type: .create(""), title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
             dataSource.append(noteCreate)
             
-            
             let realm = try! Realm()
-            let objects = realm.objects(RealmNoteModel.self)
+            
+            //section 1: 캘린더 정보 (구독하고, 캘린더 데이터가 있을 경우에만 보여줌)
+            //TODO: 지오한테 물어봐서 개발하기
+            //        if tempSubscription && tempCalendar {
+            //            let noteCalendar: [CollectionDatable] = [NoteCalendar(title: "로즈데이", startDate: Date(), endDate: Date(), sectionTitle: "예정")]
+            //            dataSource.append(noteCalendar)
+            //        } else {
+            //            dataSource.append([])
+            //        }
+            
+            //1단계: all인 경우, 휴지통에 있거나, 잠금에 있는 것들을 제외한 모든 것들을 우선 fetch하고 카운트를 기록한다.
+            let allPredicate = NSPredicate(format: "isLocked == false AND isInTrash == false")
+            let allResults = realm.objects(RealmNoteModel.self).filter(allPredicate)
+            
+            let allCount = allResults.count
+            var fetchedCount = 0
+            
+            //section 2: 고정 메모
+            //고정 메모의 경우, 1단계로 필터한 것에서 다시 필터를 돌려 isPinned = true인 것들을 찾아낸다.
+            let holdPredicate = NSPredicate(format: "isPinned == true")
+            let holdResults = allResults.filter(holdPredicate).sorted(byKeyPath: "isModified", ascending: false)
+            fetchedCount += holdResults.count
+            if fetchedCount == allCount { return dataSource }
+            
+            // 뷰모델로 변환
+            //TODO: shared 방법 Zio에게 물어봐서 적용시키기
+            let holdNotes: [Note] = holdResults.map { (noteModel) -> Note in
+                let content = String(noteModel.content.prefix(30))
+                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: true)),content: content, footnote: dateStr, sectionTitle: "고정된 메모", sectionIdentifier: NotePeriodReusableView.identifier)
+            }
+            dataSource.append(holdNotes)
+            
+            //TODO: struct만들어서 오늘 날짜를 받으면, 오늘, 어제, .... 순으로 predicate,sectionTitle를 리턴하도록 만들기
+            //i에 따라서 섹션 타이틀
+            
+            //오늘, 어제, 이전 7일, 이전 30일, 월별, 년도별
+            
+            //section 3: 오늘 날짜
+            var calendar = Calendar.current
+            calendar.timeZone = NSTimeZone.local
+            
+            let date = Date(timeIntervalSinceNow: -60 * 60 * 24 * 0)
+            let dateFrom = calendar.startOfDay(for: date)
+            
+            var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: dateFrom)
+            components.day! += 1
+            let dateTo = calendar.date(from: components)!
+            
+            let todayPredicate = NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false", [dateFrom, dateTo])
+            let todayResults = allResults.filter(todayPredicate).sorted(byKeyPath: "isModified", ascending: false)
+            fetchedCount += todayResults.count
+            if fetchedCount == allCount { return dataSource }
+            
+            // 뷰모델로 변환
+            //TODO: shared 방법 Zio에게 물어봐서 적용시키기
+            let todayNotes: [Note] = todayResults.map { (noteModel) -> Note in
+                let content = String(noteModel.content.prefix(30))
+                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: "오늘", sectionIdentifier: NotePeriodReusableView.identifier)
+            }
+            dataSource.append(holdNotes)
+            
+            
+            //section 4: 어제 날짜
+            
+            
+            
+        case .custom(let categoryStr):
+            //section 0: 새 메모 작성
+            //TODO: description에 대한 모델 대입하기
+            let noteCreate = [NoteCreate(type: .create(categoryStr), title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
+            dataSource.append(noteCreate)
             
             //section 1: 캘린더 정보 (구독하고, 캘린더 데이터가 있을 경우에만 보여줌)
             //TODO: 지오한테 물어봐서 개발하기
@@ -50,52 +119,7 @@ class NoteListViewController: UIViewController {
             
             
             //section 2: 고정 메모
-            let holdResults = objects.filter("isPinned = true AND isInTrash = false").sorted(byKeyPath: "isModified", ascending: false)
-            let holdNotes: [Note] = holdResults.map({ (noteModel) -> Note in
-                var shared = noteModel.isInSharedDB
-                if shared == false,
-                    let shareRecordName = noteModel.shareRecordName,
-                    let shareModel = realm.object(ofType: RealmCKShare.self, forPrimaryKey: shareRecordName),
-                    let share = CKShare.unarchieve(from: shareModel.shareData) as? CKShare {
-                    shared = share.participants.count > 1
-                }
-                
-                let content = noteModel.content.prefix(50)
-                let str = String(content)
-                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
-                return Note(type: NoteViewController.NoteType.open(NoteViewController.NoteInfo(id: noteModel.id, isShared: shared)),content: str, footnote: dateStr, sectionTitle: "고정된 메모", sectionIdentifier: NotePeriodReusableView.identifier)
-            })
-            dataSource.append(holdNotes)
-            
-            //section 3: 오늘 날짜
-            let normalResults = objects.filter("isPinned = false AND isInTrash = false").sorted(byKeyPath: "isModified", ascending: false)
-            let normalNotes: [Note] = normalResults.map({ (noteModel) -> Note in
-                var shared = noteModel.isInSharedDB
-                if shared == false,
-                    let shareRecordName = noteModel.shareRecordName,
-                    let shareModel = realm.object(ofType: RealmCKShare.self, forPrimaryKey: shareRecordName),
-                    let share = CKShare.unarchieve(from: shareModel.shareData) as? CKShare {
-                    shared = share.participants.count > 1
-                }
-                
-                let title = noteModel.content.prefix(50)
-                let str = String(title)
-                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
-                return Note(type: NoteViewController.NoteType.open(NoteViewController.NoteInfo(id: noteModel.id, isShared: shared)), content: str, footnote: dateStr, sectionTitle: "오늘", sectionIdentifier: NotePeriodReusableView.identifier)
-            })
-            
-            dataSource.append(normalNotes)
-            
-            
-            //section 4: 어제 날짜
-            
-            
-        case .custom(let categoryStr):
-            //section 0: 새 메모 작성
-            //TODO: description에 대한 모델 대입하기
-            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create, title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
-            
-            dataSource.append(noteCreate)
+            //TODO: tag도 필터링해줘야함
             
             
         case .deleted:
@@ -103,7 +127,7 @@ class NoteListViewController: UIViewController {
         case .locked:
             //section 0: 새 메모 작성
             //TODO: description에 대한 모델 대입하기
-            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create, title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
+            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create(""), title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
             dataSource.append(noteCreate)
         }
 
@@ -127,7 +151,7 @@ class NoteListViewController: UIViewController {
     
     private func setupNavigationBar() {
         //TODO: 네비게이션 바 세팅
-        navigationItem.title = type.string
+        navigationItem.title = type.title
         navigationItem.setRightBarButtonItems(type.rightBarItems(self), animated: true)
     }
     
@@ -166,10 +190,10 @@ extension NoteListViewController {
         case deleted
         case locked
         
-        var string: String {
+        var title: String {
             switch self {
             case .all:
-                return "모든 메모"
+                return NSLocalizedString("All Note", comment: "모든 메모")
             case .custom(let string):
                 return string
             case .deleted:

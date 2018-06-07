@@ -21,13 +21,27 @@ class NoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        guard let type = self.type else { return }
         
-        
-        let newModel = RealmNoteModel.getNewModel(content: "", categoryRecordName: "")
-        let id = newModel.id
-        ModelManager.saveNew(model: newModel)
-        noteID = id
-        textView.noteID = noteID
+        switch type {
+        case .create(let categoryStr):
+            let newModel = RealmNoteModel.getNewModel(content: "", categoryRecordName: categoryStr)
+            let id = newModel.id
+            ModelManager.saveNew(model: newModel)
+            noteID = id
+            textView.noteID = noteID
+            
+        case .open(let noteInfo):
+            ()
+        case .lock(let noteInfo):
+            ()
+        case .trash(let noteInfo):
+            ()
+        default:
+            
+            ()
+        }
 
         
         setupNavigationBar()
@@ -51,7 +65,7 @@ class NoteViewController: UIViewController {
     
     func textViewBecomeFirstResponderIfNeeded() {
         if type.becomeFirstResponder {
-            //textView.becomeFirstResponder
+            textView.becomeFirstResponder
         }
     }
     
@@ -127,10 +141,11 @@ extension NoteViewController {
     struct NoteInfo {
         let id: String
         let isShared: Bool
+        let isPinned: Bool
     }
     
     enum NoteType {
-        case create
+        case create(String) //CategoryStr
         case open(NoteInfo)
         case trash(NoteInfo)
         case lock(NoteInfo)
@@ -217,6 +232,13 @@ extension NoteViewController {
 //MARK: TextView
 extension NoteViewController {
     private func setupTextView() {
+        
+//        if #available(iOS 11.0, *) {
+//            textView.textDragDelegate = self
+//            textView.textDropDelegate = self
+//            textView.pasteDelegate = self
+//        }
+        
         textView.delegate = self
         textView.DynamicDelegate = self
         textView.DynamicDataSource = self
@@ -230,9 +252,9 @@ extension NoteViewController {
 
 extension NoteViewController: UITextViewDelegate {
     var typingButtons: [UIBarButtonItem] {
-        let completeButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(NoteViewController.tapComplete(sender:)))
-        let copyAllButton = UIBarButtonItem(title: "전체복사", style: .plain, target: self, action: #selector(NoteViewController.tapCopyAll(sender:)))
-        completeButton.tintColor = .black
+        let completeButton = UIBarButtonItem(title: NSLocalizedString("Complete", comment: "완료"), style: .plain, target: self, action: #selector(NoteViewController.tapComplete(sender:)))
+        let copyAllButton = UIBarButtonItem(title: NSLocalizedString("CopyAll", comment: "전체복사"), style: .plain, target: self, action: #selector(NoteViewController.tapCopyAll(sender:)))
+        completeButton.tintColor = .black 
         copyAllButton.tintColor = .black
         return [completeButton, copyAllButton]
     }

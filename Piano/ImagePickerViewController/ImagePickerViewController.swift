@@ -51,7 +51,12 @@ class ImagePickerViewController: UIViewController {
         updateItemSize()
         collectionView.reloadData()
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateItemSize), name: Notification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -200,8 +205,10 @@ extension ImagePickerViewController {
         
         let itemWidth = UIApplication.shared.statusBarOrientation.isPortrait ? (view.minSize - 6) / 3 : (height - 12) / 5
         let itemSize = CGSize(width: itemWidth, height: itemWidth)
-        let padding: CGFloat = 2.9
+        let padding: CGFloat = 3
         
+//        let width = view.bounds.width / 4 - (3 * 3)
+//        let itemSize = CGSize(width: width, height: width)
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = itemSize
             layout.minimumInteritemSpacing = padding
@@ -322,4 +329,19 @@ extension ImagePickerViewController: PHPhotoLibraryChangeObserver {
         }
     }
 }
+
+//extension ImagePickerViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = view.bounds.width / 6 - (3 * 5)
+//        return CGSize(width: width, height: width)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 3
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 3
+//    }
+//}
 

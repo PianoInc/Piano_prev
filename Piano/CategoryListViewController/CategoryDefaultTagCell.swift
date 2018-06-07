@@ -10,13 +10,13 @@ import UIKit
 
 struct CategoryDefaultTag: CollectionDatable {
     
-    let type: NoteListViewController.CategoryType
+    let categoryType: NoteListViewController.CategoryType
     var sectionTitle: String?
     var sectionIdentifier: String?
     var hasSeparator: Bool
     
-    init(type: NoteListViewController.CategoryType, sectionTitle: String? = nil, sectionIdentifier: String? = nil, hasSeparator: Bool) {
-        self.type = type
+    init(categoryType: NoteListViewController.CategoryType, sectionTitle: String? = nil, sectionIdentifier: String? = nil, hasSeparator: Bool) {
+        self.categoryType = categoryType
         self.sectionTitle = sectionTitle
         self.sectionIdentifier = sectionIdentifier
         self.hasSeparator = hasSeparator
@@ -27,7 +27,7 @@ struct CategoryDefaultTag: CollectionDatable {
     }
     
     func didSelectItem(fromVC viewController: ViewController) {
-        viewController.performSegue(withIdentifier: NoteListViewController.identifier, sender: type)
+        viewController.performSegue(withIdentifier: NoteListViewController.identifier, sender: categoryType)
     }
 
     
@@ -41,7 +41,7 @@ class CategoryDefaultTagCell: UICollectionViewCell, CollectionDataAcceptable {
     var data: CollectionDatable? {
         didSet {
             guard let data = self.data as? CategoryDefaultTag else { return }
-            titleLabel.text = data.type.string
+            titleLabel.text = data.categoryType.title
             separatorView.isHidden = !data.hasSeparator
         }
     }

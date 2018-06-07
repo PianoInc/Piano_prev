@@ -19,20 +19,20 @@ class CategoryListViewController: UIViewController {
         
         var dataSource: [[CollectionDatable]] = []
         //section 0
-        let allCategory: [CollectionDatable] = [CategoryDefaultTag(type: .all, hasSeparator: true)]
+        let allCategory: [CollectionDatable] = [CategoryDefaultTag(categoryType: .all, hasSeparator: true)]
         dataSource.append(allCategory)
         
         //section 1
         //TODO: 여기에 realm 카테고리 str 넣기
         let customCategories: [CategoryCustomTag] = [
-            CategoryCustomTag(type: .custom("피아노"), order: 1),
-            CategoryCustomTag(type: .custom("비지니스"), order: 2)]
+            CategoryCustomTag(categoryType: .custom("피아노"), order: 1),
+            CategoryCustomTag(categoryType: .custom("비지니스"), order: 2)]
         dataSource.append(customCategories)
         
         //section 2
         let defaultCategories: [CategoryDefaultTag] = [
-            CategoryDefaultTag(type: .locked, hasSeparator: false),
-            CategoryDefaultTag(type: .deleted, hasSeparator: true)]
+            CategoryDefaultTag(categoryType: .locked, hasSeparator: false),
+            CategoryDefaultTag(categoryType: .deleted, hasSeparator: true)]
         dataSource.append(defaultCategories)
         
         //section 3
