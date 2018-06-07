@@ -67,6 +67,24 @@
 		7C41879220C2444100ED41FB /* ImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41879120C2444100ED41FB /* ImagePickerCell.swift */; };
 		7C41879420C2A3C700ED41FB /* TextImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41879320C2A3C700ED41FB /* TextImageCell.swift */; };
 		7C41879620C2A44D00ED41FB /* TextImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C41879520C2A44D00ED41FB /* TextImageCell.xib */; };
+		7C41879B20C35C4100ED41FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C41879D20C35C4100ED41FB /* Localizable.strings */; };
+		7C4187A520C6172C00ED41FB /* PinButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187A420C6172C00ED41FB /* PinButton.xib */; };
+		7C4187A720C6175600ED41FB /* UnPinButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187A620C6175600ED41FB /* UnPinButton.xib */; };
+		7C4187A920C6175F00ED41FB /* TrashButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187A820C6175F00ED41FB /* TrashButton.xib */; };
+		7C4187AB20C6176700ED41FB /* RestoreButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187AA20C6176700ED41FB /* RestoreButton.xib */; };
+		7C4187AD20C6177200ED41FB /* LockButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187AC20C6177200ED41FB /* LockButton.xib */; };
+		7C4187AF20C6177900ED41FB /* UnlockButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187AE20C6177900ED41FB /* UnlockButton.xib */; };
+		7C4187B120C6180C00ED41FB /* CategoryButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187B020C6180C00ED41FB /* CategoryButton.xib */; };
+		7C4187B320C61C7B00ED41FB /* PinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187B220C61C7B00ED41FB /* PinButton.swift */; };
+		7C4187B520C61C9600ED41FB /* UnPinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187B420C61C9600ED41FB /* UnPinButton.swift */; };
+		7C4187B720C61CA000ED41FB /* TrashButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187B620C61CA000ED41FB /* TrashButton.swift */; };
+		7C4187B920C61CAA00ED41FB /* RestoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187B820C61CAA00ED41FB /* RestoreButton.swift */; };
+		7C4187BB20C61CB300ED41FB /* LockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187BA20C61CB300ED41FB /* LockButton.swift */; };
+		7C4187BD20C61CBA00ED41FB /* UnlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187BC20C61CBA00ED41FB /* UnlockButton.swift */; };
+		7C4187BF20C61CC000ED41FB /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187BE20C61CC000ED41FB /* CategoryButton.swift */; };
+		7C4187C220C6347200ED41FB /* DeleteButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4187C120C6347200ED41FB /* DeleteButton.xib */; };
+		7C4187C420C6348600ED41FB /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4187C320C6348600ED41FB /* DeleteButton.swift */; };
+		7C41880420C8C23100ED41FB /* DateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41880320C8C23100ED41FB /* DateChecker.swift */; };
 		7C601E0C20B460EE00A707A0 /* CategoryCustomTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C601E0B20B460EE00A707A0 /* CategoryCustomTagCell.swift */; };
 		7C601E0E20B4619000A707A0 /* CategoryNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C601E0D20B4619000A707A0 /* CategoryNotificationCell.swift */; };
 		7C601E1020B461DF00A707A0 /* CategoryLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C601E0F20B461DF00A707A0 /* CategoryLinkCell.swift */; };
@@ -109,8 +127,6 @@
 		7CB5E9C520BBFC5100B42A55 /* NoteListViewController_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9C420BBFC5100B42A55 /* NoteListViewController_extension.swift */; };
 		7CB5E9C720BBFC8A00B42A55 /* CategoryListViewController_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9C620BBFC8A00B42A55 /* CategoryListViewController_extension.swift */; };
 		7CB5E9C920BBFD0900B42A55 /* UICollectionView_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9C820BBFD0900B42A55 /* UICollectionView_extension.swift */; };
-		7CB5E9CD20BC00C600B42A55 /* DeletedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9CC20BC00C600B42A55 /* DeletedNoteCell.swift */; };
-		7CB5E9CF20BC00E800B42A55 /* LockedNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5E9CE20BC00E800B42A55 /* LockedNoteCell.swift */; };
 		7CFC3EF720C122C5002C6E09 /* NoteViewController_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC3EF620C122C5002C6E09 /* NoteViewController_extension.swift */; };
 		7CFC3EF920C12527002C6E09 /* AutoCompleteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC3EF820C12527002C6E09 /* AutoCompleteCollectionView.swift */; };
 		7CFC3EFC20C12544002C6E09 /* AutoCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC3EFA20C12544002C6E09 /* AutoCompleteCell.swift */; };
@@ -193,6 +209,30 @@
 		7C41879120C2444100ED41FB /* ImagePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCell.swift; sourceTree = "<group>"; };
 		7C41879320C2A3C700ED41FB /* TextImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextImageCell.swift; sourceTree = "<group>"; };
 		7C41879520C2A44D00ED41FB /* TextImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextImageCell.xib; sourceTree = "<group>"; };
+		7C41879C20C35C4100ED41FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C41879E20C35C5900ED41FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		7C41879F20C35C5A00ED41FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		7C4187A020C35C5A00ED41FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7C4187A120C35D3500ED41FB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		7C4187A220C35D3600ED41FB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7C4187A320C35D3600ED41FB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C4187A420C6172C00ED41FB /* PinButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinButton.xib; sourceTree = "<group>"; };
+		7C4187A620C6175600ED41FB /* UnPinButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnPinButton.xib; sourceTree = "<group>"; };
+		7C4187A820C6175F00ED41FB /* TrashButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrashButton.xib; sourceTree = "<group>"; };
+		7C4187AA20C6176700ED41FB /* RestoreButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestoreButton.xib; sourceTree = "<group>"; };
+		7C4187AC20C6177200ED41FB /* LockButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockButton.xib; sourceTree = "<group>"; };
+		7C4187AE20C6177900ED41FB /* UnlockButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnlockButton.xib; sourceTree = "<group>"; };
+		7C4187B020C6180C00ED41FB /* CategoryButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryButton.xib; sourceTree = "<group>"; };
+		7C4187B220C61C7B00ED41FB /* PinButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinButton.swift; sourceTree = "<group>"; };
+		7C4187B420C61C9600ED41FB /* UnPinButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnPinButton.swift; sourceTree = "<group>"; };
+		7C4187B620C61CA000ED41FB /* TrashButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashButton.swift; sourceTree = "<group>"; };
+		7C4187B820C61CAA00ED41FB /* RestoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreButton.swift; sourceTree = "<group>"; };
+		7C4187BA20C61CB300ED41FB /* LockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockButton.swift; sourceTree = "<group>"; };
+		7C4187BC20C61CBA00ED41FB /* UnlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockButton.swift; sourceTree = "<group>"; };
+		7C4187BE20C61CC000ED41FB /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		7C4187C120C6347200ED41FB /* DeleteButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteButton.xib; sourceTree = "<group>"; };
+		7C4187C320C6348600ED41FB /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		7C41880320C8C23100ED41FB /* DateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChecker.swift; sourceTree = "<group>"; };
 		7C601E0B20B460EE00A707A0 /* CategoryCustomTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCustomTagCell.swift; sourceTree = "<group>"; };
 		7C601E0D20B4619000A707A0 /* CategoryNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNotificationCell.swift; sourceTree = "<group>"; };
 		7C601E0F20B461DF00A707A0 /* CategoryLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLinkCell.swift; sourceTree = "<group>"; };
@@ -237,8 +277,6 @@
 		7CB5E9C420BBFC5100B42A55 /* NoteListViewController_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewController_extension.swift; sourceTree = "<group>"; };
 		7CB5E9C620BBFC8A00B42A55 /* CategoryListViewController_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController_extension.swift; sourceTree = "<group>"; };
 		7CB5E9C820BBFD0900B42A55 /* UICollectionView_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView_extension.swift; sourceTree = "<group>"; };
-		7CB5E9CC20BC00C600B42A55 /* DeletedNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedNoteCell.swift; sourceTree = "<group>"; };
-		7CB5E9CE20BC00E800B42A55 /* LockedNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedNoteCell.swift; sourceTree = "<group>"; };
 		7CFC3EF620C122C5002C6E09 /* NoteViewController_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController_extension.swift; sourceTree = "<group>"; };
 		7CFC3EF820C12527002C6E09 /* AutoCompleteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteCollectionView.swift; sourceTree = "<group>"; };
 		7CFC3EFA20C12544002C6E09 /* AutoCompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteCell.swift; sourceTree = "<group>"; };
@@ -451,6 +489,29 @@
 			path = ImagePickerViewController;
 			sourceTree = "<group>";
 		};
+		7C4187C020C61CF500ED41FB /* Cell Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				7C4187A420C6172C00ED41FB /* PinButton.xib */,
+				7C4187B220C61C7B00ED41FB /* PinButton.swift */,
+				7C4187A620C6175600ED41FB /* UnPinButton.xib */,
+				7C4187B420C61C9600ED41FB /* UnPinButton.swift */,
+				7C4187A820C6175F00ED41FB /* TrashButton.xib */,
+				7C4187B620C61CA000ED41FB /* TrashButton.swift */,
+				7C4187AA20C6176700ED41FB /* RestoreButton.xib */,
+				7C4187B820C61CAA00ED41FB /* RestoreButton.swift */,
+				7C4187AC20C6177200ED41FB /* LockButton.xib */,
+				7C4187BA20C61CB300ED41FB /* LockButton.swift */,
+				7C4187AE20C6177900ED41FB /* UnlockButton.xib */,
+				7C4187BC20C61CBA00ED41FB /* UnlockButton.swift */,
+				7C4187B020C6180C00ED41FB /* CategoryButton.xib */,
+				7C4187BE20C61CC000ED41FB /* CategoryButton.swift */,
+				7C4187C120C6347200ED41FB /* DeleteButton.xib */,
+				7C4187C320C6348600ED41FB /* DeleteButton.swift */,
+			);
+			path = "Cell Buttons";
+			sourceTree = "<group>";
+		};
 		7C64F8A620B5B67700FAC0E3 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,15 +539,15 @@
 		7C64F8AA20B61DF700FAC0E3 /* NoteListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7C41880320C8C23100ED41FB /* DateChecker.swift */,
 				7C7C9C2820B3BD6A004B8994 /* NoteListViewController.swift */,
 				7CB5E9C420BBFC5100B42A55 /* NoteListViewController_extension.swift */,
 				7C64F8A820B61DF000FAC0E3 /* NotePeriodReusableView.swift */,
 				7C64F8AB20B61EAC00FAC0E3 /* NoteCreateCell.swift */,
 				7C64F8AD20B61F6600FAC0E3 /* NoteCalendarCell.swift */,
 				7C64F8AF20B6200100FAC0E3 /* NoteCell.swift */,
-				7CB5E9CC20BC00C600B42A55 /* DeletedNoteCell.swift */,
-				7CB5E9CE20BC00E800B42A55 /* LockedNoteCell.swift */,
 				7C2F5F2220BF8CC20005B112 /* NoteGestureRecognizer.swift */,
+				7C4187C020C61CF500ED41FB /* Cell Buttons */,
 			);
 			path = NoteListViewController;
 			sourceTree = "<group>";
@@ -533,6 +594,7 @@
 				7C415C8920BCB30F00B9F8DC /* Common */,
 				7C7C9C2420B3955E004B8994 /* Extension */,
 				7C71F7C820A729DF007DB646 /* Main.storyboard */,
+				7C41879D20C35C4100ED41FB /* Localizable.strings */,
 				7C71F7CB20A729E0007DB646 /* Assets.xcassets */,
 				7C71F7CD20A729E0007DB646 /* LaunchScreen.storyboard */,
 				7C71F7D020A729E0007DB646 /* Info.plist */,
@@ -677,6 +739,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				ko,
 			);
 			mainGroup = 7C71F7B820A729DF007DB646;
 			productRefGroup = 7C71F7C220A729DF007DB646 /* Products */;
@@ -693,17 +757,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C4187C220C6347200ED41FB /* DeleteButton.xib in Resources */,
 				7CFC3EFF20C12571002C6E09 /* AutoCompleteCollectionView.xib in Resources */,
+				7C41879B20C35C4100ED41FB /* Localizable.strings in Resources */,
+				7C4187AB20C6176700ED41FB /* RestoreButton.xib in Resources */,
 				7C1F8D0220BE3567001B03AC /* PianoView.xib in Resources */,
+				7C4187A520C6172C00ED41FB /* PinButton.xib in Resources */,
 				7C71F7CF20A729E0007DB646 /* LaunchScreen.storyboard in Resources */,
+				7C4187A920C6175F00ED41FB /* TrashButton.xib in Resources */,
 				7C71F7CC20A729E0007DB646 /* Assets.xcassets in Resources */,
 				7C1F8D0F20BE35EE001B03AC /* PianoControl.xib in Resources */,
+				7C4187AF20C6177900ED41FB /* UnlockButton.xib in Resources */,
 				7CB5E9B120B9518800B42A55 /* PianoSegmentControl.xib in Resources */,
+				7C4187A720C6175600ED41FB /* UnPinButton.xib in Resources */,
 				7C7C9C1D20B39535004B8994 /* StatusBarView.xib in Resources */,
 				7C41879620C2A44D00ED41FB /* TextImageCell.xib in Resources */,
+				7C4187B120C6180C00ED41FB /* CategoryButton.xib in Resources */,
 				7C71F7CA20A729DF007DB646 /* Main.storyboard in Resources */,
 				7C1F8D1320BE3611001B03AC /* PianoCoverView.xib in Resources */,
 				7CFC3EFD20C12544002C6E09 /* AutoCompleteCell.xib in Resources */,
+				7C4187AD20C6177200ED41FB /* LockButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,18 +848,19 @@
 				7C1F8D1020BE35EE001B03AC /* PianoControl.swift in Sources */,
 				7CB5E9AD20B9513C00B42A55 /* PianoSegmentControl.swift in Sources */,
 				6CEDD14E20BD1B5C002FB34E /* Util.swift in Sources */,
+				7C4187BB20C61CB300ED41FB /* LockButton.swift in Sources */,
 				7C7C9C2320B3955A004B8994 /* View_extension.swift in Sources */,
 				7C7C9C4720B40586004B8994 /* CustomFormatViewController.swift in Sources */,
 				7C601E0E20B4619000A707A0 /* CategoryNotificationCell.swift in Sources */,
-				7CB5E9CD20BC00C600B42A55 /* DeletedNoteCell.swift in Sources */,
 				6CEDD13920BD19AD002FB34E /* CloudDatabase.swift in Sources */,
 				7CB5E9B920BA997D00B42A55 /* Linkable.swift in Sources */,
 				7C64F8AC20B61EAC00FAC0E3 /* NoteCreateCell.swift in Sources */,
 				6CEDD13A20BD19AD002FB34E /* RxCloudDatabase_Subscription.swift in Sources */,
-				7CB5E9CF20BC00E800B42A55 /* LockedNoteCell.swift in Sources */,
+				7C4187B320C61C7B00ED41FB /* PinButton.swift in Sources */,
 				7C41878D20C171A700ED41FB /* PianoLabel.swift in Sources */,
 				7CB5E9B320B953F800B42A55 /* Button_extension.swift in Sources */,
 				6CEDD15420BD1CFB002FB34E /* FontManager.swift in Sources */,
+				7C4187C420C6348600ED41FB /* DeleteButton.swift in Sources */,
 				6CEDD14420BD1A17002FB34E /* CKError.swift in Sources */,
 				7CB5E9C020BB6B6B00B42A55 /* Color_extension.swift in Sources */,
 				6CEDD11D20BD18A0002FB34E /* LocalImageCache.swift in Sources */,
@@ -811,6 +885,7 @@
 				7CB5E9B720B9777A00B42A55 /* UIViewController_extension.swift in Sources */,
 				7C1F8CFC20BE31C9001B03AC /* NSAttributedString_extension.swift in Sources */,
 				7C7C9C2D20B3BDA2004B8994 /* NoteViewController.swift in Sources */,
+				7C4187B720C61CA000ED41FB /* TrashButton.swift in Sources */,
 				7C7C9C4320B402D9004B8994 /* UsageListViewController.swift in Sources */,
 				7C7C9C3320B3D3F6004B8994 /* SearchViewController.swift in Sources */,
 				7C601E0C20B460EE00A707A0 /* CategoryCustomTagCell.swift in Sources */,
@@ -825,11 +900,14 @@
 				7C1F8D0020BE337A001B03AC /* PianoAttributes.swift in Sources */,
 				7C1F8CE620BE22C5001B03AC /* PianoTextView.swift in Sources */,
 				6CEDD13E20BD19AD002FB34E /* Diff.swift in Sources */,
+				7C4187BF20C61CC000ED41FB /* CategoryButton.swift in Sources */,
 				6CEDD14C20BD1AC0002FB34E /* Realm+CloudKit.swift in Sources */,
 				7C415C8120BCAAD400B9F8DC /* String_extension.swift in Sources */,
 				6CEDD14220BD19AD002FB34E /* Sync.swift in Sources */,
+				7C4187B520C61C9600ED41FB /* UnPinButton.swift in Sources */,
 				7C1F8D0820BE35CF001B03AC /* PianoSetup.swift in Sources */,
 				7C7C9C4920B45D42004B8994 /* CategoryDefaultTagCell.swift in Sources */,
+				7C4187BD20C61CBA00ED41FB /* UnlockButton.swift in Sources */,
 				6CEDD11F20BD18A0002FB34E /* RealmCardDataModels.swift in Sources */,
 				6CEDD16220BD1DEE002FB34E /* AttributeModelConfigurable.swift in Sources */,
 				7C7C9C2B20B3BD84004B8994 /* CategoryListViewController.swift in Sources */,
@@ -840,6 +918,7 @@
 				7C415C7E20BCA99A00B9F8DC /* LicenseViewController.swift in Sources */,
 				7C7C9C1F20B39535004B8994 /* TransParentNavigationController.swift in Sources */,
 				6CEDD12120BD18A0002FB34E /* LocalDatabase.swift in Sources */,
+				7C4187B920C61CAA00ED41FB /* RestoreButton.swift in Sources */,
 				7CB5E9AA20B9312D00B42A55 /* CategoryTitleReusableView.swift in Sources */,
 				7C79C4BB20BD70F5006249CD /* Date_extension.swift in Sources */,
 				6CEDD14720BD1A23002FB34E /* CKAsset+UIImage.swift in Sources */,
@@ -848,6 +927,7 @@
 				6CEDD14820BD1A23002FB34E /* CKDatabaseScope.swift in Sources */,
 				7C64F8B220B67FD000FAC0E3 /* DateFormatter_extension.swift in Sources */,
 				7C415C8B20BCBBB300B9F8DC /* AttachmentViewController.swift in Sources */,
+				7C41880420C8C23100ED41FB /* DateChecker.swift in Sources */,
 				7C1F8D0C20BE35E6001B03AC /* PianoResult.swift in Sources */,
 				7C7C9C2220B3955A004B8994 /* UIView_extension.swift in Sources */,
 				7C2F5F2320BF8CC20005B112 /* NoteGestureRecognizer.swift in Sources */,
@@ -863,10 +943,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7C41879D20C35C4100ED41FB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C41879C20C35C4100ED41FB /* en */,
+				7C4187A020C35C5A00ED41FB /* zh-Hans */,
+				7C4187A320C35D3600ED41FB /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		7C71F7C820A729DF007DB646 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7C71F7C920A729DF007DB646 /* Base */,
+				7C41879E20C35C5900ED41FB /* zh-Hans */,
+				7C4187A120C35D3500ED41FB /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -875,6 +967,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C71F7CE20A729E0007DB646 /* Base */,
+				7C41879F20C35C5A00ED41FB /* zh-Hans */,
+				7C4187A220C35D3600ED41FB /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -886,6 +980,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -946,6 +1041,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
