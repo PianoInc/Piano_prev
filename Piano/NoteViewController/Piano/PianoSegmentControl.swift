@@ -28,6 +28,18 @@ class PianoSegmentControl: UIView {
     
     weak var pianoView: PianoView?
     
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        textColorLabel.text = NSLocalizedString("TextColor", comment: "글자색")
+        highlighterLabel.text = NSLocalizedString("Highlighter", comment: "형광펜")
+        boldLabel.text = NSLocalizedString("Bold", comment: "강조")
+        italicLabel.text = NSLocalizedString("Italic", comment: "기울기")
+        strikethroughLabel.text = NSLocalizedString("Strikethrough", comment: "취소선")
+        underlineLabel.text = NSLocalizedString("Underline", comment: "밑줄")
+        headerLabel.text = NSLocalizedString("header", comment: "머리말")
+    }
+    
     func changeState(selectedImageView: UIImageView, selectedLabel: UILabel) {
         
         textColorImageView.image?.withRenderingMode(.alwaysTemplate)
@@ -104,10 +116,10 @@ class PianoSegmentControl: UIView {
 
         //이미 선택한 걸 또 선택했다면
         if headerLabel.textColor == Color.point {
-            if let str = headerLabel.text?.replacingOccurrences(of: "머리말", with: ""),
+            if let str = headerLabel.text?.replacingOccurrences(of: NSLocalizedString("header", comment: "머리말"), with: ""),
                 let num = Int(str) {
                 let nextNum = (num) % 3 + 1
-                let titleStr = "머리말" + "\(nextNum)"
+                let titleStr = NSLocalizedString("header", comment: "머리말") + "\(nextNum)"
                 let imageStr = "header" + "\(nextNum)"
                 headerImageView.image = UIImage(named: imageStr)
                 headerLabel.text = titleStr
@@ -115,7 +127,7 @@ class PianoSegmentControl: UIView {
         }
         
         changeState(selectedImageView: headerImageView, selectedLabel: headerLabel)
-        if let str = headerLabel.text?.replacingOccurrences(of: "머리말", with: ""), let num = Int(str) {
+        if let str = headerLabel.text?.replacingOccurrences(of: NSLocalizedString("header", comment: "머리말"), with: ""), let num = Int(str) {
             switch num {
             case 1:
                 pianoView?.attributes = .header1

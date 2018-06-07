@@ -124,10 +124,7 @@ extension PianoTextView {
 
 extension PianoTextView: NSLayoutManagerDelegate {
     func layoutManager(_ layoutManager: NSLayoutManager, shouldSetLineFragmentRect lineFragmentRect: UnsafeMutablePointer<CGRect>, lineFragmentUsedRect: UnsafeMutablePointer<CGRect>, baselineOffset: UnsafeMutablePointer<CGFloat>, in textContainer: NSTextContainer, forGlyphRange glyphRange: NSRange) -> Bool {
-
-        lineFragmentRect.pointee = lineFragmentRect.pointee.insetBy(dx: 0, dy: lineInset)
-        lineFragmentUsedRect.pointee = lineFragmentUsedRect.pointee.insetBy(dx: 0, dy: lineInset)
-        
+        baselineOffset.pointee += (lineSpacing / 2)
         return true
     }
     
@@ -135,9 +132,4 @@ extension PianoTextView: NSLayoutManagerDelegate {
         return lineSpacing
     }
     
-    
-//    override func caretRect(for position: UITextPosition) -> CGRect {
-//        var rect = super.caretRect(for: position)
-//        return rect.insetBy(dx: 0, dy: 10)
-//    }
 }

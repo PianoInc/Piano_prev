@@ -26,13 +26,13 @@ struct AutoComplete: CollectionDatable {
         var string: String {
             switch self {
             case .images:
-                return "사진"
+                return NSLocalizedString("Photo", comment: "사진")
             case .drawing:
-                return "그리기"
+                return NSLocalizedString("Drawing", comment: "그리기")
             case .calendar:
-                return "일정"
+                return NSLocalizedString("Calendar", comment: "일정")
             case .map:
-                return "지도"
+                return NSLocalizedString("Map", comment: "지도")
             }
         }
     }

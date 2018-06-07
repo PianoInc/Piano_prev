@@ -15,8 +15,7 @@ typealias PianoTrigger = () -> [Piano]?
 //MARK: Piano
 extension PianoTextView {
     
-    var lineSpacing: CGFloat { return 30 }
-    var lineInset: CGFloat { return 15 }
+    var lineSpacing: CGFloat { return 12 }
     
     //internal
     internal func beginPiano() {
@@ -126,13 +125,10 @@ extension PianoTextView {
         guard attributedText.length != 0 else { return nil }
         var point = touch.location(in: self)
         point.y -= textContainerInset.top
-        point.y += lineInset    //Temp: 임시코드, 이거 해결해야함
         let index = layoutManager.glyphIndex(for: point, in: textContainer)
         var lineRange = NSRange()
         let lineRect = layoutManager.lineFragmentRect(forGlyphAt: index, effectiveRange: &lineRange)
-        var (rect, range) = exclusiveBulletArea(rect: lineRect, in: lineRange)
-        rect.origin.y -= (lineInset * 3 / 2)
-        rect.size.height += lineInset
+        let (rect, range) = exclusiveBulletArea(rect: lineRect, in: lineRange)
         let attrText = attributedText.attributedSubstring(from: range)
         return (rect, range, attrText)
     }

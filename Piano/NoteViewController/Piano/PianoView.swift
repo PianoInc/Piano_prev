@@ -198,9 +198,9 @@ extension PianoView {
                 label.frame = rect
                 label.alpha = 1
             })
-        }) { [weak self](completed) in
-            if let results = self?.pianoResults(),
-                completed {
+        }) { [weak self](_) in
+            if let results = self?.pianoResults()
+                 {
                 completion(results)
                 self?.removeLabels()
                 self?.dataSource = nil

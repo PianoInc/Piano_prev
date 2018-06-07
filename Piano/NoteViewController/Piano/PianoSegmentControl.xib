@@ -361,6 +361,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="nAL-h1-bv8" secondAttribute="bottom" id="JDf-EQ-h1T"/>
                         <constraint firstAttribute="trailing" secondItem="nAL-h1-bv8" secondAttribute="trailing" constant="18" id="KUr-MI-n31"/>
