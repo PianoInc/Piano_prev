@@ -83,7 +83,8 @@ class NoteListViewController: UIViewController {
             components.day! += 1
             let dateTo = calendar.date(from: components)!
             
-            let todayPredicate = NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false", [dateFrom, dateTo])
+            let todayPredicate = NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false",
+                                             argumentArray: [dateFrom, dateTo])
             let todayResults = allResults.filter(todayPredicate).sorted(byKeyPath: "isModified", ascending: false)
             fetchedCount += todayResults.count
             if fetchedCount == allCount { return dataSource }
@@ -176,7 +177,7 @@ class NoteListViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? NoteViewController, let type = sender as? NoteViewController.NoteType {
-            destinationVC.type = type
+            destinationVC.noteType = type
         }
     }
 

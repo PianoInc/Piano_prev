@@ -1,7 +1,6 @@
 platform :ios, '10.0'
 
 def common
-    pod 'SnapKit'
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RealmSwift'

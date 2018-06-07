@@ -17,8 +17,8 @@ open class DynamicTextView: UITextView {
     var displayLink: CADisplayLink?
     var animationLayer: CAShapeLayer?
     
-    open weak var DynamicDataSource: DynamicTextViewDataSource?
-    open weak var DynamicDelegate: DynamicTextViewDelegate?
+    open weak var dynamicDataSource: DynamicTextViewDataSource?
+    open weak var dynamicDelegate: DynamicTextViewDelegate?
     
     public var visibleBounds: CGRect {
         return CGRect(x: self.contentOffset.x, y:self.contentOffset.y,width: self.bounds.size.width,height: self.bounds.size.height)

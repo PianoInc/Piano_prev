@@ -15,7 +15,7 @@ class DateChecker {
         calendar.timeZone = NSTimeZone.local
         return calendar
     }()
-    /*
+    
     var todayPredicate: NSPredicate {
         let todayDate = Date()
         let dateFrom = self.calendar.startOfDay(for: todayDate)
@@ -53,7 +53,7 @@ class DateChecker {
         return NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false", [dateFrom, dateTo])
     }
     
-    */
+    
     
     //성능 이슈
     //오늘
