@@ -29,15 +29,6 @@
 		75E998269299F6921E98F788 /* DynamicAttachmentCellDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E99E2B1CAE9919EFA187EC /* DynamicAttachmentCellDispatcher.swift */; };
 		7C31E8CF2092B87B00470A90 /* PianoBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A3136208EA53C00063576 /* PianoBullet.swift */; };
 		7C31E8D02092B88500470A90 /* FormAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A313A208EA5B300063576 /* FormAttributes.swift */; };
-		7C31E8D32092BA8300470A90 /* InteractiveImageScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8D22092BA8300470A90 /* InteractiveImageScrollView.xib */; };
-		7C31E8D62092BB1400470A90 /* InteractiveCalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8D52092BB1400470A90 /* InteractiveCalendarView.xib */; };
-		7C31E8D82092BB2C00470A90 /* InteractiveRemindersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8D72092BB2C00470A90 /* InteractiveRemindersView.xib */; };
-		7C31E8DA2092BB3E00470A90 /* InteractiveAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8D92092BB3E00470A90 /* InteractiveAddressView.xib */; };
-		7C31E8DC2092BB4900470A90 /* InteractiveLinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8DB2092BB4900470A90 /* InteractiveLinkView.xib */; };
-		7C31E8DE2092BB5400470A90 /* InteractiveAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8DD2092BB5400470A90 /* InteractiveAudioView.xib */; };
-		7C31E8E02092BB9500470A90 /* InteractiveFileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8DF2092BB9500470A90 /* InteractiveFileView.xib */; };
-		7C31E8E22092BBA500470A90 /* InteractiveContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8E12092BBA500470A90 /* InteractiveContactView.xib */; };
-		7C31E8E42092BBBD00470A90 /* InteractiveVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C31E8E32092BBBD00470A90 /* InteractiveVideoView.xib */; };
 		7C7A3138208EA53C00063576 /* PianoBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A3136208EA53C00063576 /* PianoBullet.swift */; };
 		7C7A313B208EA5B300063576 /* FormAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A313A208EA5B300063576 /* FormAttributes.swift */; };
 		7C7A314D208EA7CC00063576 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A314C208EA7CC00063576 /* Color.swift */; };
@@ -62,15 +53,6 @@
 		6CEB8AF1209AA1D800115A94 /* PianoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoCard.swift; sourceTree = "<group>"; };
 		75E99E05B6B564EEBCA9B769 /* DynamicAttachmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicAttachmentCell.swift; sourceTree = "<group>"; };
 		75E99E2B1CAE9919EFA187EC /* DynamicAttachmentCellDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicAttachmentCellDispatcher.swift; sourceTree = "<group>"; };
-		7C31E8D22092BA8300470A90 /* InteractiveImageScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveImageScrollView.xib; sourceTree = "<group>"; };
-		7C31E8D52092BB1400470A90 /* InteractiveCalendarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveCalendarView.xib; sourceTree = "<group>"; };
-		7C31E8D72092BB2C00470A90 /* InteractiveRemindersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveRemindersView.xib; sourceTree = "<group>"; };
-		7C31E8D92092BB3E00470A90 /* InteractiveAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveAddressView.xib; sourceTree = "<group>"; };
-		7C31E8DB2092BB4900470A90 /* InteractiveLinkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveLinkView.xib; sourceTree = "<group>"; };
-		7C31E8DD2092BB5400470A90 /* InteractiveAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveAudioView.xib; sourceTree = "<group>"; };
-		7C31E8DF2092BB9500470A90 /* InteractiveFileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveFileView.xib; sourceTree = "<group>"; };
-		7C31E8E12092BBA500470A90 /* InteractiveContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveContactView.xib; sourceTree = "<group>"; };
-		7C31E8E32092BBBD00470A90 /* InteractiveVideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractiveVideoView.xib; sourceTree = "<group>"; };
 		7C7A3136208EA53C00063576 /* PianoBullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoBullet.swift; sourceTree = "<group>"; };
 		7C7A313A208EA5B300063576 /* FormAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormAttributes.swift; sourceTree = "<group>"; };
 		7C7A314C208EA7CC00063576 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -155,25 +137,8 @@
 				75E99E05B6B564EEBCA9B769 /* DynamicAttachmentCell.swift */,
 				75E99E2B1CAE9919EFA187EC /* DynamicAttachmentCellDispatcher.swift */,
 				7C7A3152208EA82100063576 /* FormManager */,
-				7C31E8D42092BB0100470A90 /* View */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		7C31E8D42092BB0100470A90 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7C31E8D22092BA8300470A90 /* InteractiveImageScrollView.xib */,
-				7C31E8D52092BB1400470A90 /* InteractiveCalendarView.xib */,
-				7C31E8D72092BB2C00470A90 /* InteractiveRemindersView.xib */,
-				7C31E8D92092BB3E00470A90 /* InteractiveAddressView.xib */,
-				7C31E8DB2092BB4900470A90 /* InteractiveLinkView.xib */,
-				7C31E8DD2092BB5400470A90 /* InteractiveAudioView.xib */,
-				7C31E8DF2092BB9500470A90 /* InteractiveFileView.xib */,
-				7C31E8E12092BBA500470A90 /* InteractiveContactView.xib */,
-				7C31E8E32092BBBD00470A90 /* InteractiveVideoView.xib */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		7C7A3152208EA82100063576 /* FormManager */ = {
@@ -286,15 +251,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C31E8E22092BBA500470A90 /* InteractiveContactView.xib in Resources */,
-				7C31E8D32092BA8300470A90 /* InteractiveImageScrollView.xib in Resources */,
-				7C31E8D82092BB2C00470A90 /* InteractiveRemindersView.xib in Resources */,
-				7C31E8DE2092BB5400470A90 /* InteractiveAudioView.xib in Resources */,
-				7C31E8DA2092BB3E00470A90 /* InteractiveAddressView.xib in Resources */,
-				7C31E8DC2092BB4900470A90 /* InteractiveLinkView.xib in Resources */,
-				7C31E8E02092BB9500470A90 /* InteractiveFileView.xib in Resources */,
-				7C31E8E42092BBBD00470A90 /* InteractiveVideoView.xib in Resources */,
-				7C31E8D62092BB1400470A90 /* InteractiveCalendarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
