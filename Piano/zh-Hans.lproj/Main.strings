@@ -1,0 +1,180 @@
+
+/* Class = "UILabel"; text = "2018년 5월 22일"; ObjectID = "0E9-CG-LXu"; */
+"0E9-CG-LXu.text" = "2018년 5월 22일";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0ad-b4-eSU"; */
+"0ad-b4-eSU.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "붙이기"; ObjectID = "0w0-k3-Nuz"; */
+"0w0-k3-Nuz.title" = "附上";
+
+/* Class = "UIBarButtonItem"; title = "설정"; ObjectID = "4p4-rA-pYu"; */
+"4p4-rA-pYu.title" = "설정";
+
+/* Class = "UILabel"; text = "피아노 다양하게 즐기기"; ObjectID = "539-jt-oJh"; */
+"539-jt-oJh.text" = "피아노 다양하게 즐기기";
+
+/* Class = "UILabel"; text = "분류"; ObjectID = "5PX-Kd-vio"; */
+"5PX-Kd-vio.text" = "분류";
+
+/* Class = "UILabel"; text = "로즈데이"; ObjectID = "6VQ-44-Aav"; */
+"6VQ-44-Aav.text" = "로즈데이";
+
+/* Class = "UITableViewSection"; headerTitle = "사용자 설정"; ObjectID = "6xX-sk-CRm"; */
+"6xX-sk-CRm.headerTitle" = "사용자 설정";
+
+/* Class = "UILabel"; text = "피아니스트"; ObjectID = "7oT-hD-MPl"; */
+"7oT-hD-MPl.text" = "피아니스트";
+
+/* Class = "UILabel"; text = "5월"; ObjectID = "Cmu-da-Hsm"; */
+"Cmu-da-Hsm.text" = "5월";
+
+/* Class = "UIBarButtonItem"; title = "붙이기"; ObjectID = "Cye-ug-gxF"; */
+"Cye-ug-gxF.title" = "붙이기";
+
+/* Class = "UILabel"; text = "오늘의 일기"; ObjectID = "DXh-zR-htl"; */
+"DXh-zR-htl.text" = "오늘의 일기";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "EGj-qp-V9Y"; */
+"EGj-qp-V9Y.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "오늘의 일기"; ObjectID = "Epv-wJ-8gX"; */
+"Epv-wJ-8gX.text" = "오늘의 일기";
+
+/* Class = "UINavigationItem"; title = "사용법"; ObjectID = "FBg-4g-5KQ"; */
+"FBg-4g-5KQ.title" = "사용법";
+
+/* Class = "UILabel"; text = "D-Day"; ObjectID = "IK9-jR-czm"; */
+"IK9-jR-czm.text" = "D-Day";
+
+/* Class = "UILabel"; text = "피아노 효과"; ObjectID = "LDU-PA-na2"; */
+"LDU-PA-na2.text" = "피아노 효과";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "LSJ-mK-hSP"; */
+"LSJ-mK-hSP.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIButton"; normalTitle = "삭제"; ObjectID = "Lgz-9p-3Ao"; */
+"Lgz-9p-3Ao.normalTitle" = "삭제";
+
+/* Class = "UILabel"; text = "2018년 5월 22일"; ObjectID = "NX2-ek-fRU"; */
+"NX2-ek-fRU.text" = "2018년 5월 22일";
+
+/* Class = "UIBarButtonItem"; title = "붙이기"; ObjectID = "NdI-Zc-MKS"; */
+"NdI-Zc-MKS.title" = "붙이기";
+
+/* Class = "UILabel"; text = "피아노"; ObjectID = "PnS-2Q-pQC"; */
+"PnS-2Q-pQC.text" = "피아노";
+
+/* Class = "UILabel"; text = "잠긴 메모"; ObjectID = "Qj0-G4-Q4r"; */
+"Qj0-G4-Q4r.text" = "잠긴 메모";
+
+/* Class = "UILabel"; text = "텍스트 크기"; ObjectID = "QyR-pJ-gGK"; */
+"QyR-pJ-gGK.text" = "텍스트 크기";
+
+/* Class = "UILabel"; text = "삭제된 일기"; ObjectID = "R1U-r3-uA3"; */
+"R1U-r3-uA3.text" = "삭제된 일기";
+
+/* Class = "UIButton"; normalTitle = "이름 바꾸기"; ObjectID = "RTZ-R9-V9g"; */
+"RTZ-R9-V9g.normalTitle" = "이름 바꾸기";
+
+/* Class = "UILabel"; text = "14"; ObjectID = "SGE-hB-t4J"; */
+"SGE-hB-t4J.text" = "14";
+
+/* Class = "UILabel"; text = "일기"; ObjectID = "Sqt-61-8fQ"; */
+"Sqt-61-8fQ.text" = "일기";
+
+/* Class = "UILabel"; text = "새 메모 작성"; ObjectID = "TCD-Kt-6Wb"; */
+"TCD-Kt-6Wb.text" = "새 메모 작성";
+
+/* Class = "UILabel"; text = "누구에게 투표했나요? 피아노한테만 알려주세요!"; ObjectID = "Tzx-bn-ki0"; */
+"Tzx-bn-ki0.text" = "누구에게 투표했나요? 피아노한테만 알려주세요!";
+
+/* Class = "UILabel"; text = "맞춤법 검사"; ObjectID = "VJf-MT-d6R"; */
+"VJf-MT-d6R.text" = "맞춤법 검사";
+
+/* Class = "UILabel"; text = "잠금된 일기"; ObjectID = "WG4-Kr-icK"; */
+"WG4-Kr-icK.text" = "잠금된 일기";
+
+/* Class = "UINavigationItem"; title = "설정"; ObjectID = "Wyx-9d-D1m"; */
+"Wyx-9d-D1m.title" = "설정";
+
+/* Class = "UILabel"; text = "2018년 5월 22일"; ObjectID = "XGK-8A-jUB"; */
+"XGK-8A-jUB.text" = "2018년 5월 22일";
+
+/* Class = "UINavigationItem"; title = "피아니스트"; ObjectID = "btI-S0-KaY"; */
+"btI-S0-KaY.title" = "피아니스트";
+
+/* Class = "UILabel"; text = "예정"; ObjectID = "d4Z-V7-5zH"; */
+"d4Z-V7-5zH.text" = "예정";
+
+/* Class = "UILabel"; text = "Labelasdsd"; ObjectID = "dJY-oN-lLO"; */
+"dJY-oN-lLO.text" = "Labelasdsd";
+
+/* Class = "UINavigationItem"; title = "모든 메모"; ObjectID = "dLo-eE-saO"; */
+"dLo-eE-saO.title" = "모든 메모";
+
+/* Class = "UITableViewSection"; headerTitle = "연동"; ObjectID = "eyn-fx-lQW"; */
+"eyn-fx-lQW.headerTitle" = "연동";
+
+/* Class = "UILabel"; text = "커뮤니티"; ObjectID = "h0Z-ar-yGW"; */
+"h0Z-ar-yGW.text" = "커뮤니티";
+
+/* Class = "UILabel"; text = "미리알림"; ObjectID = "h6D-l8-4da"; */
+"h6D-l8-4da.text" = "미리알림";
+
+/* Class = "UINavigationItem"; title = "사용자 서식"; ObjectID = "i7U-Hl-Lyx"; */
+"i7U-Hl-Lyx.title" = "사용자 서식";
+
+/* Class = "UINavigationItem"; title = "라이센스"; ObjectID = "ihg-SA-g9w"; */
+"ihg-SA-g9w.title" = "라이센스";
+
+/* Class = "UINavigationItem"; title = "카테고리"; ObjectID = "iyi-Ac-YSL"; */
+"iyi-Ac-YSL.title" = "카테고리";
+
+/* Class = "UILabel"; text = "손가락으로 단어에 생동감을 불어 넣을 수 있습니다."; ObjectID = "kU4-HK-mj1"; */
+"kU4-HK-mj1.text" = "손가락으로 단어에 생동감을 불어 넣을 수 있습니다.";
+
+/* Class = "UINavigationItem"; title = "텍스트 크기"; ObjectID = "lZu-Sa-lc9"; */
+"lZu-Sa-lc9.title" = "텍스트 크기";
+
+/* Class = "UILabel"; text = "바로가기"; ObjectID = "nEd-lf-OjW"; */
+"nEd-lf-OjW.text" = "바로가기";
+
+/* Class = "UIButton"; normalTitle = "라이센스 ›"; ObjectID = "ocw-wp-ljy"; */
+"ocw-wp-ljy.normalTitle" = "라이센스 ›";
+
+/* Class = "UILabel"; text = "사용자 서식"; ObjectID = "pEb-Wq-ae0"; */
+"pEb-Wq-ae0.text" = "사용자 서식";
+
+/* Class = "UILabel"; text = "평소에 메모앱에 무엇을 적으시나요?"; ObjectID = "pUG-Oa-0vd"; */
+"pUG-Oa-0vd.text" = "평소에 메모앱에 무엇을 적으시나요?";
+
+/* Class = "UILabel"; text = "가계부, 일정, 과제 등"; ObjectID = "qUH-jU-eKe"; */
+"qUH-jU-eKe.text" = "가계부, 일정, 과제 등";
+
+/* Class = "UITableViewSection"; headerTitle = "오타 방지"; ObjectID = "qWo-1N-Pal"; */
+"qWo-1N-Pal.headerTitle" = "오타 방지";
+
+/* Class = "UIButton"; normalTitle = "문의하기"; ObjectID = "quP-8u-6LQ"; */
+"quP-8u-6LQ.normalTitle" = "문의하기";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "rGE-qR-8zs"; */
+"rGE-qR-8zs.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "사용법"; ObjectID = "s18-Cw-X5f"; */
+"s18-Cw-X5f.text" = "사용법";
+
+/* Class = "UILabel"; text = "연락처"; ObjectID = "vFw-VV-iOn"; */
+"vFw-VV-iOn.text" = "연락처";
+
+/* Class = "UILabel"; text = "캘린더"; ObjectID = "vzb-R6-xxm"; */
+"vzb-R6-xxm.text" = "캘린더";
+
+/* Class = "UIButton"; normalTitle = "취소"; ObjectID = "y5Z-CZ-Rhm"; */
+"y5Z-CZ-Rhm.normalTitle" = "취소";
+
+/* Class = "UILabel"; text = "오늘의 일기"; ObjectID = "y6y-dx-NPF"; */
+"y6y-dx-NPF.text" = "오늘의 일기";
+
+/* Class = "UILabel"; text = "Ver: 1.0"; ObjectID = "zJc-fd-kiC"; */
+"zJc-fd-kiC.text" = "Ver: 1.0";

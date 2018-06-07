@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Piano
+
+  Created by Kevin Kim on 2018. 6. 3..
+  Copyright © 2018년 Piano. All rights reserved.
+*/
+
+"TextColor" = "文字颜色";
+"Highlighter" = "荧光笔";
+"Bold" = "胆大";
+"Italic" = "斜体";
+"Strikethrough" = "删除线";
+"Underline" = "下划线";
+"header" = "前言";
+"All Note" = "所有记录";
+"Photo" = "照片";
+"Drawing" = "绘画";
+"Calendar" = "日历";
+"Map" = "地址";
+"CopyAll" = "完整拷贝";
+"Complete" = "完成";
