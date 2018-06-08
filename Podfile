@@ -10,6 +10,7 @@ end
 target 'Piano' do
     use_frameworks!
     pod 'CryptoSwift'
+    pod 'GoogleMaps'
     common
 end
 

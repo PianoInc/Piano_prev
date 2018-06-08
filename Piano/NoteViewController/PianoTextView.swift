@@ -87,7 +87,7 @@ extension PianoTextView {
     }
     
     override var keyCommands: [UIKeyCommand]? {
-        guard self.hasSubView(identifier: AutoCompleteCollectionView.identifier) else { return [] }
+        guard self.hasSubView(AutoCompleteCollectionView.self) else { return [] }
         return [
             KeyCommand(input: "UIKeyInputUpArrow", modifierFlags: [], action: #selector(upArrow(sender:))),
             KeyCommand(input: "UIKeyInputDownArrow", modifierFlags: [], action: #selector(downArrow(sender:))),

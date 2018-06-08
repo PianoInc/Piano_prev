@@ -18,7 +18,7 @@ extension DynamicTextView {
         dispatcher.add(attachment: attachment)
     }
 
-    func remove(attachmentID: String) {
+    public func remove(attachmentID: String) {
         dispatcher.remove(attachmentID: attachmentID)
     }
     

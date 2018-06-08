@@ -22,32 +22,19 @@ extension Date {
         
         let interval = calendar.dateComponents([.year, .month, .day, .hour], from: self, to: today)
         if interval.year! > 0 {
-            return String(format: "dateYearPast".locale, components.year!, components.month!)
+            return String(format: "recentYear".loc, components.year!)
         } else if interval.month! > 0 {
-            return String(format: "dateYear".locale, interval.month!)
+            return String(format: "recentYear".loc, 1)
         } else if interval.day! > 6 {
-            return "dateMonth".locale
+            return "recentMonth".loc
         } else if interval.day! > 0 {
-            return "dateWeek".locale
+            return "recentWeek".loc
         } else if interval.hour! > 0 {
-            return "dateYesterday".locale
+            return "yesterday".loc
         } else {
-            return "dateToday".locale
+            return "today".loc
         }
     }
     
-//    var startDay: Date {
-//        let calendar = Calendar(identifier: .gregorian)
-//        calendar.isDateInToday(<#T##date: Date##Date#>)
-//        calendar.is
-//
-//
-//        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-//        let unitFlags: NSCalendarUnit = [.Minute, .Hour, .Day, .Month, .Year]
-//        let todayComponents = gregorian!.components(unitFlags, fromDate: day)
-//        todayComponents.hour = 0
-//        todayComponents.minute = 0
-//        return (gregorian?.dateFromComponents(todayComponents))!
-//    }
-    
 }
+

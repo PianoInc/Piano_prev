@@ -26,29 +26,74 @@ extension RealmTagsModel {
 }
 
 extension RealmNoteModel {
-
+    
     func getRecordWithURL() -> NSDictionary {
         let scheme = Schema.Note.self
-
+        
         let coder = NSKeyedUnarchiver(forReadingWith: self.ckMetaData)
         coder.requiresSecureCoding = true
         guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
         coder.finishDecoding()
-
+        
         guard let asset = try? CKAsset(data: self.attributes) else { fatalError() }
-
+        
         record[scheme.id] = self.id as CKRecordValue
         record[scheme.content] = self.content as CKRecordValue
         record[scheme.attributes] = asset as CKRecordValue
-
+        
         record[scheme.tags] = self.tags as CKRecordValue
         record[scheme.isPinned] = (self.isPinned ? 1 : 0) as CKRecordValue
         record[scheme.isLocked] = (self.isLocked ? 1 : 0) as CKRecordValue
-
+        
         record[scheme.isInTrash] = (self.isInTrash ? 1 : 0) as CKRecordValue
         record[scheme.colorThemeCode] = self.colorThemeCode as CKRecordValue
-
+        
         return NSDictionary(dictionary: [Schema.dicURLsKey: [asset.fileURL], Schema.dicRecordKey: record])
+    }
+}
+
+extension RealmAddressModel {
+    
+    func getRecordWithURL() -> NSDictionary {
+        let scheme = Schema.Address.self
+        
+        let coder = NSKeyedUnarchiver(forReadingWith: self.ckMetaData)
+        coder.requiresSecureCoding = true
+        guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
+        coder.finishDecoding()
+        
+        let noteRecordID = CKRecordID(recordName: noteRecordName, zoneID: record.recordID.zoneID)
+        
+        record[scheme.id] = self.id as CKRecordValue
+        guard let data = self.address.data(using: .utf8),
+            let asset = try? CKAsset(data: data) else { fatalError() }
+        record[scheme.address] = asset
+        
+        record[scheme.noteRecordName] = CKReference(recordID: noteRecordID, action: .deleteSelf)
+        record.setParent(noteRecordID)
+        
+        return NSDictionary(dictionary: [Schema.dicURLsKey: [asset.fileURL], Schema.dicRecordKey: record])
+    }
+}
+
+extension RealmEventModel {
+    
+    func getRecord() -> CKRecord {
+        let scheme = Schema.Event.self
+        
+        let coder = NSKeyedUnarchiver(forReadingWith: self.ckMetaData)
+        coder.requiresSecureCoding = true
+        guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
+        coder.finishDecoding()
+        
+        let noteRecordID = CKRecordID(recordName: noteRecordName, zoneID: record.recordID.zoneID)
+        
+        record[scheme.id] = self.id as CKRecordValue
+        record[scheme.noteRecordName] = CKReference(recordID: noteRecordID, action: .deleteSelf)
+        record[scheme.event] = self.event as CKRecordValue
+        record.setParent(noteRecordID)
+        
+        return record
     }
 }
 
@@ -70,58 +115,58 @@ extension RealmImageModel {
         
         record[scheme.noteRecordName] = CKReference(recordID: noteRecordID, action: .deleteSelf)
         record.setParent(noteRecordID)
-
+        
         return NSDictionary(dictionary: [Schema.dicURLsKey: [asset.fileURL], Schema.dicRecordKey: record])
     }
 }
 
 extension RealmImageListModel {
-
+    
     func getRecord() -> CKRecord {
         let scheme = Schema.ImageList.self
-
+        
         let coder = NSKeyedUnarchiver(forReadingWith: self.ckMetaData)
         coder.requiresSecureCoding = true
         guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
         coder.finishDecoding()
-
+        
         let noteRecordID = CKRecordID(recordName: noteRecordName, zoneID: record.recordID.zoneID)
-
+        
         record[scheme.id] = self.id as CKRecordValue
         record[scheme.noteRecordName] = CKReference(recordID: noteRecordID, action: .deleteSelf)
         record[scheme.imageList] = self.imageIDs as CKRecordValue
         record.setParent(noteRecordID)
-
+        
         return record
     }
 }
 
 extension CKRecord {
-
+    
     func getMetaData() -> Data {
         let data = NSMutableData()
         let coder = NSKeyedArchiver(forWritingWith: data)
         coder.requiresSecureCoding = true
         self.encodeSystemFields(with: coder)
         coder.finishEncoding()
-
+        
         return Data(referencing: data)
     }
-
+    
     func parseRecord(isShared: Bool) -> Object? {
         switch self.recordType {
-            case RealmTagsModel.recordTypeString: return parseTagsRecord()
-            case RealmNoteModel.recordTypeString: return parseNoteRecord(isShared: isShared)
-            case RealmImageModel.recordTypeString: return parseImageRecord(isShared: isShared)
-            case RealmCKShare.recordTypeString: return parseShare(isShared: isShared)
-            case RealmRecordTypeString.latestEvent.rawValue:
-                //special case!
-                if let date = self[Schema.LatestEvent.date] as? Date {
-                    UserDefaults.standard.set(date, forKey: Schema.LatestEvent.key)
-                    UserDefaults.standard.synchronize()
-                }
-                fallthrough
-            default: return nil
+        case RealmTagsModel.recordTypeString: return parseTagsRecord()
+        case RealmNoteModel.recordTypeString: return parseNoteRecord(isShared: isShared)
+        case RealmImageModel.recordTypeString: return parseImageRecord(isShared: isShared)
+        case RealmCKShare.recordTypeString: return parseShare(isShared: isShared)
+        case RealmRecordTypeString.latestEvent.rawValue:
+            //special case!
+            if let date = self[Schema.LatestEvent.date] as? Date {
+                UserDefaults.standard.set(date, forKey: Schema.LatestEvent.key)
+                UserDefaults.standard.synchronize()
+            }
+            fallthrough
+        default: return nil
         }
     }
     
@@ -144,14 +189,14 @@ extension CKRecord {
         let schema = Schema.Note.self
         
         guard let id = self[schema.id] as? String,
-                let content = self[schema.content] as? String,
-                let attributesAsset = self[schema.attributes] as? CKAsset,
-                let attributes = try? Data(contentsOf: attributesAsset.fileURL),
-                let tags = self[schema.tags] as? String,
-                let isPinned = self[schema.isPinned] as? Int,
-                let isInTrash = self[schema.isInTrash] as? Int,
-                let colorThemeCode = self[schema.colorThemeCode] as? String else {return nil}
-
+            let content = self[schema.content] as? String,
+            let attributesAsset = self[schema.attributes] as? CKAsset,
+            let attributes = try? Data(contentsOf: attributesAsset.fileURL),
+            let tags = self[schema.tags] as? String,
+            let isPinned = self[schema.isPinned] as? Int,
+            let isInTrash = self[schema.isInTrash] as? Int,
+            let colorThemeCode = self[schema.colorThemeCode] as? String else {return nil}
+        
         newNoteModel.id = id
         newNoteModel.content = content
         newNoteModel.attributes = attributes
@@ -176,7 +221,7 @@ extension CKRecord {
         }
         
         newNoteModel.colorThemeCode = colorThemeCode
-
+        
         newNoteModel.isInSharedDB = isShared
         
         newNoteModel.shareRecordName = share?.recordID.recordName
@@ -193,33 +238,33 @@ extension CKRecord {
             let image = try? Data(contentsOf: imageAsset.fileURL),
             let noteReference = self[schema.noteRecordName] as? CKReference
             else {return nil}
-
+        
         newImageModel.id = id
         newImageModel.image = image
         newImageModel.noteRecordName = noteReference.recordID.recordName
         newImageModel.recordName = self.recordID.recordName
         newImageModel.ckMetaData = self.getMetaData()
         newImageModel.isInSharedDB = isShared
-
+        
         defer {
             try? FileManager.default.removeItem(at: imageAsset.fileURL)
         }
         
         return newImageModel
     }
-
+    
     private func parseImageListRecord(isShared: Bool) -> RealmImageListModel? {
         let newImageListModel = RealmImageListModel()
         let scheme = Schema.ImageList.self
-
+        
         guard let id = self[scheme.id] as? String,
-                let noteReference = self[scheme.noteRecordName] as? CKReference,
-                let imageList = self[scheme.imageList] as? String else { return nil}
-
+            let noteReference = self[scheme.noteRecordName] as? CKReference,
+            let imageList = self[scheme.imageList] as? String else { return nil}
+        
         newImageListModel.id = id
         newImageListModel.noteRecordName = noteReference.recordID.recordName
         newImageListModel.imageIDs = imageList
-
+        
         return newImageListModel
     }
     

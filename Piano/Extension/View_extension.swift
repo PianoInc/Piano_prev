@@ -8,34 +8,55 @@
 
 import Foundation
 import CoreGraphics
+import Anchor
 
 extension View {
     
-    internal func hasSubView(identifier: String) -> Bool {
-        
-        return self.viewWithTag(identifier.hashValue) != nil ? true : false
+    /**
+     해당 type의 view가 subView에 속하고 있는지의 여부를 반환한다.
+     - parameter type: 확인하려는 view의 type.
+     */
+    internal func hasSubView<T: View>(_ type: T.Type) -> Bool {
+        return (viewWithTag(String(describing: type).hashValue) != nil)
     }
     
-    internal func subView(identifier: String) -> View? {
-        return viewWithTag(identifier.hashValue)
-        
+    /**
+     SubViews에서 해당 type의 view를 반환한다.
+     - parameter type: 가져오려는 view의 type.
+     */
+    internal func subView<T: View>(_ type: T.Type) -> T? {
+        return viewWithTag(String(describing: type).hashValue) as? T
     }
     
-    internal func createSubviewIfNeeded(identifier: String) -> View {
+    /**
+     SubViews에서 해당 type의 view를 반환하되, 존재하지 않을시엔 생생하여 반환한다.
+     - parameter type: 가져오려는 View의 type.
+     */
+    internal func createSubviewIfNeeded<T: View>(_ type: T.Type) -> T? {
+        let type = String(describing: type)
         
-        if let view = self.viewWithTag(identifier.hashValue) {
+        if let view = self.viewWithTag(type.hashValue) as? T {
             return view
         }
         
-        let nib = Nib(nibName: identifier, bundle: nil)
-        for object in nib.instantiate(withOwner: nil, options: nil) {
-            if let view = object as? View {
-                view.tag = identifier.hashValue
-                return view
-            }
+        let nib = Nib(nibName: type, bundle: nil)
+        if let view = nib.instantiate(withOwner: nil, options: nil).first as? T {
+            view.tag = type.hashValue
+            return view
         }
         
-        fatalError("can't create view with this ViewTag")
+        return nil
     }
     
+}
+
+/**
+ View 생성 helper.
+ - parameter view : 생성하고자 하는 view.
+ - parameter attr : View에 대한 attribute 선언부.
+ - returns : Attribute가 설정된 view.
+ */
+func view<T>(_ view: T, _ attr: ((T) -> ())) -> T {
+    attr(view)
+    return view
 }

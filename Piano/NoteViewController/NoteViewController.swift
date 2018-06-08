@@ -12,6 +12,7 @@ import RealmSwift
 import CloudKit
 import RxCocoa
 import RxSwift
+import EventKitUI
 
 class NoteViewController: UIViewController {
     
@@ -94,15 +95,7 @@ class NoteViewController: UIViewController {
         super.viewWillDisappear(animated)
         unRegisterKeyboardNotification()
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let navigationController = segue.destination as? UINavigationController, let imagePickerViewController = navigationController.topViewController as? ImagePickerViewController {
-            imagePickerViewController.noteViewController = self
-        }
-    }
-    
 
-    
     private func setLastModifiedString(for noteID: String) {
         guard let realm = try? Realm(),
             let noteModel = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) else {return}
@@ -174,11 +167,9 @@ class NoteViewController: UIViewController {
     private func registerNibs() {
         
         textView.register(nib: UINib(nibName: "TextImageCell", bundle: nil), forCellReuseIdentifier: TextImageCell.identifier)
-        //        textView.register(nib: UINib(nibName: "PianoTextLinkCell", bundle: nil), forCellReuseIdentifier: LinkAttachment.cellIdentifier)
-        //        textView.register(nib: UINib(nibName: "PianoTextAddressCell", bundle: nil), forCellReuseIdentifier: AddressAttachment.cellIdentifier)
-        //        textView.register(nib: UINib(nibName: "PianoTextContactCell", bundle: nil), forCellReuseIdentifier: ContactAttachment.cellIdentifier)
-        //        textView.register(nib: UINib(nibName: "PianoTextEventCell", bundle: nil), forCellReuseIdentifier: EventAttachment.cellIdentifier)
-        //        textView.register(nib: UINib(nibName: "PianoTextReminderCell", bundle: nil), forCellReuseIdentifier: ReminderAttachment.cellIdentifier)
+        textView.register(nib: UINib(nibName: "TextAddressCell", bundle: nil), forCellReuseIdentifier: TextAddressCell.identifier)
+        textView.register(nib: UINib(nibName: "TextEventCell", bundle: nil), forCellReuseIdentifier: TextEventCell.identifier)
+        textView.register(nib: UINib(nibName: "TextEventCell", bundle: nil), forCellReuseIdentifier: TextEventCell.identifier)
         
     }
     
@@ -223,14 +214,15 @@ class NoteViewController: UIViewController {
                 }
             }).disposed(by: disposeBag)
 
+        /*
         //TODO: 이 부분 빼도 되지 않나 Check by Zio
         NotificationCenter.default.rx.notification(.pianoSizeInspectorSizeChanged)
             .subscribe(onNext: { [weak self] _ in
                 DispatchQueue.main.async {
-                    self?.resetFonts()
+                    self?.reset
                 }
             }).disposed(by: disposeBag)
-        
+        */
         
         
         if let realm = try? Realm(),
@@ -333,17 +325,74 @@ class NoteViewController: UIViewController {
     func perform(autoCompleteType: AutoComplete.AutoCompleteType) {
         switch autoCompleteType {
         case .calendar:
-            print("일정화면을 띄우자")
+            LocalAuth.share.request(calendar: {
+                let eventController = EKEventEditViewController()
+                let eventStore = EKEventStore()
+                eventController.eventStore = eventStore
+                eventController.event = EKEvent(eventStore: eventStore)
+                eventController.editViewDelegate = self
+                self.present(eventController, animated: true)
+            })
         case .drawing:
-            print("그리기화면을 띄우자")
+            let drawingMapCtrl = viewCtrl(type: DrawingMapController.self)
+            drawingMapCtrl.noteID = noteID
+            drawingMapCtrl.drawDismissed = { [weak self] id in
+                self?.attachment(with: id, cellId: TextImageCell.identifier)
+            }
+            present(drawingMapCtrl, animated: true)
         case .images:
-            performSegue(withIdentifier: ImagePickerViewController.identifier, sender: nil)
-            print("앨범을 띄우자")
+            LocalAuth.share.request(photo: {
+                let albumCardCtrl = viewCtrl(type: AlbumCardController.self)
+                albumCardCtrl.noteID = self.noteID
+                albumCardCtrl.albumDismissed = { [weak self] ids, isGrouped in
+                    if isGrouped {
+                        self?.attachment(with: ids, cellId: TextImageListCell.identifier)
+                    } else {
+                        ids.components(separatedBy: "|").forEach {
+                            self?.attachment(with: $0, cellId: TextImageCell.identifier)
+                        }
+                    }
+                }
+                self.present(UINavigationController(rootViewController: albumCardCtrl), animated: true)
+            })
         case .map:
-            print("지도를 띄우자")
+            let cardMapCtrl = viewCtrl(type: CardMapController.self)
+            cardMapCtrl.noteID = noteID
+            cardMapCtrl.mapDismissed = { [weak self] id in
+                self?.attachment(with: id, cellId: TextAddressCell.identifier)
+            }
+            present(UINavigationController(rootViewController: cardMapCtrl), animated: true)
         }
     }
 
+}
+
+extension NoteViewController: EKEventEditViewDelegate {
+    
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        dismiss(animated: true)
+        guard action != .canceled, let eventIdentifier = controller.event?.eventIdentifier else {return}
+        
+        guard let realm = try? Realm(),
+            let noteModel = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) else {return}
+        let coder = NSKeyedUnarchiver(forReadingWith: noteModel.ckMetaData)
+        coder.requiresSecureCoding = true
+        guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
+        coder.finishDecoding()
+        
+        if let eventModel = realm.objects(RealmEventModel.self).filter(NSPredicate(format: "event == %@", eventIdentifier)).first {
+            if action == .deleted {
+                textView.remove(attachmentID: eventModel.id)
+            } else {
+                textView.reload(attachmentID: eventModel.id)
+            }
+        } else {
+            let model = RealmEventModel.getNewModel(sharedZoneID: record.recordID.zoneID, noteRecordName: record.recordID.recordName, event: eventIdentifier)
+            ModelManager.saveNew(model: model)
+            attachment(with: model.id, cellId: TextEventCell.identifier)
+        }
+    }
+    
 }
 
 extension NoteViewController {
@@ -548,7 +597,7 @@ extension NoteViewController: UITextViewDelegate {
         guard let position = textView.selectedTextRange?.end else { return }
         let caretRect = textView.caretRect(for: position)
         
-        if let autoCompleteCollectionView = textView.createSubviewIfNeeded(identifier: AutoCompleteCollectionView.identifier) as? AutoCompleteCollectionView {
+        if let autoCompleteCollectionView = textView.createSubviewIfNeeded(AutoCompleteCollectionView.self) {
             
             let cellNib = UINib(nibName: AutoCompleteCell.identifier, bundle: nil)
             

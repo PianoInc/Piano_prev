@@ -21,3 +21,25 @@
 "Map" = "지도";
 "CopyAll" = "전체복사";
 "Complete" = "완료";
+
+"mapCopyAddr" = "주소복사";
+"mapBaseUrl" = "https://www.google.com/maps/@";
+"mapLocation" = "document.querySelector('div.ml-common-overflow-information-list.ml-panes-entity-location-information span').textContent";
+"mapAddress" = "document.querySelectorAll('div.ml-panes-entity-address-lines-concat')[0].textContent";
+"mapTitle" = "document.querySelector('span.ml-panes-entity-title-truncate').textContent";
+"mapQuery" = "document.querySelector('input').value = '%@'";
+"mapSearch" = "document.querySelector('button.ml-searchbox-right-side-button.ml-search-on-blur-button').click()";
+
+"cancel" = "취소";
+"setting" = "설정";
+"requestCamera" = "카메라 기능을 사용하려면 사용관한을 허용해야 합니다.";
+"requestPhoto" = "사진 기능을 사용하려면 접근관한을 허용해야 합니다.";
+"albumNoTitle" = "이름없음";
+"authReason" = "폴더 잠금 해제";
+
+"today" = "오늘";
+"yesterday" = "어제";
+"recentWeek" = "최근 일주일";
+"recentMonth" = "최근 한달";
+"recentYear" = "최근 %d년";
+
