@@ -201,7 +201,10 @@ extension PianoView {
         }) { [weak self](_) in
             if let results = self?.pianoResults()
                  {
+                    let startDate = Date()
                 completion(results)
+                    let finishDate = Date()
+                    print(finishDate.timeIntervalSince(startDate))
                 self?.removeLabels()
                 self?.dataSource = nil
             }

@@ -37,7 +37,7 @@ class PianoSegmentControl: UIView {
         italicLabel.text = NSLocalizedString("Italic", comment: "기울기")
         strikethroughLabel.text = NSLocalizedString("Strikethrough", comment: "취소선")
         underlineLabel.text = NSLocalizedString("Underline", comment: "밑줄")
-        headerLabel.text = NSLocalizedString("header", comment: "머리말")
+        headerLabel.text = NSLocalizedString("header", comment: "머리말") + "1"
     }
     
     func changeState(selectedImageView: UIImageView, selectedLabel: UILabel) {

@@ -153,7 +153,13 @@ extension PianoTextView {
                     && textStorage.attributedSubstring(from: NSMakeRange(result.range.upperBound-1, 1)).string == "\n" {
                 return
             }
+//            let startDate = Date()
+            
             textStorage.addAttributes(result.attrs, range: result.range)
+            
+            
+//            let finishDate = Date()
+//            print("어트리뷰트 편집시간: \(finishDate.timeIntervalSince(startDate))")
         }
     }
     

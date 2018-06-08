@@ -19,7 +19,7 @@ enum PianoAttributes: Int {
     case header1
     case header2
     case header3
-
+    
     func addAttribute(from attr: [NSAttributedStringKey : Any]) -> [NSAttributedStringKey : Any] {
         
         var newAttr = attr
