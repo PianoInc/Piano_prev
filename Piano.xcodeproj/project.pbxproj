@@ -57,6 +57,12 @@
 		7C1F8D1620BE3779001B03AC /* PianoCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8D1520BE3779001B03AC /* PianoCoverView.swift */; };
 		7C1F8D1820BE383D001B03AC /* ConstraintIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F8D1720BE383D001B03AC /* ConstraintIdentifier.swift */; };
 		7C2F5F2320BF8CC20005B112 /* NoteGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2F5F2220BF8CC20005B112 /* NoteGestureRecognizer.swift */; };
+		7C34B3E420C90EA60032E0DB /* TextImageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C34B3E320C90EA60032E0DB /* TextImageListCell.xib */; };
+		7C34B3E620C90F490032E0DB /* TextImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34B3E520C90F490032E0DB /* TextImageListCell.swift */; };
+		7C34B3E820C91D600032E0DB /* TextEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34B3E720C91D600032E0DB /* TextEventCell.swift */; };
+		7C34B3EA20C91D680032E0DB /* TextEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C34B3E920C91D680032E0DB /* TextEventCell.xib */; };
+		7C34B3F020C9F37F0032E0DB /* TextAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34B3EF20C9F37F0032E0DB /* TextAddressCell.swift */; };
+		7C34B3F220C9F38F0032E0DB /* TextAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C34B3F120C9F38F0032E0DB /* TextAddressCell.xib */; };
 		7C415C7E20BCA99A00B9F8DC /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C415C7D20BCA99A00B9F8DC /* LicenseViewController.swift */; };
 		7C415C8120BCAAD400B9F8DC /* String_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C415C8020BCAAD400B9F8DC /* String_extension.swift */; };
 		7C415C8820BCB30000B9F8DC /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C415C8720BCB30000B9F8DC /* AppNavigator.swift */; };
@@ -199,6 +205,12 @@
 		7C1F8D1520BE3779001B03AC /* PianoCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoCoverView.swift; sourceTree = "<group>"; };
 		7C1F8D1720BE383D001B03AC /* ConstraintIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintIdentifier.swift; sourceTree = "<group>"; };
 		7C2F5F2220BF8CC20005B112 /* NoteGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteGestureRecognizer.swift; sourceTree = "<group>"; };
+		7C34B3E320C90EA60032E0DB /* TextImageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextImageListCell.xib; sourceTree = "<group>"; };
+		7C34B3E520C90F490032E0DB /* TextImageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextImageListCell.swift; sourceTree = "<group>"; };
+		7C34B3E720C91D600032E0DB /* TextEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEventCell.swift; sourceTree = "<group>"; };
+		7C34B3E920C91D680032E0DB /* TextEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextEventCell.xib; sourceTree = "<group>"; };
+		7C34B3EF20C9F37F0032E0DB /* TextAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAddressCell.swift; sourceTree = "<group>"; };
+		7C34B3F120C9F38F0032E0DB /* TextAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAddressCell.xib; sourceTree = "<group>"; };
 		7C415C7D20BCA99A00B9F8DC /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		7C415C8020BCAAD400B9F8DC /* String_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_extension.swift; sourceTree = "<group>"; };
 		7C415C8720BCB30000B9F8DC /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
@@ -659,6 +671,12 @@
 				7C1F8CEF20BE2AB7001B03AC /* AutoComplete */,
 				7C41879320C2A3C700ED41FB /* TextImageCell.swift */,
 				7C41879520C2A44D00ED41FB /* TextImageCell.xib */,
+				7C34B3E320C90EA60032E0DB /* TextImageListCell.xib */,
+				7C34B3E520C90F490032E0DB /* TextImageListCell.swift */,
+				7C34B3E720C91D600032E0DB /* TextEventCell.swift */,
+				7C34B3E920C91D680032E0DB /* TextEventCell.xib */,
+				7C34B3EF20C9F37F0032E0DB /* TextAddressCell.swift */,
+				7C34B3F120C9F38F0032E0DB /* TextAddressCell.xib */,
 			);
 			path = NoteViewController;
 			sourceTree = "<group>";
@@ -768,6 +786,7 @@
 				7C71F7CC20A729E0007DB646 /* Assets.xcassets in Resources */,
 				7C1F8D0F20BE35EE001B03AC /* PianoControl.xib in Resources */,
 				7C4187AF20C6177900ED41FB /* UnlockButton.xib in Resources */,
+				7C34B3EA20C91D680032E0DB /* TextEventCell.xib in Resources */,
 				7CB5E9B120B9518800B42A55 /* PianoSegmentControl.xib in Resources */,
 				7C4187A720C6175600ED41FB /* UnPinButton.xib in Resources */,
 				7C7C9C1D20B39535004B8994 /* StatusBarView.xib in Resources */,
@@ -776,7 +795,9 @@
 				7C71F7CA20A729DF007DB646 /* Main.storyboard in Resources */,
 				7C1F8D1320BE3611001B03AC /* PianoCoverView.xib in Resources */,
 				7CFC3EFD20C12544002C6E09 /* AutoCompleteCell.xib in Resources */,
+				7C34B3F220C9F38F0032E0DB /* TextAddressCell.xib in Resources */,
 				7C4187AD20C6177200ED41FB /* LockButton.xib in Resources */,
+				7C34B3E420C90EA60032E0DB /* TextImageListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +860,7 @@
 				7C7C9C2620B39579004B8994 /* iOS.swift in Sources */,
 				7C41879220C2444100ED41FB /* ImagePickerCell.swift in Sources */,
 				7C7C9C2920B3BD6A004B8994 /* NoteListViewController.swift in Sources */,
+				7C34B3E820C91D600032E0DB /* TextEventCell.swift in Sources */,
 				6CEDD14A20BD1A2B002FB34E /* NSObject.swift in Sources */,
 				7C64F8A920B61DF000FAC0E3 /* NotePeriodReusableView.swift in Sources */,
 				6CEDD14020BD19AD002FB34E /* NoteSynchronizer.swift in Sources */,
@@ -876,6 +898,7 @@
 				7C415C8820BCB30000B9F8DC /* AppNavigator.swift in Sources */,
 				7C7C9C4520B402F0004B8994 /* SubscribeViewController.swift in Sources */,
 				7C41879420C2A3C700ED41FB /* TextImageCell.swift in Sources */,
+				7C34B3F020C9F37F0032E0DB /* TextAddressCell.swift in Sources */,
 				7C64F8AE20B61F6600FAC0E3 /* NoteCalendarCell.swift in Sources */,
 				7CFC3EF720C122C5002C6E09 /* NoteViewController_extension.swift in Sources */,
 				6CEDD13B20BD19AD002FB34E /* RxCloudDatabase.swift in Sources */,
@@ -910,6 +933,7 @@
 				6CEDD16220BD1DEE002FB34E /* AttributeModelConfigurable.swift in Sources */,
 				7C7C9C2B20B3BD84004B8994 /* CategoryListViewController.swift in Sources */,
 				7CB5E9C220BB6ED100B42A55 /* PianoView.swift in Sources */,
+				7C34B3E620C90F490032E0DB /* TextImageListCell.swift in Sources */,
 				7CB5E9C920BBFD0900B42A55 /* UICollectionView_extension.swift in Sources */,
 				7C41878B20C1712D00ED41FB /* PianoTextView_extension.swift in Sources */,
 				6CEDD15920BD1D2D002FB34E /* CardAttachment.swift in Sources */,
@@ -1099,7 +1123,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
 				INFOPLIST_FILE = Piano/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pianoInc.Piano;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1116,7 +1143,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
 				INFOPLIST_FILE = Piano/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pianoInc.Piano;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
