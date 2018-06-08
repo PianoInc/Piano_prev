@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TextEventCell" customModule="Piano" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="75"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6o2-bg-Sxe">
+                    <rect key="frame" x="26" y="18" width="21" height="16"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndo-Wc-2nV">
+                    <rect key="frame" x="24" y="35" width="25" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D+6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcD-kT-dS7">
+                    <rect key="frame" x="73" y="14" width="32" height="18"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCN-fL-iKY">
+                    <rect key="frame" x="60" y="18" width="1" height="39"/>
+                    <color key="backgroundColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="WBt-wt-rhf"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="남북정상회담" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsV-DY-FTk">
+                    <rect key="frame" x="72" y="36" width="104" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Ndo-Wc-2nV" secondAttribute="bottom" constant="16" id="0DY-P2-1UO"/>
+                <constraint firstItem="Ndo-Wc-2nV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="46w-0T-SC3"/>
+                <constraint firstItem="Ndo-Wc-2nV" firstAttribute="centerX" secondItem="6o2-bg-Sxe" secondAttribute="centerX" id="5ZQ-Cr-087"/>
+                <constraint firstItem="EsV-DY-FTk" firstAttribute="top" secondItem="pcD-kT-dS7" secondAttribute="bottom" constant="4" id="A25-2o-rZk"/>
+                <constraint firstItem="UCN-fL-iKY" firstAttribute="leading" secondItem="Ndo-Wc-2nV" secondAttribute="trailing" constant="11" id="GaA-8h-cbd"/>
+                <constraint firstAttribute="bottom" secondItem="UCN-fL-iKY" secondAttribute="bottom" constant="18" id="HmL-KA-NOe"/>
+                <constraint firstItem="EsV-DY-FTk" firstAttribute="leading" secondItem="UCN-fL-iKY" secondAttribute="trailing" constant="11" id="JWK-Qe-MdS"/>
+                <constraint firstItem="pcD-kT-dS7" firstAttribute="leading" secondItem="UCN-fL-iKY" secondAttribute="trailing" constant="12" id="PLU-KZ-TQh"/>
+                <constraint firstItem="Ndo-Wc-2nV" firstAttribute="top" secondItem="6o2-bg-Sxe" secondAttribute="bottom" constant="1" id="Tk2-3C-lPB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="EsV-DY-FTk" secondAttribute="bottom" constant="15" id="bW7-k8-OJH"/>
+                <constraint firstItem="UCN-fL-iKY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="wZs-vM-FyF"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="34.5" y="-226.5"/>
+        </view>
+    </objects>
+</document>

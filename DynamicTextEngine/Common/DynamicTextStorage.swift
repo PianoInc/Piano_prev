@@ -459,10 +459,12 @@ extension DynamicTextStorage {
         let blankString = backingStore.attributedSubstring(from: NSMakeRange(bullet.paraRange.location, bullet.baselineIndex - bullet.paraRange.location))
         
         let width = blankString.size().width
-        let spaceCount = blankString.string.filter{$0 == " "}.count
-        let tabCount = blankString.string.filter{$0 == "\t"}.count
-        let paragraphStyle = FormAttributes.customMakeParagraphStyle?(bullet, spaceCount, tabCount) ??
-            FormAttributes.makeParagraphStyle(bullet: bullet, whitespaceWidth: width)
+        
+//        let spaceCount = blankString.string.filter{$0 == " "}.count
+//        let tabCount = blankString.string.filter{$0 == "\t"}.count
+//        let paragraphStyle = FormAttributes.customMakeParagraphStyle?(bullet, spaceCount, tabCount) ??
+//            FormAttributes.makeParagraphStyle(bullet: bullet, whitespaceWidth: width)
+        let paragraphStyle = FormAttributes.makeParagraphStyle(bullet: bullet, whitespaceWidth: width)
         
         backingStore.addAttributes(
             [.paragraphStyle: paragraphStyle],

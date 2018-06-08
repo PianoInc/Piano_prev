@@ -114,7 +114,7 @@ extension DynamicAttachmentCellDispatcher: DynamicTextAttachmentDelegate {
         //get cell from delegate
         guard let textView = superView,
             let currentBounds = attachment.currentBounds,
-            let cell = textView.DynamicDataSource?.textView(textView, attachmentForCell: attachment) else {return}
+            let cell = textView.dynamicDataSource?.textView(textView, attachmentForCell: attachment) else {return}
         
         
         workingCells[cell.reuseIdentifier]?[cell.uniqueID] = cell
@@ -125,7 +125,7 @@ extension DynamicAttachmentCellDispatcher: DynamicTextAttachmentDelegate {
         attachment.relatedCell = cell
         
         //willDisplayCell
-        textView.DynamicDelegate?.textView?(textView, willDisplay: cell)
+        textView.dynamicDelegate?.textView?(textView, willDisplay: cell)
         //sync frame
         
         let containerInset = textView.textContainerInset
@@ -139,7 +139,7 @@ extension DynamicAttachmentCellDispatcher: DynamicTextAttachmentDelegate {
         cell.isHidden = false
         
         //didDisplayCell
-        textView.DynamicDelegate?.textView?(textView, didDisplay: cell)
+        textView.dynamicDelegate?.textView?(textView, didDisplay: cell)
     }
 
     func needToEndDisplay(attachment: DynamicTextAttachment) {
@@ -151,7 +151,7 @@ extension DynamicAttachmentCellDispatcher: DynamicTextAttachmentDelegate {
         cell.relatedAttachment = nil
         
         //willEndDisplayCell
-        textView.DynamicDelegate?.textView?(textView, willEndDisplaying: cell)
+        textView.dynamicDelegate?.textView?(textView, willEndDisplaying: cell)
         
         cell.leadingConstraint?.constant = 0
         cell.topConstraint?.constant = 0
@@ -165,7 +165,7 @@ extension DynamicAttachmentCellDispatcher: DynamicTextAttachmentDelegate {
         workingCells[cell.reuseIdentifier]?.removeValue(forKey: cell.uniqueID)
         
         //didEndDisplayCell
-        textView.DynamicDelegate?.textView?(textView, didEndDisplaying: cell)
+        textView.dynamicDelegate?.textView?(textView, didEndDisplaying: cell)
     }
     
     func invalidateDisplay(range: NSRange) {

@@ -10,34 +10,98 @@ import UIKit
 import DynamicTextEngine_iOS
 import RealmSwift
 import CloudKit
+import RxCocoa
+import RxSwift
 
 class NoteViewController: UIViewController {
     
+    var noteType: NoteType!
     lazy var dataSource: [[CollectionDatable]] = []
-    @IBOutlet weak var textView: PianoTextView!
-    var type: NoteType!
     
+    
+
+    @IBOutlet weak var textView: PianoTextView!
+    var noteID: String!
+    var isSaving: Bool = false
+    var initialImageRecordNames: Set<String> = []
+    let disposeBag = DisposeBag()
+    var synchronizer: NoteSynchronizer!
+    var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
+     
         super.viewDidLoad()
+        
+        guard let noteType = self.noteType else { return }
+        
+        switch noteType {
+        case .create(let categoryStr):
+            let newModel = RealmNoteModel.getNewModel(content: "", categoryRecordName: categoryStr)
+            let id = newModel.id
+            ModelManager.saveNew(model: newModel)
+            noteID = id
+            textView.noteID = noteID
+            textView.becomeFirstResponder()
+            
+        case .open(let noteInfo):
+            ()
+        case .lock(let noteInfo):
+            ()
+        case .trash(let noteInfo):
+            ()
+        default:
+            
+            ()
+        }
+        
+        if let realm = try? Realm(),
+            let note = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID),
+            let code = ColorPreset(rawValue: note.colorThemeCode) {
+            
+            resetColors(code: code)
+        }
+
+        setTextViewContainer(view.bounds.size)
+        setFormAttributes()
+        setDelegates()
+        registerNibs() //카드관련
+        setNavigationBar()
+        
+        textView.noteID = noteID
+        textView.typingAttributes = FormAttributes.defaultTypingAttributes
+        
+        synchronizer = NoteSynchronizer(textView: textView)
+        synchronizer?.registerToCloud()
+        
+        setNoteContents()
+        subscribeToChange()
 
         
-        setupNavigationBar()
-        setupTextView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        textViewBecomeFirstResponderIfNeeded()
-        
+    deinit {
+        synchronizer?.unregisterFromCloud()
+        notificationToken?.invalidate()
+        removeGarbageImages()
     }
     
-    func textViewBecomeFirstResponderIfNeeded() {
-        if type.becomeFirstResponder {
-            //textView.becomeFirstResponder
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unRegisterKeyboardNotification()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let navigationController = segue.destination as? UINavigationController, let imagePickerViewController = navigationController.topViewController as? ImagePickerViewController {
+            imagePickerViewController.noteViewController = self
         }
     }
+    
+
     
     private func setLastModifiedString(for noteID: String) {
         guard let realm = try? Realm(),
@@ -66,6 +130,205 @@ class NoteViewController: UIViewController {
         }
     }
     
+    private func setTextViewContainer(_ size: CGSize) {
+        if size.width > size.height {
+            textView.textContainerInset.left = size.width / 10
+            textView.textContainerInset.right = size.width / 10
+        } else {
+            textView.textContainerInset.left = 0
+            textView.textContainerInset.right = 0
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setTextViewContainer(size)
+        
+        coordinator.animate(alongsideTransition: nil) {[weak self] (_) in
+            guard let strongSelf = self else { return }
+            
+            if !strongSelf.textView.isEditable {
+                strongSelf.textView.attachControl()
+                
+            }
+        }
+    }
+    
+    private func setDelegates() {
+        textView.delegate = self
+        
+        if #available(iOS 11.0, *) {
+            textView.textDragDelegate = self
+            textView.textDropDelegate = self
+            textView.pasteDelegate = self
+        }
+        
+        textView.dynamicDelegate = self
+        textView.dynamicDataSource = self
+    }
+    
+    private func resetColors(code: ColorPreset) {
+        textView.resetColors(preset: code)
+    }
+    
+    private func registerNibs() {
+        
+        textView.register(nib: UINib(nibName: "TextImageCell", bundle: nil), forCellReuseIdentifier: TextImageCell.identifier)
+        //        textView.register(nib: UINib(nibName: "PianoTextLinkCell", bundle: nil), forCellReuseIdentifier: LinkAttachment.cellIdentifier)
+        //        textView.register(nib: UINib(nibName: "PianoTextAddressCell", bundle: nil), forCellReuseIdentifier: AddressAttachment.cellIdentifier)
+        //        textView.register(nib: UINib(nibName: "PianoTextContactCell", bundle: nil), forCellReuseIdentifier: ContactAttachment.cellIdentifier)
+        //        textView.register(nib: UINib(nibName: "PianoTextEventCell", bundle: nil), forCellReuseIdentifier: EventAttachment.cellIdentifier)
+        //        textView.register(nib: UINib(nibName: "PianoTextReminderCell", bundle: nil), forCellReuseIdentifier: ReminderAttachment.cellIdentifier)
+        
+    }
+    
+    private func setFormAttributes() {
+        FormAttributes.defaultFont = PianoFontAttribute.standard().getFont()
+        FormAttributes.numFont = UIFont(name: "Avenir Next", size: PianoFontAttribute.standard().getFont().pointSize)!
+        FormAttributes.effectColor = ColorManager.shared.pointForeground()
+        FormAttributes.defaultColor = ColorManager.shared.defaultForeground()
+        FormAttributes.customMakeParagraphStyle = { bullet, spaceCount, tabCount in
+            return DynamicParagraphStyle(bullet: bullet, spaceCount: spaceCount, tabCount: tabCount)
+        }
+        
+        
+    }
+    
+    private func setNoteContents() {
+        do {
+            let realm = try Realm()
+            guard let note = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) else {return}
+            let attributes = try JSONDecoder().decode([AttributeModel].self, from: note.attributes)
+            
+            textView.set(string: note.content, with: attributes)
+            
+            let imageRecordNames = attributes.compactMap { attribute -> String? in
+                if case let .attachment(reuseIdentifier, id) = attribute.style,
+                    reuseIdentifier == TextImageCell.identifier {return id}
+                else {return nil}
+            }
+            
+            initialImageRecordNames = Set<String>(imageRecordNames)
+            
+        } catch {print(error)}
+    }
+    
+    private func subscribeToChange() {
+        textView.rx.didChange
+            .skip(1)
+            .debounce(2.0, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.saveText(isDeallocating: false)
+                }
+            }).disposed(by: disposeBag)
+
+        //TODO: 이 부분 빼도 되지 않나 Check by Zio
+        NotificationCenter.default.rx.notification(.pianoSizeInspectorSizeChanged)
+            .subscribe(onNext: { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.resetFonts()
+                }
+            }).disposed(by: disposeBag)
+        
+        
+        
+        if let realm = try? Realm(),
+            let note = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) {
+            notificationToken = note.observe { [weak self] change in
+                switch change {
+                case .change(let properties):
+                    if let colorThemeCode = (properties.filter{ $0.name == Schema.Note.colorThemeCode }).first?.newValue as? String,
+                        let code = ColorPreset(rawValue: colorThemeCode) {
+                        self?.resetColors(code: code)
+                    }
+                default: break
+                }
+            }
+        }
+    }
+    
+    private func resetFonts() {
+        self.textView.textStorage.addAttributes([.font: PianoFontAttribute.standard().getFont()], range: NSMakeRange(0, textView.textStorage.length))
+        
+        self.textView.textStorage.enumerateAttribute(.pianoFontInfo, in: NSMakeRange(0, textView.textStorage.length), options: .longestEffectiveRangeNotRequired) { value, range, _ in
+            guard let fontAttribute = value as? PianoFontAttribute else {return}
+            let font = fontAttribute.getFont()
+            textView.textStorage.addAttribute(.font, value: font, range: range)
+        }
+    }
+    
+    private func removeGarbageImages() {
+        guard let realm = try? Realm(),
+            let noteID = noteID,
+            let note = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) else {return}
+        //get zoneID from record
+        let coder = NSKeyedUnarchiver(forReadingWith: note.ckMetaData)
+        coder.requiresSecureCoding = true
+        guard let record = CKRecord(coder: coder) else {fatalError("Data polluted!!")}
+        coder.finishDecoding()
+        
+        let (_, attributes) = textView.attributedText.getStringWithPianoAttributes()
+        
+        let imageRecordNames = attributes.map { attribute -> String in
+            if case let .attachment(reuseIdentifier, id) = attribute.style,
+                reuseIdentifier == TextImageCell.identifier {return id}
+            else {return ""}
+            }.filter{!$0.isEmpty}
+        
+        let currentImageRecordNames = Set<String>(imageRecordNames)
+        initialImageRecordNames.subtract(currentImageRecordNames)
+        
+        let deletedImageRecordIDs = Array<String>(initialImageRecordNames).map{ CKRecordID(recordName: $0, zoneID: record.recordID.zoneID)}
+        
+        if note.isInSharedDB {
+            CloudManager.shared.sharedDatabase.delete(recordIDs: deletedImageRecordIDs) { error in
+                guard error == nil else { return }
+            }
+        } else {
+            CloudManager.shared.privateDatabase.delete(recordIDs: deletedImageRecordIDs) { error in
+                guard error == nil else { return print(error!) }
+            }
+        }
+    }
+    
+    func saveText(isDeallocating: Bool) {
+        if self.isSaving || self.textView.isSyncing {
+            return
+        }
+        let (string, attributes) = self.textView.get()
+        let noteID = self.noteID ?? ""
+        self.isSaving = true
+        
+        DispatchQueue.global().async {
+            let jsonEncoder = JSONEncoder()
+            guard let data = try? jsonEncoder.encode(attributes) else {self.isSaving = false;return}
+            let kv: [String: Any] = ["content": string, "attributes": data, "isModified": Date()]
+            
+            let completion: ((Error?) -> Void)? = isDeallocating ? nil : { [weak self] error in
+                if let error = error {print(error)}
+                else {print("happy")}
+                self?.isSaving = false
+            }
+            
+            ModelManager.update(id: noteID, type: RealmNoteModel.self, kv: kv, completion: completion)
+        }
+    }
+    
+    func saveWhenDeallocating() {
+        if isSaving {
+            return
+        }
+        let (string, attributes) = textView.get()
+        let noteID = self.noteID ?? ""
+        guard let data = try? JSONEncoder().encode(attributes) else {isSaving = false;return}
+        let kv: [String: Any] = [Schema.Note.content: string,
+                                 Schema.Note.attributes: data,
+                                 "isModified": Date()]
+        
+        ModelManager.update(id: noteID, type: RealmNoteModel.self, kv: kv, completion: nil)
+    }
+    
     
     func perform(autoCompleteType: AutoComplete.AutoCompleteType) {
         switch autoCompleteType {
@@ -74,6 +337,7 @@ class NoteViewController: UIViewController {
         case .drawing:
             print("그리기화면을 띄우자")
         case .images:
+            performSegue(withIdentifier: ImagePickerViewController.identifier, sender: nil)
             print("앨범을 띄우자")
         case .map:
             print("지도를 띄우자")
@@ -86,10 +350,11 @@ extension NoteViewController {
     struct NoteInfo {
         let id: String
         let isShared: Bool
+        let isPinned: Bool
     }
     
     enum NoteType {
-        case create
+        case create(String) //CategoryStr
         case open(NoteInfo)
         case trash(NoteInfo)
         case lock(NoteInfo)
@@ -139,32 +404,32 @@ extension NoteViewController {
                 let barButton2 = UIBarButtonItem(image: #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
                 barButton1.tintColor = .black
                 barButton2.tintColor = .black
-                return [barButton1, barButton2]
+                return [barButton2, barButton1]
             case .open(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
-                let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
+                let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare(_:)))
                 barButton1.tintColor = .black
                 barButton2.tintColor = .black
-                return [barButton1, barButton2]
+                return [barButton2, barButton1]
                 
             case .trash(let info):
-                let barButton1 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
+                let barButton1 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare(_:)))
                 let barButton2 = UIBarButtonItem(title: "복구하기", style: .plain, target: vc, action: #selector(NoteViewController.tapRestore))
                 let barButton3 = UIBarButtonItem(title: "영구삭제", style: .plain, target: vc, action: #selector(NoteViewController.tapCompletelyDelete))
                 barButton1.tintColor = .black
                 barButton2.tintColor = .black
                 barButton3.tintColor = .black
                 
-                return [barButton1, barButton2, barButton3]
+                return [barButton3, barButton2, barButton1]
                 
             case .lock(let info):
                 let barButton1 = UIBarButtonItem(image: #imageLiteral(resourceName: "piano"), style: .plain, target: vc, action: #selector(NoteViewController.tapPiano))
-                let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare))
+                let barButton2 = UIBarButtonItem(image: info.isShared ? #imageLiteral(resourceName: "shareded") : #imageLiteral(resourceName: "share"), style: .plain, target: vc, action: #selector(NoteViewController.tapShare(_:)))
                 let barButton3 = UIBarButtonItem(title: "잠금해제", style: .plain, target: vc, action: #selector(NoteViewController.tapRestore))
                 barButton1.tintColor = .black
                 barButton2.tintColor = .black
                 barButton3.tintColor = .black
-                return [barButton1, barButton2, barButton3]
+                return [barButton3, barButton2, barButton1]
                 
                 }
                 
@@ -173,20 +438,13 @@ extension NoteViewController {
     }
 }
 
-//MARK: TextView
-extension NoteViewController {
-    private func setupTextView() {
-        textView.delegate = self
-        if type.textViewEditable {
-            
-        }
-    }
-}
 
 extension NoteViewController: UITextViewDelegate {
     var typingButtons: [UIBarButtonItem] {
-        let completeButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(NoteViewController.tapComplete(sender:)))
-        let copyAllButton = UIBarButtonItem(title: "전체복사", style: .plain, target: self, action: #selector(NoteViewController.tapCopyAll(sender:)))
+        let completeButton = UIBarButtonItem(title: NSLocalizedString("Complete", comment: "완료"), style: .plain, target: self, action: #selector(NoteViewController.tapComplete(sender:)))
+        let copyAllButton = UIBarButtonItem(title: NSLocalizedString("CopyAll", comment: "전체복사"), style: .plain, target: self, action: #selector(NoteViewController.tapCopyAll(sender:)))
+        completeButton.tintColor = .black 
+        copyAllButton.tintColor = .black
         return [completeButton, copyAllButton]
     }
     
@@ -206,7 +464,7 @@ extension NoteViewController: UITextViewDelegate {
 //
     func textViewDidEndEditing(_ textView: UITextView) {
         //내비게이션바에 디폴트 아이템들 세팅하기
-        navigationItem.setRightBarButtonItems(type.rightBarItems(self), animated: true)
+        navigationItem.setRightBarButtonItems(noteType.rightBarItems(self), animated: true)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -241,46 +499,9 @@ extension NoteViewController: UITextViewDelegate {
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        hideAutoCompleteTableViewIfNeeded(in: textView)
+        (textView as? PianoTextView)?.hideAutoCompleteCollectionViewIfNeeded()
     }
-    
-    
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//
-//        if text == "\n" {
-//            if let attachment = DynamicAttachment(text: textView.text, selectedRange: textView.selectedRange) {
-//
-//                if attachment.type == .image {
-//
-//                    guard let realm = try? Realm(), let noteRecordName = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID)?.recordName else { return true }
-//
-//                    let imageModel = RealmImageModel.getNewModel(noteRecordName: noteRecordName, image: UIImage(named: "imagePlus")!)
-//                    ModelManager.saveNew(model: imageModel)
-//                    let cardAttachment = CardAttachment(idForModel: imageModel.id, cellIdentifier: PianoTextImageCell.reuseIdentifier)
-//                    let cardAttrString = NSAttributedString(attachment: cardAttachment)
-//
-//                    //                    let cardAttrString = NSAttributedString(string: "")
-//                    textView.textStorage.replaceCharacters(in: attachment.paraRange, with: cardAttrString)
-//                    //1은 개행때문에 사라진 length
-//                    textView.selectedRange.location += ( cardAttrString.length - attachment.paraRange.length + 3)
-//                    textView.resignFirstResponder()
-//                    //                    showImagePicker()
-//                    return false
-//
-//                }
-//
-//
-//            }
-//        }
-//        return true
-//
-//    }
-    
-    
-    func hideAutoCompleteTableViewIfNeeded(in textView: UITextView) {
-        textView.subView(identifier: AutoCompleteCollectionView.identifier)?.removeFromSuperview()
-    }
-    
+
     
     func showAutoCompleteTableViewIfNeeded(in textView: UITextView) {
         
@@ -288,7 +509,7 @@ extension NoteViewController: UITextViewDelegate {
         
         //#이 문단 맨 앞에 있는지, position이 있는지 판단
         guard let range = rangeAfterSharp(textView: textView) else {
-            hideAutoCompleteTableViewIfNeeded(in: textView)
+            (textView as? PianoTextView)?.hideAutoCompleteCollectionViewIfNeeded()
             return }
         
         //커서 frame과 샾 뒤에 글자 추출
@@ -308,7 +529,7 @@ extension NoteViewController: UITextViewDelegate {
                 return
             }
         }
-        hideAutoCompleteTableViewIfNeeded(in: textView)
+        (textView as? PianoTextView)?.hideAutoCompleteCollectionViewIfNeeded()
     }
     
     private func rangeAfterSharp(textView: UITextView) -> NSRange? {
@@ -350,16 +571,16 @@ extension NoteViewController: UITextViewDelegate {
 
 //MARK: NavigationController
 extension NoteViewController {
-    private func setupNavigationBar() {
-        navigationItem.setRightBarButtonItems(type.rightBarItems(self), animated: true)
+    private func setNavigationBar() {
+        navigationItem.setRightBarButtonItems(noteType.rightBarItems(self), animated: true)
     }
     
     @objc func tapPiano() {
         textView.beginPiano()
     }
     
-    @objc func tapShare() {
-        
+    @objc func tapShare(_ sender: UIBarButtonItem) {
+        presentShare(sender)
     }
     
     @objc func tapRestore() {

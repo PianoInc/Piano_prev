@@ -34,7 +34,7 @@ class ColorManager {
     
     func pointForeground() -> UIColor {
         switch preset {
-        case .white: return UIColor.blue
+        case .white: return UIColor(hex6: "007aff")
         }
     }
     
@@ -46,7 +46,7 @@ class ColorManager {
     
     func highlightBackground() -> UIColor {
         switch preset {
-        case .white: return UIColor(hex6: "229CFF")
+        case .white: return UIColor(hex6: "FFF000")
         }
     }
     

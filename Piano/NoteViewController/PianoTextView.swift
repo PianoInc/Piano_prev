@@ -8,6 +8,7 @@
 
 import UIKit
 import DynamicTextEngine_iOS
+import RealmSwift
 
 class PianoTextView: DynamicTextView {
     
@@ -61,6 +62,21 @@ class PianoTextView: DynamicTextView {
             layer.render(in: rendererContext.cgContext)
         }
     }
+    
+    func insertImageCell(image: UIImage, at range: NSRange) {
+        guard let realm = try? Realm(),
+            let noteRecordName = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID)?.recordName else { return }
+
+        let imageModel = RealmImageModel.getNewModel(sharedZoneID: nil, noteRecordName: noteRecordName, image: image)
+        ModelManager.saveNew(model: imageModel)
+        let attachment = CardAttachment(idForModel: imageModel.id, cellIdentifier: TextImageCell.identifier)
+        
+        let attrString = NSAttributedString(attachment: attachment)
+        let mutableAttrString = NSMutableAttributedString(attributedString: attrString)
+        mutableAttrString.addAttributes(FormAttributes.defaultAttributes, range: NSMakeRange(0, mutableAttrString.length))
+        textStorage.replaceCharacters(in: selectedRange, with: mutableAttrString)
+        selectedRange.location += mutableAttrString.length
+    }
 
 }
 
@@ -74,7 +90,9 @@ extension PianoTextView {
         guard self.hasSubView(identifier: AutoCompleteCollectionView.identifier) else { return [] }
         return [
             KeyCommand(input: "UIKeyInputUpArrow", modifierFlags: [], action: #selector(upArrow(sender:))),
-            KeyCommand(input: "UIKeyInputDownArrow", modifierFlags: [], action: #selector(downArrow(sender:)))
+            KeyCommand(input: "UIKeyInputDownArrow", modifierFlags: [], action: #selector(downArrow(sender:))),
+            KeyCommand(input: "UIKeyInputEscape", modifierFlags: [], action: #selector(escape(sender:))),
+            KeyCommand(input: "\r", modifierFlags: [], action: #selector(newline(sender:)))
         ]
     }
 }
@@ -106,20 +124,12 @@ extension PianoTextView {
 
 extension PianoTextView: NSLayoutManagerDelegate {
     func layoutManager(_ layoutManager: NSLayoutManager, shouldSetLineFragmentRect lineFragmentRect: UnsafeMutablePointer<CGRect>, lineFragmentUsedRect: UnsafeMutablePointer<CGRect>, baselineOffset: UnsafeMutablePointer<CGFloat>, in textContainer: NSTextContainer, forGlyphRange glyphRange: NSRange) -> Bool {
-
-        lineFragmentRect.pointee = lineFragmentRect.pointee.insetBy(dx: 0, dy: 2.5)
-        lineFragmentUsedRect.pointee = lineFragmentUsedRect.pointee.insetBy(dx: 0, dy: 2.5)
-        
+        baselineOffset.pointee += (lineSpacing / 2)
         return true
     }
     
     func layoutManager(_ layoutManager: NSLayoutManager, lineSpacingAfterGlyphAt glyphIndex: Int, withProposedLineFragmentRect rect: CGRect) -> CGFloat {
-        return 10
+        return lineSpacing
     }
     
-    
-//    override func caretRect(for position: UITextPosition) -> CGRect {
-//        var rect = super.caretRect(for: position)
-//        return rect.insetBy(dx: 0, dy: 10)
-//    }
 }

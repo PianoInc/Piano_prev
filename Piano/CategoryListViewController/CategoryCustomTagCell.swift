@@ -12,13 +12,13 @@ struct CategoryCustomTag: CollectionDatable {
     
     
     
-    let type: NoteListViewController.CategoryType
+    let categoryType: NoteListViewController.CategoryType
     let order: Int
     var sectionTitle: String?
     var sectionIdentifier: String?
     
-    init(type: NoteListViewController.CategoryType, order: Int, sectionTitle: String? = nil, sectionIdentifier: String? = nil) {
-        self.type = type
+    init(categoryType: NoteListViewController.CategoryType, order: Int, sectionTitle: String? = nil, sectionIdentifier: String? = nil) {
+        self.categoryType = categoryType
         self.order = order
         self.sectionTitle = sectionTitle
         self.sectionIdentifier = sectionIdentifier
@@ -29,7 +29,7 @@ struct CategoryCustomTag: CollectionDatable {
     }
     
     func didSelectItem(fromVC viewController: ViewController) {
-        viewController.performSegue(withIdentifier: NoteListViewController.identifier, sender: type)
+        viewController.performSegue(withIdentifier: NoteListViewController.identifier, sender: categoryType)
     }
 
     
@@ -40,7 +40,7 @@ class CategoryCustomTagCell: UICollectionViewCell, CollectionDataAcceptable {
     var data: CollectionDatable? {
         didSet {
             guard let data = self.data as? CategoryCustomTag else { return }
-            titleLabel.text = data.type.string
+            titleLabel.text = data.categoryType.title
         }
     }
     

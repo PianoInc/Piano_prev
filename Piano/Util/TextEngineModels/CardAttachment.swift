@@ -53,7 +53,7 @@ class CardAttachment: DynamicTextAttachment {
         let height: CGFloat
 
         switch identifier {
-            default: height = 100
+            default: height = 200
         }
 
         return CGSize(width: width, height: height)

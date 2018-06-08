@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Tsj-47-S47" customClass="TextImageCell" customModule="Piano" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="366" height="382"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v6Q-4E-lrB">
+                    <rect key="frame" x="0.0" y="0.0" width="366" height="382"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="v6Q-4E-lrB" firstAttribute="leading" secondItem="Tsj-47-S47" secondAttribute="leading" id="ApS-oy-hWH"/>
+                <constraint firstAttribute="bottom" secondItem="v6Q-4E-lrB" secondAttribute="bottom" id="Pwu-xV-3cx"/>
+                <constraint firstAttribute="trailing" secondItem="v6Q-4E-lrB" secondAttribute="trailing" id="tPb-cv-j6c"/>
+                <constraint firstItem="v6Q-4E-lrB" firstAttribute="top" secondItem="Tsj-47-S47" secondAttribute="top" id="u0T-Ep-EPT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="ytN-Mq-oqe"/>
+            <connections>
+                <outlet property="imageView" destination="v6Q-4E-lrB" id="FFv-Bm-Lib"/>
+            </connections>
+            <point key="canvasLocation" x="221" y="-388"/>
+        </view>
+    </objects>
+</document>
