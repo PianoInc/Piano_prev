@@ -32,7 +32,6 @@ class NoteViewController: UIViewController {
      
         super.viewDidLoad()
         
-        
         guard let noteType = self.noteType else { return }
         
         switch noteType {
@@ -88,10 +87,12 @@ class NoteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        registerKeyboardNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        unRegisterKeyboardNotification()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -53,6 +53,12 @@ class DateChecker {
         return NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false", [dateFrom, dateTo])
     }
     
+//    var recentOneYear: NSPredicate {
+//        let previousOneYear = Date(timeIntervalSinceNow: -60 * 60 * 24 * 365)
+//        let dateFrom = self.calendar.startOfDay(for: previousOneYear)
+//
+//    }
+    
     
     
     //성능 이슈
