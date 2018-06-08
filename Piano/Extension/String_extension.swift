@@ -41,75 +41,108 @@ extension String {
 
 extension String {
     
-    /// 해당 id를 가지는 localized string을 반환한다.
-    var locale: String {
+    /// 해당 string과 동일한 id의 LocalizedString을 반환한다.
+    var loc: String {
         return NSLocalizedString(self, comment: self)
     }
     
     /**
-     앞에서부터 해당 문자열의 index를 검출한다.
-     - parameter of : 해당 문자열.
-     - returns : 검출된 index.
+     앞에서부터 찾고자 하는 string의 index를 반환한다.
+     - parameter of : 찾고자 하는 string.
+     - returns : 찾고자 하는 string의 index값.
      */
     func index(of: String) -> Int {
-        guard let range = range(of: of) else {return 0}
-        return distance(from: startIndex, to: range.lowerBound)
+        if let range = range(of: of) {
+            return distance(from: startIndex, to: range.lowerBound)
+        } else {
+            return 0
+        }
     }
     
     /**
-     뒤에서부터 해당 문자열의 index를 검출한다.
-     - parameter of : 해당 문자열.
-     - returns : 검출된 index.
+     앞에서부터 특정 위치까지 찾고자 하는 string의 index를 반환한다.
+     - parameter of : 찾고자 하는 string.
+     - parameter from : Start index값.
+     - returns : 찾고자 하는 string의 index값.
+     */
+    func index(of: String, from: Int) -> Int {
+        let fromIndex = index(startIndex, offsetBy: from)
+        let startRange = Range(uncheckedBounds: (lower: fromIndex, upper: endIndex))
+        if let range = range(of: of, range: startRange, locale: nil) {
+            return distance(from: startIndex, to: range.lowerBound)
+        } else {
+            return 0
+        }
+    }
+    
+    /**
+     뒤에서부터 찾고자 하는 string의 index를 반환한다.
+     - parameter lastOf : 찾고자 하는 string.
+     - returns : 찾고자 하는 string의 index값.
      */
     func index(lastOf: String) -> Int {
-        guard let range = range(of: lastOf, options: .backwards) else {return 0}
-        return distance(from: startIndex, to: range.upperBound)
+        if let range = range(of: lastOf, options: .backwards, range: nil, locale: nil) {
+            return distance(from: startIndex, to: range.upperBound)
+        } else {
+            return 0
+        }
     }
     
     /**
-     주어진 range의 substring을 반환한다.
-     - parameter r : from...to
+     뒤에서부터 특정 위치까지 찾고자 하는 string의 index를 반환한다.
+     - parameter lastOf : 찾고자 하는 string.
+     - parameter to : End index값.
+     - returns : 찾고자 하는 string의 index값.
      */
-    func sub(_ r: CountableClosedRange<Int>) -> String {
-        return substring(r.lowerBound..<r.upperBound)
+    func index(lastOf: String, to: Int) -> Int {
+        let toIndex = index(startIndex, offsetBy: to)
+        let startRange = Range(uncheckedBounds: (lower: toIndex, upper: endIndex))
+        if let range = range(of: lastOf, range: startRange, locale: nil) {
+            return distance(from: startIndex, to: range.upperBound)
+        } else {
+            return 0
+        }
     }
     
     /**
-     주어진 range의 substring을 반환한다.
-     - parameter r : from...
+     Subtring값을 반환한다.
+     - parameter r : [value ..< value]
+     - returns : 해당 range만큼의 string값.
      */
-    func sub(_ r: CountablePartialRangeFrom<Int>) -> String {
-        return substring(r.lowerBound..<count)
-    }
-    
-    /**
-     주어진 range의 substring을 반환한다.
-     - parameter r : ...to
-     */
-    func sub(_ r: PartialRangeThrough<Int>) -> String {
-        return substring(0..<r.upperBound)
-    }
-    
-    /// Substring 계산 함수.
-    private func substring(_ r: CountableRange<Int>) -> String {
+    func sub(_ r: CountableRange<Int>) -> String {
         let from = (r.startIndex > 0) ? index(startIndex, offsetBy: r.startIndex) : startIndex
         let to = (count > r.endIndex) ? index(startIndex, offsetBy: r.endIndex) : endIndex
-        guard from >= startIndex && to <= endIndex else {return self}
-        return String(self[from..<to])
+        if from >= startIndex && to <= endIndex {
+            return String(self[from..<to])
+        }
+        return self
     }
     
     /**
-     해당 String이 가지는 boundingRect중에서 height값을 반환한다.
-     - parameter width: 계산에 사용될 width.
-     - parameter point: 계산에 사용될 font point size.
-     - returns: 주어진 data를 통해 계산된 height값.
+     Subtring값을 반환한다.
+     - parameter r : [value ... value]
+     - returns : 해당 range만큼의 string값.
      */
-    func boundingRect(with width: CGFloat, font point: CGFloat) -> CGFloat {
-        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let set: StringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
-        let font = [NSAttributedStringKey.font : Font.systemFont(ofSize: point)]
-        let contentSize = self.boundingRect(with: size, options: set, attributes: font, context: nil)
-        return contentSize.height
+    func sub(_ r: CountableClosedRange<Int>) -> String {
+        return sub(r.lowerBound..<r.upperBound)
+    }
+    
+    /**
+     Subtring값을 반환한다.
+     - parameter r : [value ...]
+     - returns : 해당 range만큼의 string값.
+     */
+    func sub(_ r: CountablePartialRangeFrom<Int>) -> String {
+        return sub(r.lowerBound..<count)
+    }
+    
+    /**
+     Subtring값을 반환한다.
+     - parameter r : [... value]
+     - returns : 해당 range만큼의 string값.
+     */
+    func sub(_ r: PartialRangeThrough<Int>) -> String {
+        return sub(0..<r.upperBound)
     }
     
     /**

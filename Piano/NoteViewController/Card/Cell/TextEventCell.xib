@@ -64,6 +64,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="day" destination="Ndo-Wc-2nV" id="C6i-YR-xva"/>
+                <outlet property="dday" destination="pcD-kT-dS7" id="tIC-uF-af6"/>
+                <outlet property="month" destination="6o2-bg-Sxe" id="DR8-aE-yol"/>
+                <outlet property="title" destination="EsV-DY-FTk" id="9kv-Tw-gNX"/>
+            </connections>
             <point key="canvasLocation" x="34.5" y="-226.5"/>
         </view>
     </objects>

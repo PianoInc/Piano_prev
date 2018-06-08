@@ -34,8 +34,8 @@ extension PianoTextView {
     }
     
     internal func attachControl() {
-        guard let control = createSubviewIfNeeded(identifier: PianoControl.identifier) as? PianoControl,
-            let pianoView = superview?.createSubviewIfNeeded(identifier: PianoView.identifier) as? PianoView else { return }
+        guard let control = createSubviewIfNeeded(PianoControl.self),
+            let pianoView = superview?.createSubviewIfNeeded(PianoView.self) else { return }
         control.removeFromSuperview()
         control.textView = self
         control.pianoView = pianoView
@@ -48,7 +48,7 @@ extension PianoTextView {
     }
     
     internal func detachControl() {
-        guard let control = subView(identifier: PianoControl.identifier) as? PianoControl else { return }
+        guard let control = subView(PianoControl.self) as? PianoControl else { return }
         control.removeFromSuperview()
     }
     
@@ -166,15 +166,15 @@ extension PianoTextView {
     private func addCoverView(rect: CGRect) {
         var correctRect = rect
         correctRect.origin.y += textContainerInset.top
-        let coverView = createSubviewIfNeeded(identifier: PianoCoverView.identifier)
-        let control = createSubviewIfNeeded(identifier: PianoControl.identifier)
+        guard let coverView = createSubviewIfNeeded(PianoCoverView.self) else {return}
+        guard let control = createSubviewIfNeeded(PianoControl.self) else {return}
         coverView.backgroundColor = self.backgroundColor
         coverView.frame = correctRect
         insertSubview(coverView, belowSubview: control)
     }
     
     private func removeCoverView(){
-        subView(identifier: PianoCoverView.identifier)?.removeFromSuperview()
+        subView(PianoCoverView.self)?.removeFromSuperview()
     }
     
     private func operate(on: Bool) {
@@ -183,11 +183,11 @@ extension PianoTextView {
         
         guard let superView = superview,
             let pianoView = (on
-                ? superView.createSubviewIfNeeded(identifier: PianoView.identifier)
-                : superView.subView(identifier: PianoView.identifier)) as? PianoView,
+                ? superView.createSubviewIfNeeded(PianoView.self)
+                : superView.subView(PianoView.self)),
             let segmentControl = (on
-                ? superView.createSubviewIfNeeded(identifier: PianoSegmentControl.identifier)
-                : superView.subView(identifier: PianoSegmentControl.identifier)) as? PianoSegmentControl
+                ? superView.createSubviewIfNeeded(PianoSegmentControl.self)
+                : superView.subView(PianoSegmentControl.self))
             else { return }
         
         pianoView.setup(pianoMode: on, to: superView)
@@ -238,7 +238,8 @@ extension PianoTextView {
 extension PianoTextView {
     
     @objc func newline(sender: KeyCommand) {
-        if let collectionView = subView(identifier: AutoCompleteCollectionView.identifier) as? AutoCompleteCollectionView, let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
+        if let collectionView = subView(AutoCompleteCollectionView.self),
+            let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
             collectionView.delegate?.collectionView!(collectionView, didSelectItemAt: selectedIndexPath)
         }
 
@@ -250,7 +251,7 @@ extension PianoTextView {
     
     @objc func upArrow(sender: KeyCommand) {
         
-        guard let collectionView = subView(identifier: AutoCompleteCollectionView.identifier) as? AutoCompleteCollectionView,
+        guard let collectionView = subView(AutoCompleteCollectionView.self),
             let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first else { return }
         
         let numberOfRows = collectionView.numberOfItems(inSection: 0)
@@ -267,7 +268,7 @@ extension PianoTextView {
     }
     
     @objc func downArrow(sender: KeyCommand) {
-        guard let collectionView = subView(identifier: AutoCompleteCollectionView.identifier) as? AutoCompleteCollectionView,
+        guard let collectionView = subView(AutoCompleteCollectionView.self),
             let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first else { return }
         
         let numberOfRows = collectionView.numberOfItems(inSection: 0)
@@ -283,7 +284,7 @@ extension PianoTextView {
     }
     
     internal func hideAutoCompleteCollectionViewIfNeeded(){
-        subView(identifier: AutoCompleteCollectionView.identifier)?.removeFromSuperview()
+        subView(AutoCompleteCollectionView.self)?.removeFromSuperview()
     }
 }
 

@@ -117,32 +117,32 @@ extension NoteCell {
         switch data.noteType {
         case .open(let noteInfo):
             if noteInfo.isPinned {
-                let unPinButton = self.createSubviewIfNeeded(identifier: UnPinButton.identifier) as! UIButton
+                guard let unPinButton = self.createSubviewIfNeeded(UnPinButton.self) else {break}
                 unPinButton.addTarget(self, action: #selector(NoteCell.tapUnPin(_:)), for: .touchUpInside)
                 buttons.append(unPinButton)
             } else {
-                let pinButton = self.createSubviewIfNeeded(identifier: PinButton.identifier) as! UIButton
+                guard let pinButton = self.createSubviewIfNeeded(PinButton.self) else {break}
                 pinButton.addTarget(self, action: #selector(NoteCell.tapPin(_:)), for: .touchUpInside)
                 buttons.append(pinButton)
             }
             
-            let lockButton = self.createSubviewIfNeeded(identifier: LockButton.identifier) as! UIButton
+            guard let lockButton = self.createSubviewIfNeeded(LockButton.self) else {break}
             lockButton.addTarget(self, action: #selector(NoteCell.tapLock(_:)), for: .touchUpInside)
             buttons.append(lockButton)
             
             
         case .lock(let noteInfo):
             if noteInfo.isPinned {
-                let unPinButton = self.createSubviewIfNeeded(identifier: UnPinButton.identifier) as! UIButton
+                guard let unPinButton = self.createSubviewIfNeeded(UnPinButton.self) else {break}
                 unPinButton.addTarget(self, action: #selector(NoteCell.tapUnPin(_:)), for: .touchUpInside)
                 buttons.append(unPinButton)
             } else {
-                let pinButton = self.createSubviewIfNeeded(identifier: PinButton.identifier) as! UIButton
+                guard let pinButton = self.createSubviewIfNeeded(PinButton.self) else {break}
                 pinButton.addTarget(self, action: #selector(NoteCell.tapPin(_:)), for: .touchUpInside)
                 buttons.append(pinButton)
             }
             
-            let unLockButton = self.createSubviewIfNeeded(identifier: UnlockButton.identifier) as! UIButton
+            guard let unLockButton = self.createSubviewIfNeeded(UnlockButton.self) else {break}
             unLockButton.addTarget(self, action: #selector(NoteCell.tapUnlock(_:)), for: .touchUpInside)
             buttons.append(unLockButton)
             
@@ -158,21 +158,21 @@ extension NoteCell {
         
         switch data.noteType {
         case .open, .lock:
-            let categoryButton = self.createSubviewIfNeeded(identifier: CategoryButton.identifier) as! UIButton
+            guard let categoryButton = self.createSubviewIfNeeded(CategoryButton.self) else {break}
             categoryButton.addTarget(self, action: #selector(NoteCell.tapCategory(_:)), for: .touchUpInside)
             buttons.append(categoryButton)
             
-            let trashButton = self.createSubviewIfNeeded(identifier: TrashButton.identifier) as! UIButton
+            guard let trashButton = self.createSubviewIfNeeded(TrashButton.self) else {break}
             trashButton.addTarget(self, action: #selector(NoteCell.tapTrash(_:)), for: .touchUpInside)
             buttons.append(trashButton)
             
         case .trash:
             
-            let deleteButton = self.createSubviewIfNeeded(identifier: DeleteButton.identifier) as! UIButton
+            guard let deleteButton = self.createSubviewIfNeeded(DeleteButton.self) else {break}
             deleteButton.addTarget(self, action: #selector(NoteCell.tapDelete(_:)), for: .touchUpInside)
             buttons.append(deleteButton)
             
-            let restoreButton = self.createSubviewIfNeeded(identifier: RestoreButton.identifier) as! UIButton
+            guard let restoreButton = self.createSubviewIfNeeded(RestoreButton.self) else {break}
             restoreButton.addTarget(self, action: #selector(NoteCell.tapRestore(_:)), for: .touchUpInside)
             buttons.append(restoreButton)
             

@@ -9,6 +9,7 @@
 import UIKit
 import CloudKit
 import RealmSwift
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,14 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        GMSServices.provideAPIKey("AIzaSyC_BfQX72njTUj4CIprkxTrv6cyC6IqX3o")
         application.registerForRemoteNotifications()
         _ = CloudManager.shared
         _ = LocalDatabase.shared
         _ = PianoNoteSizeInspector.shared
         performMigration()
-        
-        
         return true
     }
 

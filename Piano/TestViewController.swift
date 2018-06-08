@@ -16,7 +16,7 @@ class TestViewController: UIViewController {
         
         button.centerVertically()
         
-        let segmentControl = view.createSubviewIfNeeded(identifier: PianoSegmentControl.identifier)
+        guard let segmentControl = view.createSubviewIfNeeded(PianoSegmentControl.self) else {return}
         view.addSubview(segmentControl)
         
         segmentControl.translatesAutoresizingMaskIntoConstraints = false

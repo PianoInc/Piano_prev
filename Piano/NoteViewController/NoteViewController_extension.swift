@@ -74,6 +74,17 @@ extension NoteViewController: UICollectionViewDelegateFlowLayout {
 
 extension NoteViewController: DynamicTextViewDelegate {
     
+    func attachment(with idForModel: String, cellId: String) {
+        let attachment = CardAttachment(idForModel: idForModel, cellIdentifier: cellId)
+        let attr = NSAttributedString(attachment: attachment)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.firstLineHeadIndent = 30
+        let mAttr = NSMutableAttributedString(attributedString: attr)
+        mAttr.addAttributes([.paragraphStyle : paragraphStyle], range: NSMakeRange(0, mAttr.length))
+        textView.textStorage.replaceCharacters(in: textView.selectedRange, with: mAttr)
+        textView.selectedRange.location += mAttr.length
+    }
+    
 }
 
 extension NoteViewController: DynamicTextViewDataSource {
@@ -83,7 +94,6 @@ extension NoteViewController: DynamicTextViewDataSource {
             let attachmentWithAttribute = attachment as? CardAttachment {
             configuarableCell.configure(with: attachmentWithAttribute.idForModel)
         }
-        
         return cell
     }
 

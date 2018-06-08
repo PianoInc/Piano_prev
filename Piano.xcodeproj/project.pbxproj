@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16CF336820CA67B200AA606F /* AlbumPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335820CA67B100AA606F /* AlbumPhotoCell.swift */; };
+		16CF336920CA67B200AA606F /* AlbumFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335920CA67B100AA606F /* AlbumFolderCell.swift */; };
+		16CF336A20CA67B200AA606F /* AlbumPhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335A20CA67B100AA606F /* AlbumPhotoListView.swift */; };
+		16CF336B20CA67B200AA606F /* AlbumCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335B20CA67B100AA606F /* AlbumCardController.swift */; };
+		16CF336C20CA67B200AA606F /* AlbumFolderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335C20CA67B100AA606F /* AlbumFolderListView.swift */; };
+		16CF336D20CA67B200AA606F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335E20CA67B100AA606F /* CameraViewController.swift */; };
+		16CF336E20CA67B200AA606F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335F20CA67B100AA606F /* CameraView.swift */; };
+		16CF336F20CA67B200AA606F /* CameraCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF336020CA67B100AA606F /* CameraCapture.swift */; };
+		16CF337020CA67B200AA606F /* CameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF336120CA67B100AA606F /* CameraSession.swift */; };
+		16CF337220CA67B200AA606F /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF336520CA67B200AA606F /* CanvasView.swift */; };
+		16CF337320CA67B200AA606F /* DrawingUndoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF336620CA67B200AA606F /* DrawingUndoManager.swift */; };
+		16CF337420CA67B200AA606F /* DrawingMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF336720CA67B200AA606F /* DrawingMapController.swift */; };
+		16CF337720CA67CC00AA606F /* CardMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF337620CA67CC00AA606F /* CardMapController.swift */; };
+		16CF337B20CA691800AA606F /* Anchor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF337820CA690F00AA606F /* Anchor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		16CF337E20CA69D800AA606F /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF337C20CA69D700AA606F /* StoreService.swift */; };
+		16CF337F20CA69D800AA606F /* LocalAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF337D20CA69D800AA606F /* LocalAuth.swift */; };
+		16CF338120CA6A0E00AA606F /* Date_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF338020CA6A0E00AA606F /* Date_extension.swift */; };
+		16CF338320CA6EB700AA606F /* AlbumPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CF338220CA6EB700AA606F /* AlbumPhotoCell.xib */; };
 		56004718BFACAB4352342344 /* Pods_Piano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C004A8803023887369302C /* Pods_Piano.framework */; };
 		6CDF3F4D20BD250E00C28918 /* DynamicTextEngine_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDF3F4C20BD250E00C28918 /* DynamicTextEngine_iOS.framework */; };
 		6CDF3F4E20BD250E00C28918 /* DynamicTextEngine_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDF3F4C20BD250E00C28918 /* DynamicTextEngine_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -69,8 +87,6 @@
 		7C415C8B20BCBBB300B9F8DC /* AttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C415C8A20BCBBB300B9F8DC /* AttachmentViewController.swift */; };
 		7C41878B20C1712D00ED41FB /* PianoTextView_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41878A20C1712D00ED41FB /* PianoTextView_extension.swift */; };
 		7C41878D20C171A700ED41FB /* PianoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41878C20C171A700ED41FB /* PianoLabel.swift */; };
-		7C41878F20C2438200ED41FB /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41878E20C2438200ED41FB /* ImagePickerViewController.swift */; };
-		7C41879220C2444100ED41FB /* ImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41879120C2444100ED41FB /* ImagePickerCell.swift */; };
 		7C41879420C2A3C700ED41FB /* TextImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41879320C2A3C700ED41FB /* TextImageCell.swift */; };
 		7C41879620C2A44D00ED41FB /* TextImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C41879520C2A44D00ED41FB /* TextImageCell.xib */; };
 		7C41879B20C35C4100ED41FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C41879D20C35C4100ED41FB /* Localizable.strings */; };
@@ -105,7 +121,6 @@
 		7C71F7CA20A729DF007DB646 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C71F7C820A729DF007DB646 /* Main.storyboard */; };
 		7C71F7CC20A729E0007DB646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C71F7CB20A729E0007DB646 /* Assets.xcassets */; };
 		7C71F7CF20A729E0007DB646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C71F7CD20A729E0007DB646 /* LaunchScreen.storyboard */; };
-		7C79C4BB20BD70F5006249CD /* Date_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79C4BA20BD70F5006249CD /* Date_extension.swift */; };
 		7C7C9C1D20B39535004B8994 /* StatusBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7C9C1A20B39535004B8994 /* StatusBarView.xib */; };
 		7C7C9C1E20B39535004B8994 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C9C1B20B39535004B8994 /* StatusBarView.swift */; };
 		7C7C9C1F20B39535004B8994 /* TransParentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C9C1C20B39535004B8994 /* TransParentNavigationController.swift */; };
@@ -148,6 +163,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6CDF3F4E20BD250E00C28918 /* DynamicTextEngine_iOS.framework in Embed Frameworks */,
+				16CF337B20CA691800AA606F /* Anchor.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +171,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		16CF335820CA67B100AA606F /* AlbumPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumPhotoCell.swift; sourceTree = "<group>"; };
+		16CF335920CA67B100AA606F /* AlbumFolderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumFolderCell.swift; sourceTree = "<group>"; };
+		16CF335A20CA67B100AA606F /* AlbumPhotoListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumPhotoListView.swift; sourceTree = "<group>"; };
+		16CF335B20CA67B100AA606F /* AlbumCardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCardController.swift; sourceTree = "<group>"; };
+		16CF335C20CA67B100AA606F /* AlbumFolderListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumFolderListView.swift; sourceTree = "<group>"; };
+		16CF335E20CA67B100AA606F /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		16CF335F20CA67B100AA606F /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		16CF336020CA67B100AA606F /* CameraCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraCapture.swift; sourceTree = "<group>"; };
+		16CF336120CA67B100AA606F /* CameraSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSession.swift; sourceTree = "<group>"; };
+		16CF336520CA67B200AA606F /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		16CF336620CA67B200AA606F /* DrawingUndoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingUndoManager.swift; sourceTree = "<group>"; };
+		16CF336720CA67B200AA606F /* DrawingMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingMapController.swift; sourceTree = "<group>"; };
+		16CF337620CA67CC00AA606F /* CardMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardMapController.swift; sourceTree = "<group>"; };
+		16CF337820CA690F00AA606F /* Anchor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Anchor.framework; sourceTree = "<group>"; };
+		16CF337C20CA69D700AA606F /* StoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		16CF337D20CA69D800AA606F /* LocalAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAuth.swift; sourceTree = "<group>"; };
+		16CF338020CA6A0E00AA606F /* Date_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date_extension.swift; sourceTree = "<group>"; };
+		16CF338220CA6EB700AA606F /* AlbumPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumPhotoCell.xib; sourceTree = "<group>"; };
 		5330C18E5AE13D724B6D77DC /* Pods-Piano.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Piano.release.xcconfig"; path = "Pods/Target Support Files/Pods-Piano/Pods-Piano.release.xcconfig"; sourceTree = "<group>"; };
 		6CDF3F4C20BD250E00C28918 /* DynamicTextEngine_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DynamicTextEngine_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CEDD11820BD18A0002FB34E /* LocalImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalImageCache.swift; sourceTree = "<group>"; };
@@ -217,8 +251,6 @@
 		7C415C8A20BCBBB300B9F8DC /* AttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentViewController.swift; sourceTree = "<group>"; };
 		7C41878A20C1712D00ED41FB /* PianoTextView_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_extension.swift; sourceTree = "<group>"; };
 		7C41878C20C171A700ED41FB /* PianoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoLabel.swift; sourceTree = "<group>"; };
-		7C41878E20C2438200ED41FB /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
-		7C41879120C2444100ED41FB /* ImagePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCell.swift; sourceTree = "<group>"; };
 		7C41879320C2A3C700ED41FB /* TextImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextImageCell.swift; sourceTree = "<group>"; };
 		7C41879520C2A44D00ED41FB /* TextImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextImageCell.xib; sourceTree = "<group>"; };
 		7C41879C20C35C4100ED41FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -261,7 +293,6 @@
 		7C71F7CB20A729E0007DB646 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C71F7CE20A729E0007DB646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C71F7D020A729E0007DB646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C79C4BA20BD70F5006249CD /* Date_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_extension.swift; sourceTree = "<group>"; };
 		7C7C9C1A20B39535004B8994 /* StatusBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusBarView.xib; sourceTree = "<group>"; };
 		7C7C9C1B20B39535004B8994 /* StatusBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		7C7C9C1C20B39535004B8994 /* TransParentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransParentNavigationController.swift; sourceTree = "<group>"; };
@@ -312,6 +343,75 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16CF335620CA679400AA606F /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				16CF337520CA67CC00AA606F /* CardMapController */,
+				16CF335720CA67B100AA606F /* AlbumCardController */,
+				16CF335D20CA67B100AA606F /* CameraViewController */,
+				16CF336420CA67B200AA606F /* DrawingMapController */,
+				16CF338420CA744400AA606F /* Cell */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
+		16CF335720CA67B100AA606F /* AlbumCardController */ = {
+			isa = PBXGroup;
+			children = (
+				16CF338220CA6EB700AA606F /* AlbumPhotoCell.xib */,
+				16CF335820CA67B100AA606F /* AlbumPhotoCell.swift */,
+				16CF335920CA67B100AA606F /* AlbumFolderCell.swift */,
+				16CF335A20CA67B100AA606F /* AlbumPhotoListView.swift */,
+				16CF335B20CA67B100AA606F /* AlbumCardController.swift */,
+				16CF335C20CA67B100AA606F /* AlbumFolderListView.swift */,
+			);
+			path = AlbumCardController;
+			sourceTree = "<group>";
+		};
+		16CF335D20CA67B100AA606F /* CameraViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16CF335E20CA67B100AA606F /* CameraViewController.swift */,
+				16CF335F20CA67B100AA606F /* CameraView.swift */,
+				16CF336020CA67B100AA606F /* CameraCapture.swift */,
+				16CF336120CA67B100AA606F /* CameraSession.swift */,
+			);
+			path = CameraViewController;
+			sourceTree = "<group>";
+		};
+		16CF336420CA67B200AA606F /* DrawingMapController */ = {
+			isa = PBXGroup;
+			children = (
+				16CF336520CA67B200AA606F /* CanvasView.swift */,
+				16CF336620CA67B200AA606F /* DrawingUndoManager.swift */,
+				16CF336720CA67B200AA606F /* DrawingMapController.swift */,
+			);
+			path = DrawingMapController;
+			sourceTree = "<group>";
+		};
+		16CF337520CA67CC00AA606F /* CardMapController */ = {
+			isa = PBXGroup;
+			children = (
+				16CF337620CA67CC00AA606F /* CardMapController.swift */,
+			);
+			path = CardMapController;
+			sourceTree = "<group>";
+		};
+		16CF338420CA744400AA606F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C41879320C2A3C700ED41FB /* TextImageCell.swift */,
+				7C41879520C2A44D00ED41FB /* TextImageCell.xib */,
+				7C34B3E320C90EA60032E0DB /* TextImageListCell.xib */,
+				7C34B3E520C90F490032E0DB /* TextImageListCell.swift */,
+				7C34B3E720C91D600032E0DB /* TextEventCell.swift */,
+				7C34B3E920C91D680032E0DB /* TextEventCell.xib */,
+				7C34B3EF20C9F37F0032E0DB /* TextAddressCell.swift */,
+				7C34B3F120C9F38F0032E0DB /* TextAddressCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		50353EF5727C875D751552E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +425,8 @@
 			isa = PBXGroup;
 			children = (
 				6CEDD14D20BD1B5B002FB34E /* Util.swift */,
+				16CF337D20CA69D800AA606F /* LocalAuth.swift */,
+				16CF337C20CA69D700AA606F /* StoreService.swift */,
 				6CEDD16520BD205A002FB34E /* ModelManager.swift */,
 				6CEDD15120BD1CF0002FB34E /* ColorManager.swift */,
 				6CEDD15320BD1CFB002FB34E /* FontManager.swift */,
@@ -492,15 +594,6 @@
 			path = AttachmentViewController;
 			sourceTree = "<group>";
 		};
-		7C41879020C2438500ED41FB /* ImagePickerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7C41878E20C2438200ED41FB /* ImagePickerViewController.swift */,
-				7C41879120C2444100ED41FB /* ImagePickerCell.swift */,
-			);
-			path = ImagePickerViewController;
-			sourceTree = "<group>";
-		};
 		7C4187C020C61CF500ED41FB /* Cell Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +660,7 @@
 		7C71F7B820A729DF007DB646 = {
 			isa = PBXGroup;
 			children = (
+				16CF337820CA690F00AA606F /* Anchor.framework */,
 				6CDF3F4C20BD250E00C28918 /* DynamicTextEngine_iOS.framework */,
 				7C71F7C320A729DF007DB646 /* Piano */,
 				7C71F7C220A729DF007DB646 /* Products */,
@@ -601,7 +695,6 @@
 				7C415C8520BCADF500B9F8DC /* SubscribeViewController */,
 				7C415C8620BCADFC00B9F8DC /* CustomFormatViewController */,
 				7C7C9C2720B395A0004B8994 /* NavigationController */,
-				7C41879020C2438500ED41FB /* ImagePickerViewController */,
 				7C64F8A620B5B67700FAC0E3 /* Protocol */,
 				7C415C8920BCB30F00B9F8DC /* Common */,
 				7C7C9C2420B3955E004B8994 /* Extension */,
@@ -619,6 +712,7 @@
 			children = (
 				6CEDD16320BD1F80002FB34E /* Device.swift */,
 				6CEDD15F20BD1D84002FB34E /* NSAttributedStringKey.swift */,
+				16CF338020CA6A0E00AA606F /* Date_extension.swift */,
 				6CEDD14F20BD1C75002FB34E /* UIImage+resize.swift */,
 				6CEDD14B20BD1ABF002FB34E /* Realm+CloudKit.swift */,
 				6CEDD14920BD1A2B002FB34E /* NSObject.swift */,
@@ -634,7 +728,6 @@
 				7CB5E9B620B9777A00B42A55 /* UIViewController_extension.swift */,
 				7CB5E9C820BBFD0900B42A55 /* UICollectionView_extension.swift */,
 				7C415C8020BCAAD400B9F8DC /* String_extension.swift */,
-				7C79C4BA20BD70F5006249CD /* Date_extension.swift */,
 				7C1F8CFB20BE31C9001B03AC /* NSAttributedString_extension.swift */,
 				7C1F8CFD20BE31EE001B03AC /* NSRange_extension.swift */,
 			);
@@ -663,20 +756,13 @@
 		7CB5E9AB20B94F5300B42A55 /* NoteViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7CB5E9C320BB6ED900B42A55 /* Piano */,
+				7C1F8CEF20BE2AB7001B03AC /* AutoComplete */,
+				16CF335620CA679400AA606F /* Card */,
 				7C7C9C2C20B3BDA2004B8994 /* NoteViewController.swift */,
 				7CFC3EF620C122C5002C6E09 /* NoteViewController_extension.swift */,
 				7C1F8CE520BE22C5001B03AC /* PianoTextView.swift */,
 				7C41878A20C1712D00ED41FB /* PianoTextView_extension.swift */,
-				7CB5E9C320BB6ED900B42A55 /* Piano */,
-				7C1F8CEF20BE2AB7001B03AC /* AutoComplete */,
-				7C41879320C2A3C700ED41FB /* TextImageCell.swift */,
-				7C41879520C2A44D00ED41FB /* TextImageCell.xib */,
-				7C34B3E320C90EA60032E0DB /* TextImageListCell.xib */,
-				7C34B3E520C90F490032E0DB /* TextImageListCell.swift */,
-				7C34B3E720C91D600032E0DB /* TextEventCell.swift */,
-				7C34B3E920C91D680032E0DB /* TextEventCell.xib */,
-				7C34B3EF20C9F37F0032E0DB /* TextAddressCell.swift */,
-				7C34B3F120C9F38F0032E0DB /* TextAddressCell.xib */,
 			);
 			path = NoteViewController;
 			sourceTree = "<group>";
@@ -714,6 +800,7 @@
 				7C71F7BF20A729DF007DB646 /* Resources */,
 				4391EC9517EB694032058252 /* [CP] Embed Pods Frameworks */,
 				6CDF3F4F20BD250E00C28918 /* Embed Frameworks */,
+				21E20C4CAC42D97B9495FD97 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -795,6 +882,7 @@
 				7C71F7CA20A729DF007DB646 /* Main.storyboard in Resources */,
 				7C1F8D1320BE3611001B03AC /* PianoCoverView.xib in Resources */,
 				7CFC3EFD20C12544002C6E09 /* AutoCompleteCell.xib in Resources */,
+				16CF338320CA6EB700AA606F /* AlbumPhotoCell.xib in Resources */,
 				7C34B3F220C9F38F0032E0DB /* TextAddressCell.xib in Resources */,
 				7C4187AD20C6177200ED41FB /* LockButton.xib in Resources */,
 				7C34B3E420C90EA60032E0DB /* TextImageListCell.xib in Resources */,
@@ -804,6 +892,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21E20C4CAC42D97B9495FD97 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Piano/Pods-Piano-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Piano/Pods-Piano-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4391EC9517EB694032058252 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -858,7 +964,6 @@
 				6CEDD15C20BD1D45002FB34E /* DynamicParagraphStyle.swift in Sources */,
 				6CEDD13C20BD19AD002FB34E /* CloudManager.swift in Sources */,
 				7C7C9C2620B39579004B8994 /* iOS.swift in Sources */,
-				7C41879220C2444100ED41FB /* ImagePickerCell.swift in Sources */,
 				7C7C9C2920B3BD6A004B8994 /* NoteListViewController.swift in Sources */,
 				7C34B3E820C91D600032E0DB /* TextEventCell.swift in Sources */,
 				6CEDD14A20BD1A2B002FB34E /* NSObject.swift in Sources */,
@@ -866,6 +971,7 @@
 				6CEDD14020BD19AD002FB34E /* NoteSynchronizer.swift in Sources */,
 				6CEDD16420BD1F80002FB34E /* Device.swift in Sources */,
 				7C1F8D1020BE35EE001B03AC /* PianoControl.swift in Sources */,
+				16CF336D20CA67B200AA606F /* CameraViewController.swift in Sources */,
 				7CB5E9AD20B9513C00B42A55 /* PianoSegmentControl.swift in Sources */,
 				6CEDD14E20BD1B5C002FB34E /* Util.swift in Sources */,
 				7C4187BB20C61CB300ED41FB /* LockButton.swift in Sources */,
@@ -875,12 +981,14 @@
 				6CEDD13920BD19AD002FB34E /* CloudDatabase.swift in Sources */,
 				7CB5E9B920BA997D00B42A55 /* Linkable.swift in Sources */,
 				7C64F8AC20B61EAC00FAC0E3 /* NoteCreateCell.swift in Sources */,
+				16CF336820CA67B200AA606F /* AlbumPhotoCell.swift in Sources */,
 				6CEDD13A20BD19AD002FB34E /* RxCloudDatabase_Subscription.swift in Sources */,
 				7C4187B320C61C7B00ED41FB /* PinButton.swift in Sources */,
 				7C41878D20C171A700ED41FB /* PianoLabel.swift in Sources */,
 				7CB5E9B320B953F800B42A55 /* Button_extension.swift in Sources */,
 				6CEDD15420BD1CFB002FB34E /* FontManager.swift in Sources */,
 				7C4187C420C6348600ED41FB /* DeleteButton.swift in Sources */,
+				16CF338120CA6A0E00AA606F /* Date_extension.swift in Sources */,
 				6CEDD14420BD1A17002FB34E /* CKError.swift in Sources */,
 				7CB5E9C020BB6B6B00B42A55 /* Color_extension.swift in Sources */,
 				6CEDD11D20BD18A0002FB34E /* LocalImageCache.swift in Sources */,
@@ -888,6 +996,7 @@
 				7C1F8D1820BE383D001B03AC /* ConstraintIdentifier.swift in Sources */,
 				6CEDD14120BD19AD002FB34E /* CloudNotificationCenter.swift in Sources */,
 				6CEDD12A20BD19A6002FB34E /* AttributeModel.swift in Sources */,
+				16CF337020CA67B200AA606F /* CameraSession.swift in Sources */,
 				7C601E1020B461DF00A707A0 /* CategoryLinkCell.swift in Sources */,
 				7C7C9C1E20B39535004B8994 /* StatusBarView.swift in Sources */,
 				7C1F8D1620BE3779001B03AC /* PianoCoverView.swift in Sources */,
@@ -896,9 +1005,11 @@
 				7CB5E9B520B9547000B42A55 /* TestViewController.swift in Sources */,
 				6CEDD16620BD205B002FB34E /* ModelManager.swift in Sources */,
 				7C415C8820BCB30000B9F8DC /* AppNavigator.swift in Sources */,
+				16CF336C20CA67B200AA606F /* AlbumFolderListView.swift in Sources */,
 				7C7C9C4520B402F0004B8994 /* SubscribeViewController.swift in Sources */,
 				7C41879420C2A3C700ED41FB /* TextImageCell.swift in Sources */,
 				7C34B3F020C9F37F0032E0DB /* TextAddressCell.swift in Sources */,
+				16CF337720CA67CC00AA606F /* CardMapController.swift in Sources */,
 				7C64F8AE20B61F6600FAC0E3 /* NoteCalendarCell.swift in Sources */,
 				7CFC3EF720C122C5002C6E09 /* NoteViewController_extension.swift in Sources */,
 				6CEDD13B20BD19AD002FB34E /* RxCloudDatabase.swift in Sources */,
@@ -912,12 +1023,14 @@
 				7C601E0C20B460EE00A707A0 /* CategoryCustomTagCell.swift in Sources */,
 				6CEDD15220BD1CF0002FB34E /* ColorManager.swift in Sources */,
 				6CEDD13F20BD19AD002FB34E /* Diff3.swift in Sources */,
+				16CF337220CA67B200AA606F /* CanvasView.swift in Sources */,
 				7CFC3EFC20C12544002C6E09 /* AutoCompleteCell.swift in Sources */,
 				7C64F8B020B6200100FAC0E3 /* NoteCell.swift in Sources */,
 				6CEDD15020BD1C76002FB34E /* UIImage+resize.swift in Sources */,
 				6CEDD13D20BD19AD002FB34E /* ConflictResolver.swift in Sources */,
 				6CEDD16020BD1D84002FB34E /* NSAttributedStringKey.swift in Sources */,
 				6CEDD15E20BD1D76002FB34E /* PianoNoteSizeInspector.swift in Sources */,
+				16CF336A20CA67B200AA606F /* AlbumPhotoListView.swift in Sources */,
 				7C1F8D0020BE337A001B03AC /* PianoAttributes.swift in Sources */,
 				7C1F8CE620BE22C5001B03AC /* PianoTextView.swift in Sources */,
 				6CEDD13E20BD19AD002FB34E /* Diff.swift in Sources */,
@@ -935,25 +1048,31 @@
 				7CB5E9C220BB6ED100B42A55 /* PianoView.swift in Sources */,
 				7C34B3E620C90F490032E0DB /* TextImageListCell.swift in Sources */,
 				7CB5E9C920BBFD0900B42A55 /* UICollectionView_extension.swift in Sources */,
+				16CF336E20CA67B200AA606F /* CameraView.swift in Sources */,
 				7C41878B20C1712D00ED41FB /* PianoTextView_extension.swift in Sources */,
+				16CF336B20CA67B200AA606F /* AlbumCardController.swift in Sources */,
 				6CEDD15920BD1D2D002FB34E /* CardAttachment.swift in Sources */,
 				7C415C7E20BCA99A00B9F8DC /* LicenseViewController.swift in Sources */,
 				7C7C9C1F20B39535004B8994 /* TransParentNavigationController.swift in Sources */,
 				6CEDD12120BD18A0002FB34E /* LocalDatabase.swift in Sources */,
+				16CF336F20CA67B200AA606F /* CameraCapture.swift in Sources */,
+				16CF337E20CA69D800AA606F /* StoreService.swift in Sources */,
 				7C4187B920C61CAA00ED41FB /* RestoreButton.swift in Sources */,
+				16CF337320CA67B200AA606F /* DrawingUndoManager.swift in Sources */,
 				7CB5E9AA20B9312D00B42A55 /* CategoryTitleReusableView.swift in Sources */,
-				7C79C4BB20BD70F5006249CD /* Date_extension.swift in Sources */,
 				6CEDD14720BD1A23002FB34E /* CKAsset+UIImage.swift in Sources */,
+				16CF337420CA67B200AA606F /* DrawingMapController.swift in Sources */,
 				7C601E1220B4620500A707A0 /* CategoryExtraCell.swift in Sources */,
 				6CEDD12920BD19A6002FB34E /* FontAttribute.swift in Sources */,
 				6CEDD14820BD1A23002FB34E /* CKDatabaseScope.swift in Sources */,
 				7C64F8B220B67FD000FAC0E3 /* DateFormatter_extension.swift in Sources */,
+				16CF337F20CA69D800AA606F /* LocalAuth.swift in Sources */,
 				7C415C8B20BCBBB300B9F8DC /* AttachmentViewController.swift in Sources */,
 				7C41880420C8C23100ED41FB /* DateChecker.swift in Sources */,
 				7C1F8D0C20BE35E6001B03AC /* PianoResult.swift in Sources */,
+				16CF336920CA67B200AA606F /* AlbumFolderCell.swift in Sources */,
 				7C7C9C2220B3955A004B8994 /* UIView_extension.swift in Sources */,
 				7C2F5F2320BF8CC20005B112 /* NoteGestureRecognizer.swift in Sources */,
-				7C41878F20C2438200ED41FB /* ImagePickerViewController.swift in Sources */,
 				7C1F8CFE20BE31EE001B03AC /* NSRange_extension.swift in Sources */,
 				7C71F7C520A729DF007DB646 /* AppDelegate.swift in Sources */,
 				6CEDD11E20BD18A0002FB34E /* RealmDataModel.swift in Sources */,
@@ -1122,6 +1241,10 @@
 				CODE_SIGN_ENTITLEMENTS = Piano/Piano.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Piano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1142,6 +1265,10 @@
 				CODE_SIGN_ENTITLEMENTS = Piano/Piano.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Piano/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

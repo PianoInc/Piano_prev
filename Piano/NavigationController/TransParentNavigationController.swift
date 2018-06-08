@@ -35,12 +35,12 @@ class TransParentNavigationController: UINavigationController {
     private func setStatusBarView() {
         
         if UIApplication.shared.statusBarFrame.height != 0 {
-            let statusBarView = view.createSubviewIfNeeded(identifier: StatusBarView.identifier)
+            guard let statusBarView = view.createSubviewIfNeeded(StatusBarView.self) else {return}
             statusBarView.backgroundColor = navColor
             statusBarView.frame = UIApplication.shared.statusBarFrame
             view.addSubview(statusBarView)
         } else {
-            view.subView(identifier: StatusBarView.identifier)?.removeFromSuperview()
+            view.subView(StatusBarView.self)?.removeFromSuperview()
         }
         
     }
