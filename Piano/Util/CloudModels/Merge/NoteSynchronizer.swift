@@ -145,17 +145,17 @@ class NoteSynchronizer {
                         let diff3Maker = Diff3Maker(ancestor: oldContent, a: currentString, b: serverContent)
                         let diff3Chunks = diff3Maker.mergeInLineLevel().flatMap { chunk -> [Diff3Block] in
                             if case let .change(oRange, aRange, bRange) = chunk {
-                                let oString = oldContent.substring(with: oRange)
-                                let aString = currentString.substring(with: aRange)
-                                let bString = serverContent.substring(with: bRange)
+                                let oString = (oldContent as NSString).substring(with: oRange)
+                                let aString = (currentString as NSString).substring(with: aRange)
+                                let bString = (serverContent as NSString).substring(with: bRange)
                                 
                                 let wordDiffMaker = Diff3Maker(ancestor: oString, a: aString, b: bString, separator: "")
                                 return wordDiffMaker.mergeInWordLevel(oOffset: oRange.lowerBound, aOffset: aRange.lowerBound, bOffset: bRange.lowerBound)
                                 
                             } else if case let .conflict(oRange, aRange, bRange) = chunk {
-                                let oString = oldContent.substring(with: oRange)
-                                let aString = currentString.substring(with: aRange)
-                                let bString = serverContent.substring(with: bRange)
+                                let oString = (oldContent as NSString).substring(with: oRange)
+                                let aString = (currentString as NSString).substring(with: aRange)
+                                let bString = (serverContent as NSString).substring(with: bRange)
                                 
                                 let wordDiffMaker = Diff3Maker(ancestor: oString, a: aString, b: bString, separator: "")
                                 return wordDiffMaker.mergeInWordLevel(oOffset: oRange.lowerBound, aOffset: aRange.lowerBound, bOffset: bRange.lowerBound)
@@ -237,17 +237,17 @@ class NoteSynchronizer {
                     let diff3Maker = Diff3Maker(ancestor: ancestorContent, a: currentString, b: serverContent)
                     let diff3Chunks = diff3Maker.mergeInLineLevel().flatMap { chunk -> [Diff3Block] in
                         if case let .change(oRange, aRange, bRange) = chunk {
-                            let oString = ancestorContent.substring(with: oRange)
-                            let aString = currentString.substring(with: aRange)
-                            let bString = serverContent.substring(with: bRange)
+                            let oString = (ancestorContent as NSString).substring(with: oRange)
+                            let aString = (currentString as NSString).substring(with: aRange)
+                            let bString = (serverContent as NSString).substring(with: bRange)
                             
                             let wordDiffMaker = Diff3Maker(ancestor: oString, a: aString, b: bString, separator: "")
                             return wordDiffMaker.mergeInWordLevel(oOffset: oRange.lowerBound, aOffset: aRange.lowerBound, bOffset: bRange.lowerBound)
                             
                         } else if case let .conflict(oRange, aRange, bRange) = chunk {
-                            let oString = ancestorContent.substring(with: oRange)
-                            let aString = currentString.substring(with: aRange)
-                            let bString = serverContent.substring(with: bRange)
+                            let oString = (ancestorContent as NSString).substring(with: oRange)
+                            let aString = (currentString as NSString).substring(with: aRange)
+                            let bString = (serverContent as NSString).substring(with: bRange)
                             
                             let wordDiffMaker = Diff3Maker(ancestor: oString, a: aString, b: bString, separator: "")
                             return wordDiffMaker.mergeInWordLevel(oOffset: oRange.lowerBound, aOffset: aRange.lowerBound, bOffset: bRange.lowerBound)

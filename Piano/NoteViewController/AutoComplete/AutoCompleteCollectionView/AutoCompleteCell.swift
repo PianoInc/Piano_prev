@@ -54,7 +54,8 @@ struct AutoComplete: CollectionDatable {
         
         //텍스트뷰에서 개행을 제외한 현재 문단을 다 지워버린다.
         let paragraphRange = (textView.text as NSString).paragraphRange(for: textView.selectedRange)
-        let replaceStr = textView.text.substring(with: paragraphRange).contains("\n") ? "\n" : ""
+        
+        let replaceStr = (textView.text as NSString).substring(with: paragraphRange).contains("\n") ? "\n" : ""
         textView.textStorage.replaceCharacters(in: paragraphRange, with: replaceStr)
         textView.selectedRange.location += (replaceStr.count - paragraphRange.length)
         
