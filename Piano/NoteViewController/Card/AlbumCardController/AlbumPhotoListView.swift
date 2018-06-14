@@ -13,9 +13,12 @@ class AlbumPhotoListView: UICollectionView {
     
     weak var delegates: AlbumDelegates!
     
-    private let emptyImage = view(UIImageView()) {
-        $0.contentMode = .scaleAspectFit
-        $0.backgroundColor = .red
+    private let emptyView = view(UILabel()) {
+        $0.text = "사진 없음"
+        $0.textColor = UIColor(hex6: "9d9d9d")
+        $0.font = UIFont.systemFont(ofSize: 20)
+        $0.textAlignment = .center
+        $0.backgroundColor = .white
     }
     
     let imageManager = PHCachingImageManager()
@@ -44,12 +47,7 @@ class AlbumPhotoListView: UICollectionView {
     
     private func viewDidLoad() {
         initView()
-        initConst()
         fetchPhoto()
-        device(orientationDidChange: { [weak self] _ in
-            self?.initConst()
-            self?.collectionViewLayout.invalidateLayout()
-        })
     }
     
     private func initView() {
@@ -65,16 +63,12 @@ class AlbumPhotoListView: UICollectionView {
             flowLayout.minimumInteritemSpacing = 2
             flowLayout.minimumLineSpacing = 2
         }
-        addSubview(emptyImage)
+        addSubview(emptyView)
     }
     
-    private func initConst() {
-        emptyImage.anchor {
-            $0.leading.equalTo(0)
-            $0.trailing.equalTo(0)
-            $0.top.equalTo(0)
-            $0.bottom.equalTo(0)
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        emptyView.frame = bounds
     }
     
     private func fetchPhoto() {
@@ -83,7 +77,7 @@ class AlbumPhotoListView: UICollectionView {
             photoFetchResult = PHAsset.fetchAssets(in: album, options: nil)
             albumTitle = album.localizedTitle ?? "albumNoTitle".loc
         }
-        emptyImage.isHidden = (photoFetchResult.count > 0)
+        emptyView.isHidden = (photoFetchResult.count > 0)
     }
     
     /**

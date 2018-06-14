@@ -13,7 +13,8 @@ class CameraView: UIView {
     
     let previewView = UIView()
     private let flashButton = view(UIButton()) {
-        $0.setTitle("flash", for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "flash_off"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "flash_off"), for: .highlighted)
     }
     private let cancelButton = view(UIButton()) {
         $0.setTitle("cancel".loc, for: .normal)
@@ -21,10 +22,12 @@ class CameraView: UIView {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 17)
     }
     private let shotButton = view(UIButton()) {
-        $0.setTitle("shot", for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "shot"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "shot"), for: .highlighted)
     }
     private let rotateButton = view(UIButton()) {
-        $0.setTitle("rotate", for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "rotate"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "rotate"), for: .highlighted)
     }
     
     var captureSession: AVCaptureSession?
@@ -65,12 +68,6 @@ class CameraView: UIView {
         addSubview(shotButton)
         addSubview(rotateButton)
         
-        previewView.backgroundColor = .red
-        flashButton.backgroundColor = .red
-        cancelButton.backgroundColor = .red
-        shotButton.backgroundColor = .red
-        rotateButton.backgroundColor = .red
-        
         DispatchQueue.global().async {
             self.initDevice()
             DispatchQueue.main.async {
@@ -87,8 +84,8 @@ class CameraView: UIView {
             $0.height.equalTo(flashButton.widthAnchor)
         }
         cancelButton.anchor {
-            $0.leading.equalTo(0)
-            $0.bottom.equalTo(0)
+            $0.leading.equalTo(25)
+            $0.bottom.equalTo(-25)
             $0.width.equalTo(50)
             $0.height.equalTo(cancelButton.widthAnchor)
         }
@@ -99,8 +96,8 @@ class CameraView: UIView {
             $0.height.equalTo(shotButton.widthAnchor)
         }
         rotateButton.anchor {
-            $0.trailing.equalTo(0)
-            $0.bottom.equalTo(0)
+            $0.trailing.equalTo(-25)
+            $0.bottom.equalTo(-25)
             $0.width.equalTo(50)
             $0.height.equalTo(rotateButton.widthAnchor)
         }
@@ -115,13 +112,15 @@ class CameraView: UIView {
     @objc private func action(flash: UIButton) {
         flashButton.isSelected = !flash.isSelected
         flashMode = flashButton.isSelected ? .on : .off
+        flashButton.setImage(flashButton.isSelected ? #imageLiteral(resourceName: "flash_on") : #imageLiteral(resourceName: "flash_off"), for: .normal)
+        flashButton.setImage(flashButton.isSelected ? #imageLiteral(resourceName: "flash_on") : #imageLiteral(resourceName: "flash_off"), for: .highlighted)
     }
     
     @objc private func action(close: UIButton) {
         DispatchQueue.global().async {
             self.captureSession?.stopRunning()
             DispatchQueue.main.async {
-                self.captureCompletion?(nil)
+                self.cameraShoted?(nil)
             }
         }
     }

@@ -12,14 +12,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TextImageListCell" customModule="Piano" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="536" height="220"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleToFill" restorationIdentifier="TextImageListCell" id="38O-vX-6sN" customClass="TextImageListCell" customModule="Piano" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="366" height="382"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="LwB-cQ-gcZ">
-                    <rect key="frame" x="0.0" y="0.0" width="536" height="220"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Wy-ob-ZSH">
+                    <rect key="frame" x="0.0" y="0.0" width="366" height="382"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qbI-ya-GFF">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1gY-d7-0Jv">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -27,16 +27,19 @@
                     </collectionViewFlowLayout>
                 </collectionView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="LwB-cQ-gcZ" secondAttribute="bottom" id="FJB-5d-L6U"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LwB-cQ-gcZ" secondAttribute="trailing" id="cES-HR-7Uu"/>
-                <constraint firstItem="LwB-cQ-gcZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hw8-rv-kaa"/>
-                <constraint firstItem="LwB-cQ-gcZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="jux-es-QHR"/>
+                <constraint firstItem="0Wy-ob-ZSH" firstAttribute="top" secondItem="59x-CZ-85N" secondAttribute="top" id="Qg9-nr-EWl"/>
+                <constraint firstItem="59x-CZ-85N" firstAttribute="trailing" secondItem="0Wy-ob-ZSH" secondAttribute="trailing" id="gul-dN-NlX"/>
+                <constraint firstItem="59x-CZ-85N" firstAttribute="bottom" secondItem="0Wy-ob-ZSH" secondAttribute="bottom" id="lbe-PN-vLy"/>
+                <constraint firstItem="0Wy-ob-ZSH" firstAttribute="leading" secondItem="59x-CZ-85N" secondAttribute="leading" id="rnt-6w-gRY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="114" y="-170"/>
+            <viewLayoutGuide key="safeArea" id="59x-CZ-85N"/>
+            <connections>
+                <outlet property="listView" destination="0Wy-ob-ZSH" id="tVT-Xr-dNj"/>
+            </connections>
+            <point key="canvasLocation" x="221" y="-388"/>
         </view>
     </objects>
 </document>

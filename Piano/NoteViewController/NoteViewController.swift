@@ -167,10 +167,10 @@ class NoteViewController: UIViewController {
     private func registerNibs() {
         
         textView.register(nib: UINib(nibName: "TextImageCell", bundle: nil), forCellReuseIdentifier: TextImageCell.identifier)
+        textView.register(nib: UINib(nibName: "TextImageListCell", bundle: nil), forCellReuseIdentifier: TextImageListCell.identifier)
+        textView.register(nib: UINib(nibName: "TextEventCell", bundle: nil), forCellReuseIdentifier: TextEventCell.identifier)
         textView.register(nib: UINib(nibName: "TextAddressCell", bundle: nil), forCellReuseIdentifier: TextAddressCell.identifier)
-        textView.register(nib: UINib(nibName: "TextEventCell", bundle: nil), forCellReuseIdentifier: TextEventCell.identifier)
-        textView.register(nib: UINib(nibName: "TextEventCell", bundle: nil), forCellReuseIdentifier: TextEventCell.identifier)
-        
+
     }
     
     private func setFormAttributes() {

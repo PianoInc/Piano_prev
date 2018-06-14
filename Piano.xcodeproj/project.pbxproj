@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16A301C520D2230600D2256A /* ImageListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A301C420D2230600D2256A /* ImageListDataSource.swift */; };
+		16A301C720D2231B00D2256A /* ImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A301C620D2231B00D2256A /* ImageListCell.swift */; };
+		16A301C920D2245100D2256A /* ImageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16A301C820D2245100D2256A /* ImageListCell.xib */; };
+		16A301CC20D2294E00D2256A /* AlbumReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A301CB20D2294E00D2256A /* AlbumReviewController.swift */; };
 		16CF336820CA67B200AA606F /* AlbumPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335820CA67B100AA606F /* AlbumPhotoCell.swift */; };
 		16CF336920CA67B200AA606F /* AlbumFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335920CA67B100AA606F /* AlbumFolderCell.swift */; };
 		16CF336A20CA67B200AA606F /* AlbumPhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF335A20CA67B100AA606F /* AlbumPhotoListView.swift */; };
@@ -171,6 +175,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		16A301C420D2230600D2256A /* ImageListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListDataSource.swift; sourceTree = "<group>"; };
+		16A301C620D2231B00D2256A /* ImageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCell.swift; sourceTree = "<group>"; };
+		16A301C820D2245100D2256A /* ImageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageListCell.xib; sourceTree = "<group>"; };
+		16A301CB20D2294E00D2256A /* AlbumReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumReviewController.swift; sourceTree = "<group>"; };
 		16CF335820CA67B100AA606F /* AlbumPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumPhotoCell.swift; sourceTree = "<group>"; };
 		16CF335920CA67B100AA606F /* AlbumFolderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumFolderCell.swift; sourceTree = "<group>"; };
 		16CF335A20CA67B100AA606F /* AlbumPhotoListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumPhotoListView.swift; sourceTree = "<group>"; };
@@ -343,9 +351,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16A301C320D222E000D2256A /* ImageListData */ = {
+			isa = PBXGroup;
+			children = (
+				16A301C420D2230600D2256A /* ImageListDataSource.swift */,
+				16A301C620D2231B00D2256A /* ImageListCell.swift */,
+				16A301C820D2245100D2256A /* ImageListCell.xib */,
+			);
+			path = ImageListData;
+			sourceTree = "<group>";
+		};
+		16A301CA20D2293A00D2256A /* AlbumReviewController */ = {
+			isa = PBXGroup;
+			children = (
+				16A301CB20D2294E00D2256A /* AlbumReviewController.swift */,
+			);
+			path = AlbumReviewController;
+			sourceTree = "<group>";
+		};
 		16CF335620CA679400AA606F /* Card */ = {
 			isa = PBXGroup;
 			children = (
+				16A301CA20D2293A00D2256A /* AlbumReviewController */,
 				16CF337520CA67CC00AA606F /* CardMapController */,
 				16CF335720CA67B100AA606F /* AlbumCardController */,
 				16CF335D20CA67B100AA606F /* CameraViewController */,
@@ -400,6 +427,7 @@
 		16CF338420CA744400AA606F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				16A301C320D222E000D2256A /* ImageListData */,
 				7C41879320C2A3C700ED41FB /* TextImageCell.swift */,
 				7C41879520C2A44D00ED41FB /* TextImageCell.xib */,
 				7C34B3E320C90EA60032E0DB /* TextImageListCell.xib */,
@@ -877,6 +905,7 @@
 				7CB5E9B120B9518800B42A55 /* PianoSegmentControl.xib in Resources */,
 				7C4187A720C6175600ED41FB /* UnPinButton.xib in Resources */,
 				7C7C9C1D20B39535004B8994 /* StatusBarView.xib in Resources */,
+				16A301C920D2245100D2256A /* ImageListCell.xib in Resources */,
 				7C41879620C2A44D00ED41FB /* TextImageCell.xib in Resources */,
 				7C4187B120C6180C00ED41FB /* CategoryButton.xib in Resources */,
 				7C71F7CA20A729DF007DB646 /* Main.storyboard in Resources */,
@@ -1045,6 +1074,8 @@
 				6CEDD11F20BD18A0002FB34E /* RealmCardDataModels.swift in Sources */,
 				6CEDD16220BD1DEE002FB34E /* AttributeModelConfigurable.swift in Sources */,
 				7C7C9C2B20B3BD84004B8994 /* CategoryListViewController.swift in Sources */,
+				16A301C720D2231B00D2256A /* ImageListCell.swift in Sources */,
+				16A301CC20D2294E00D2256A /* AlbumReviewController.swift in Sources */,
 				7CB5E9C220BB6ED100B42A55 /* PianoView.swift in Sources */,
 				7C34B3E620C90F490032E0DB /* TextImageListCell.swift in Sources */,
 				7CB5E9C920BBFD0900B42A55 /* UICollectionView_extension.swift in Sources */,
@@ -1053,6 +1084,7 @@
 				16CF336B20CA67B200AA606F /* AlbumCardController.swift in Sources */,
 				6CEDD15920BD1D2D002FB34E /* CardAttachment.swift in Sources */,
 				7C415C7E20BCA99A00B9F8DC /* LicenseViewController.swift in Sources */,
+				16A301C520D2230600D2256A /* ImageListDataSource.swift in Sources */,
 				7C7C9C1F20B39535004B8994 /* TransParentNavigationController.swift in Sources */,
 				6CEDD12120BD18A0002FB34E /* LocalDatabase.swift in Sources */,
 				16CF336F20CA67B200AA606F /* CameraCapture.swift in Sources */,

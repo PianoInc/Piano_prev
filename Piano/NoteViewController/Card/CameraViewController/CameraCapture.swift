@@ -26,7 +26,7 @@ extension CameraView: AVCapturePhotoCaptureDelegate {
                 let croppedImage = self.crop(image: image)
                 self.captureCompletion?(croppedImage)
                 try? PHPhotoLibrary.shared().performChangesAndWait {
-                    PHAssetChangeRequest.creationRequestForAsset(from: croppedImage)
+                    //PHAssetChangeRequest.creationRequestForAsset(from: croppedImage)
                 }
             })
         } else {

@@ -18,7 +18,9 @@ class TextAddressCell: DynamicAttachmentCell, AttributeModelConfigurable {
     @IBOutlet private var vLine1: UIView!
     @IBOutlet private var duplicate: UIButton!
     @IBOutlet private var address: UILabel!
-    @IBOutlet private var arrow: UIButton!
+    @IBOutlet private var arrow: UIImageView!
+    
+    private var mapData: MapData?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +29,50 @@ class TextAddressCell: DynamicAttachmentCell, AttributeModelConfigurable {
         layer.cornerRadius = 9
         mapView.layer.borderColor = UIColor(hex6: "9aa4af").cgColor
         mapView.layer.borderWidth = 0.5
+        duplicate.setTitle("mapCopyAddr".loc, for: .normal)
+        
+        initConst()
+    }
+    
+    private func initConst() {
+        mapView.anchor {
+            $0.leading.equalTo(13.fit)
+            $0.trailing.equalTo(-13.fit)
+            $0.top.equalTo(13.fit)
+            $0.height.equalTo(130.fit)
+        }
+        hLine.anchor {
+            $0.leading.equalTo(13.fit)
+            $0.trailing.equalTo(-13.fit)
+            $0.top.equalTo(mapView.bottomAnchor).offset(8.fit)
+            $0.height.equalTo(0.5)
+        }
+        name.anchor {
+            $0.leading.equalTo(13.fit)
+            $0.top.equalTo(mapView.bottomAnchor).offset(17.fit)
+            $0.width.lessThanOrEqualTo(230.fit)
+        }
+        vLine1.anchor {
+            $0.leading.equalTo(name.trailingAnchor).offset(13.fit)
+            $0.top.equalTo(mapView.bottomAnchor).offset(20.fit)
+            $0.width.equalTo(0.5)
+            $0.height.equalTo(13.fit)
+        }
+        duplicate.anchor {
+            $0.leading.equalTo(vLine1.trailingAnchor).offset(13.fit)
+            $0.top.equalTo(mapView.bottomAnchor).offset(18.fit)
+            $0.height.equalTo(17.fit)
+        }
+        address.anchor {
+            $0.leading.equalTo(13.fit)
+            $0.top.equalTo(mapView.bottomAnchor).offset(43.fit)
+            $0.width.lessThanOrEqualTo(262.fit)
+        }
+        arrow.anchor {
+            $0.leading.equalTo(address.trailingAnchor).offset(13.fit)
+            $0.top.equalTo(mapView.bottomAnchor).offset(45.fit)
+            $0.height.equalTo(13.fit)
+        }
     }
     
     override func prepareForReuse() {
@@ -38,8 +84,9 @@ class TextAddressCell: DynamicAttachmentCell, AttributeModelConfigurable {
             guard let realm = try? Realm(),
                 let model = realm.object(ofType: RealmAddressModel.self, forPrimaryKey: id)
                 else {return}
+            self.mapData = MapData(with: model.address)
+            guard let data = self.mapData else {return}
             
-            let data = MapData(with: model.address)
             let camera = GMSCameraPosition.camera(withLatitude: data.coordinate[0],
                                                   longitude: data.coordinate[1],
                                                   zoom: Float(data.coordinate[2]))
@@ -54,12 +101,12 @@ class TextAddressCell: DynamicAttachmentCell, AttributeModelConfigurable {
             
             self.name.text = data.title
             self.address.text = data.location
-            self.duplicate.setTitle("mapCopyAddr".loc, for: .normal)
         }
     }
     
     @IBAction private func action(copy: UIButton) {
-        
+        guard let data = self.mapData else {return}
+        UIPasteboard.general.string = data.location
     }
     
 }
