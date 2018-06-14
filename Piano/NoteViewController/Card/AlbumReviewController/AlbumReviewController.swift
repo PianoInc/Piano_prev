@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class AlbumReviewController: UIViewController {
     
@@ -34,12 +35,24 @@ class AlbumReviewController: UIViewController {
     }
     
     @IBAction private func action(save: UIBarButtonItem) {
-        
+        guard let image = image else {return}
+        try? PHPhotoLibrary.shared().performChangesAndWait {
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }
     }
     
     @IBAction private func action(share: UIBarButtonItem) {
-        
+        guard let image = image else {return}
+        let imageData = UIImageJPEGRepresentation(image, 1.0)!
+        let writePath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("instagram.ig")
+        do {
+            try imageData.write(to: writePath)
+            let documentsInteractionsController = UIDocumentInteractionController(url: writePath)
+            documentsInteractionsController.uti = "com.instagram.photo"
+            documentsInteractionsController.presentOpenInMenu(from: .zero, in: view, animated: true)
+        }catch {
+            return
+        }
     }
     
 }
-

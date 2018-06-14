@@ -27,6 +27,6 @@ open class DynamicAttachmentCell: UIView {
     }
 
     open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        return false
+        return true
     }
 }
