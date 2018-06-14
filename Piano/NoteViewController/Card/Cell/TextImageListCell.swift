@@ -23,7 +23,7 @@ class TextImageListCell: DynamicAttachmentCell, AttributeModelConfigurable {
         let nib = UINib(nibName: "ImageListCell", bundle: nil)
         listView.register(nib, forCellWithReuseIdentifier: ImageListCell.identifier)
         dataSource = ImageListDataSource<ImageListCell>(with: listView, imageListModel: id)
-        dataSource.didSelectRowAt = {self.review(with: $0)}
+        dataSource.didSelectRowAt = { [weak self] in self?.review(with: $0)}
     }
     
     private func review(with image: Image) {

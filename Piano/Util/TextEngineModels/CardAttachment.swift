@@ -55,7 +55,8 @@ class CardAttachment: DynamicTextAttachment {
         switch identifier {
             case TextImageCell.identifier: break
             case TextImageListCell.identifier: break
-            case TextEventCell.identifier: break
+            case TextEventCell.identifier:
+                height = 65
             case TextAddressCell.identifier:
                 height = 200
             default: break

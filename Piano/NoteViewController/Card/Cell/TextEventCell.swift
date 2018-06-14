@@ -45,8 +45,19 @@ class TextEventCell: DynamicAttachmentCell, AttributeModelConfigurable {
         
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day]
-        formatter.unitsStyle = .full
-        dday.text = formatter.string(from: event.startDate, to: today) ?? ""
+        let formatStr = formatter.string(from: event.startDate, to: today) ?? ""
+        
+        do {
+            let regex = try NSRegularExpression(pattern: "[0-9]", options: [])
+            guard let regexRange = regex.firstMatch(in: formatStr, options: [], range: NSMakeRange(0, formatStr.count))?.range else {return}
+            
+            let start = regexRange.location
+            let end = start + regexRange.length
+            let dayComponents = formatStr.sub(start...end)
+            dday.text = (dayComponents == "0") ? "D-Day" : String(format: "D-%@", dayComponents)
+        } catch {
+            dday.text = formatStr
+        }
         
         title.text = event.title
     }
