@@ -10,19 +10,28 @@ import DynamicTextEngine_iOS
 import RealmSwift
 
 class TextImageListCell: DynamicAttachmentCell, AttributeModelConfigurable {
-
-    //TODO: 컬렉션뷰 뷰 모델로 만들어서 구조짜기
+    
+    @IBOutlet private weak var listView: UICollectionView!
+    
+    private var dataSource: ImageListDataSource<ImageListCell>!
+    
     override func prepareForReuse() {
         super.prepareForReuse()
     }
     
     func configure(with id: String) {
-        guard let realm = try? Realm(),
-            let imageModel = realm.object(ofType: RealmImageListModel.self, forPrimaryKey: id)
-            else {return}
-        let imageIDs = imageModel.imageIDs.components(separatedBy: "|")
-        print("imageIDs :", imageIDs)
+        let nib = UINib(nibName: "ImageListCell", bundle: nil)
+        listView.register(nib, forCellWithReuseIdentifier: ImageListCell.identifier)
+        dataSource = ImageListDataSource<ImageListCell>(with: listView, imageListModel: id)
+        dataSource.didSelectRowAt = {self.review(with: $0)}
     }
-
+    
+    private func review(with image: Image) {
+        guard let noteViewCtrl = AppNavigator.currentViewController as? NoteViewController else {return}
+        let cardMapCtrl = viewCtrl(type: AlbumReviewController.self)
+        cardMapCtrl.image = image
+        noteViewCtrl.present(UINavigationController(rootViewController: cardMapCtrl), animated: true)
+    }
+    
 }
 
