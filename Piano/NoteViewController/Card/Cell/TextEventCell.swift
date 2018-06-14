@@ -17,6 +17,8 @@ class TextEventCell: DynamicAttachmentCell, AttributeModelConfigurable {
     @IBOutlet private var day: UILabel!
     @IBOutlet private var dday: UILabel!
     @IBOutlet private var title: UILabel!
+    
+    private var event: EKEvent!
 
     func configure(with id: String) {
         guard let realm = try? Realm(),
@@ -25,9 +27,9 @@ class TextEventCell: DynamicAttachmentCell, AttributeModelConfigurable {
         
         let eventStore = EKEventStore()
         guard let event = eventStore.event(withIdentifier: eventModel.event) else {return}
+        self.event = event
         
         let format = DateFormatter()
-        
         format.dateFormat = "MM"
         month.text = format.string(from: event.startDate) + "월"
         

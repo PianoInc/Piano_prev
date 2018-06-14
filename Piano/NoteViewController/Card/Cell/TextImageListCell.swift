@@ -20,8 +20,8 @@ class TextImageListCell: DynamicAttachmentCell, AttributeModelConfigurable {
         guard let realm = try? Realm(),
             let imageModel = realm.object(ofType: RealmImageListModel.self, forPrimaryKey: id)
             else {return}
-        let _ = imageModel.imageIDs.components(separatedBy: "|")
-        
+        let imageIDs = imageModel.imageIDs.components(separatedBy: "|")
+        print("imageIDs :", imageIDs)
     }
 
 }

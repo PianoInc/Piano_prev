@@ -50,10 +50,15 @@ class CardAttachment: DynamicTextAttachment {
     private func size(forIdentifier identifier: String) -> CGSize {
         let edgeInsets: CGFloat = 53 // head == 30, tail == 20, inset == 3
         let width = self.minSize - edgeInsets
-        let height: CGFloat
-
+        var height = width * 3 / 4
+        
         switch identifier {
-            default: height = 200
+            case TextImageCell.identifier: break
+            case TextImageListCell.identifier: break
+            case TextEventCell.identifier: break
+            case TextAddressCell.identifier:
+                height = 200
+            default: break
         }
 
         return CGSize(width: width, height: height)

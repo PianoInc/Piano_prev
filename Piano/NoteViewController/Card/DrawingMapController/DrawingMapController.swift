@@ -37,16 +37,8 @@ class DrawingMapController: UIViewController {
     private func initView() {
         view.backgroundColor = UIColor(hex6: "e5e5e5")
         menuView.backgroundColor = UIColor.white.withAlphaComponent(0.75)
-        
-        closeButton.setTitle("close", for: .normal)
-        undoButton.setTitle("undo", for: .normal)
-        redoButton.setTitle("redo", for: .normal)
-        clearButton.setTitle("clear", for: .normal)
-        
-        closeButton.backgroundColor = .red
-        undoButton.backgroundColor = .red
-        redoButton.backgroundColor = .red
-        clearButton.backgroundColor = .red
+        clearButton.setTitleColor(UIColor(hex6: "9d9d9d"), for: .normal)
+        clearButton.setTitle("Clear", for: .normal)
     }
     
     override func viewDidLayoutSubviews() {
@@ -69,26 +61,26 @@ class DrawingMapController: UIViewController {
         closeButton.anchor {
             $0.leading.equalTo(minSize * 0.0266)
             $0.top.equalTo(0)
-            $0.width.greaterThanOrEqualTo(0)
-            $0.height.equalTo(minSize * 0.08)
+            $0.width.equalTo(menuView.heightAnchor)
+            $0.height.equalTo(menuView.heightAnchor)
         }
         undoButton.anchor {
             $0.leading.equalTo(closeButton.trailingAnchor).offset(minSize * 0.0266)
             $0.top.equalTo(0)
-            $0.width.greaterThanOrEqualTo(0)
-            $0.height.equalTo(minSize * 0.08)
+            $0.width.equalTo(menuView.heightAnchor)
+            $0.height.equalTo(menuView.heightAnchor)
         }
         redoButton.anchor {
             $0.leading.equalTo(undoButton.trailingAnchor).offset(minSize * 0.0266)
             $0.top.equalTo(0)
-            $0.width.greaterThanOrEqualTo(0)
-            $0.height.equalTo(minSize * 0.08)
+            $0.width.equalTo(menuView.heightAnchor)
+            $0.height.equalTo(menuView.heightAnchor)
         }
         clearButton.anchor {
             $0.leading.equalTo(redoButton.trailingAnchor).offset(minSize * 0.0266)
             $0.top.equalTo(0)
             $0.width.greaterThanOrEqualTo(0)
-            $0.height.equalTo(minSize * 0.08)
+            $0.height.equalTo(menuView.heightAnchor)
         }
     }
     

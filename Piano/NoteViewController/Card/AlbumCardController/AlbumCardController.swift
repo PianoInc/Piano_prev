@@ -63,9 +63,9 @@ class AlbumCardController: UIViewController {
         navigationController?.isToolbarHidden = false
         navigationController?.toolbarItems = toolbarItems
         guard let toolbarItems = navigationController?.toolbarItems else {return}
-        toolbarItems[0].image = #imageLiteral(resourceName: "plus")
+        toolbarItems[0].isEnabled = false
         toolbarItems[0].tintColor = .gray
-        toolbarItems[1].title = "묶어보내기"
+        toolbarItems[0].title = "묶어보내기"
     }()
     
     private func initConst() {
@@ -107,8 +107,8 @@ class AlbumCardController: UIViewController {
     
     @IBAction private func action(group: UIButton) {
         guard let toolbarItems = navigationController?.toolbarItems else {return}
-        toolbarItems[0].tintColor = (toolbarItems[0].tintColor == .gray) ? .blue : .gray
-        isGrouped = (toolbarItems[0].tintColor == .blue)
+        toolbarItems[0].tintColor = (toolbarItems[0].tintColor == .gray) ? UIColor(hex6: "006FFF") : .gray
+        isGrouped = (toolbarItems[0].tintColor == UIColor(hex6: "006FFF"))
     }
     
     /// 현재 display 되고 있는 folder에 따라 title을 갱신한다.
@@ -202,7 +202,6 @@ extension AlbumCardController: AlbumDelegates {
             navigationItem.rightBarButtonItem?.isEnabled = !photoListView.selectedIndex.isEmpty
             guard let toolbarItems = navigationController?.toolbarItems else {return}
             toolbarItems[0].isEnabled = (photoListView.selectedIndex.count > 1)
-            toolbarItems[1].isEnabled = (photoListView.selectedIndex.count > 1)
         }
     }
     

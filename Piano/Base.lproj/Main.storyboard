@@ -1344,14 +1344,9 @@
                         <viewLayoutGuide key="safeArea" id="ZLs-A6-kfI"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem id="LLg-mb-LX8">
+                        <barButtonItem style="plain" id="LLg-mb-LX8">
                             <connections>
                                 <action selector="actionWithGroup:" destination="gZB-dg-xfT" id="qIY-2y-uTZ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem id="y1F-LF-GUx">
-                            <connections>
-                                <action selector="actionWithGroup:" destination="gZB-dg-xfT" id="gA1-Y0-iH2"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -1481,29 +1476,32 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBQ-ba-fah">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBQ-ba-fah">
+                                                <rect key="frame" x="0.0" y="3" width="50" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="close"/>
                                                 <connections>
                                                     <action selector="actionWithClose:" destination="NXR-h2-FIM" eventType="touchUpInside" id="qah-DH-lQF"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwy-m8-6Dr">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwy-m8-6Dr">
+                                                <rect key="frame" x="0.0" y="4" width="50" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="undo"/>
                                                 <connections>
                                                     <action selector="actionWithUndo:" destination="NXR-h2-FIM" eventType="touchUpInside" id="Jzb-ca-gMg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kc-Ws-LNf">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kc-Ws-LNf">
+                                                <rect key="frame" x="3" y="4" width="44" height="43"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="redo"/>
                                                 <connections>
                                                     <action selector="actionWithRedo:" destination="NXR-h2-FIM" eventType="touchUpInside" id="cZr-3H-oIH"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfG-TB-LBT">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfG-TB-LBT">
+                                                <rect key="frame" x="10" y="9" width="30" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
                                                     <action selector="actionWithClear:" destination="NXR-h2-FIM" eventType="touchUpInside" id="pbN-y3-qGk"/>
@@ -1543,11 +1541,14 @@
     </scenes>
     <resources>
         <image name="bold" width="18" height="20"/>
+        <image name="close" width="50" height="44"/>
         <image name="member" width="12" height="12"/>
         <image name="piano" width="17" height="19"/>
         <image name="plus" width="20" height="20"/>
+        <image name="redo" width="44" height="43"/>
         <image name="rightAccessoryDisclosureLight" width="8" height="13"/>
         <image name="share" width="20" height="20"/>
         <image name="test2" width="512" height="384"/>
+        <image name="undo" width="50" height="42"/>
     </resources>
 </document>
