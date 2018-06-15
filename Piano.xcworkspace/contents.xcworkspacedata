@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Anchor/Anchor.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:DynamicTextEngine/DynamicTextEngine.xcodeproj">
    </FileRef>
    <FileRef

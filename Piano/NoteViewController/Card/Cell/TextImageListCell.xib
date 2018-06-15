@@ -12,14 +12,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="TextImageListCell" id="38O-vX-6sN" customClass="TextImageListCell" customModule="Piano" customModuleProvider="target">
+        <view contentMode="scaleToFill" restorationIdentifier="TextImageListCell" id="5Ei-Z9-qtx" customClass="TextImageListCell" customModule="Piano" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="366" height="382"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Wy-ob-ZSH">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZDJ-gd-Q5t">
                     <rect key="frame" x="0.0" y="0.0" width="366" height="382"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1gY-d7-0Jv">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oFc-Mi-dZ7" customClass="FastPagingFlowLayout" customModule="Piano" customModuleProvider="target">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -29,15 +29,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="0Wy-ob-ZSH" firstAttribute="top" secondItem="59x-CZ-85N" secondAttribute="top" id="Qg9-nr-EWl"/>
-                <constraint firstItem="59x-CZ-85N" firstAttribute="trailing" secondItem="0Wy-ob-ZSH" secondAttribute="trailing" id="gul-dN-NlX"/>
-                <constraint firstItem="59x-CZ-85N" firstAttribute="bottom" secondItem="0Wy-ob-ZSH" secondAttribute="bottom" id="lbe-PN-vLy"/>
-                <constraint firstItem="0Wy-ob-ZSH" firstAttribute="leading" secondItem="59x-CZ-85N" secondAttribute="leading" id="rnt-6w-gRY"/>
+                <constraint firstItem="ZDJ-gd-Q5t" firstAttribute="leading" secondItem="req-do-uqs" secondAttribute="leading" id="EoS-zT-C0d"/>
+                <constraint firstItem="ZDJ-gd-Q5t" firstAttribute="top" secondItem="req-do-uqs" secondAttribute="top" id="N1X-6M-RpK"/>
+                <constraint firstItem="req-do-uqs" firstAttribute="trailing" secondItem="ZDJ-gd-Q5t" secondAttribute="trailing" id="ZdX-zt-FSL"/>
+                <constraint firstItem="req-do-uqs" firstAttribute="bottom" secondItem="ZDJ-gd-Q5t" secondAttribute="bottom" id="clg-Uk-PSy"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="59x-CZ-85N"/>
+            <viewLayoutGuide key="safeArea" id="req-do-uqs"/>
             <connections>
-                <outlet property="listView" destination="0Wy-ob-ZSH" id="tVT-Xr-dNj"/>
+                <outlet property="listView" destination="ZDJ-gd-Q5t" id="1Jy-ar-806"/>
             </connections>
             <point key="canvasLocation" x="221" y="-388"/>
         </view>
