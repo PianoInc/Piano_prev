@@ -8,8 +8,8 @@
 
 import DynamicTextEngine_iOS
 import UIKit
-import EventKit
 import RealmSwift
+import EventKitUI
 
 class TextEventCell: DynamicAttachmentCell, AttributeModelConfigurable {
    
@@ -17,13 +17,16 @@ class TextEventCell: DynamicAttachmentCell, AttributeModelConfigurable {
     @IBOutlet private var day: UILabel!
     @IBOutlet private var dday: UILabel!
     @IBOutlet private var title: UILabel!
+    @IBOutlet weak var button: UIButton!
     
     private var event: EKEvent!
-
+    private var eventID = ""
+    
     func configure(with id: String) {
         guard let realm = try? Realm(),
             let eventModel = realm.object(ofType: RealmEventModel.self, forPrimaryKey: id)
             else {return}
+        eventID = eventModel.event
         
         let eventStore = EKEventStore()
         guard let event = eventStore.event(withIdentifier: eventModel.event) else {return}
@@ -60,6 +63,26 @@ class TextEventCell: DynamicAttachmentCell, AttributeModelConfigurable {
         }
         
         title.text = event.title
+    }
+    
+    @IBAction private func action(select: UIButton) {
+        let eventStore = EKEventStore()
+        var event = eventStore.event(withIdentifier: eventID)
+        if event == nil {
+            do {
+                try eventStore.save(self.event, span: .thisEvent)
+                event = eventStore.event(withIdentifier: eventID)
+            } catch {
+                event = EKEvent(eventStore: eventStore)
+            }
+        }
+        
+        guard let noteViewCtrl = AppNavigator.currentViewController as? NoteViewController else {return}
+        let eventController = EKEventEditViewController()
+        eventController.eventStore = eventStore
+        eventController.event = event
+        eventController.editViewDelegate = noteViewCtrl
+        noteViewCtrl.present(eventController, animated: true)
     }
     
 }

@@ -392,7 +392,7 @@ extension NoteViewController: EKEventEditViewDelegate {
             attachment(with: model.id, cellId: TextEventCell.identifier)
         }
     }
-    
+
 }
 
 extension NoteViewController {

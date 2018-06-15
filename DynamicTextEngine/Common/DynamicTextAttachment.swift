@@ -10,7 +10,7 @@ import UIKit
 
 open class DynamicTextAttachment: NSTextAttachment {
 
-    public let uniqueID = UUID().uuidString // cell dispatcher가 사용하는 unique ID
+    public var uniqueID = "" // cell dispatcher가 사용하는 unique ID
 
     private var isVisible = false //현재 텍스트뷰에서 visible한가
     var currentCharacterIndex: Int!// 현재 textview의 character index

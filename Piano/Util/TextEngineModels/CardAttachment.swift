@@ -25,7 +25,8 @@ class CardAttachment: DynamicTextAttachment {
         if cellIdentifier.contains("|") {
             fatalError("identifier should not contain | character")
         }
-
+        
+        self.uniqueID = idForModel
         self.idForModel = idForModel
         self.privateCellIdentifier = cellIdentifier
         self.currentSize = size(forIdentifier: cellIdentifier)

@@ -23,6 +23,8 @@ class DrawingMapController: UIViewController {
     
     var drawDismissed: ((String) -> ())?
     var noteID = ""
+    var modelID = ""
+    var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,7 @@ class DrawingMapController: UIViewController {
         menuView.backgroundColor = UIColor.white.withAlphaComponent(0.75)
         clearButton.setTitleColor(UIColor(hex6: "9d9d9d"), for: .normal)
         clearButton.setTitle("Clear", for: .normal)
+        canvasView.canvas.image = image
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,18 +110,30 @@ class DrawingMapController: UIViewController {
     
     @IBAction private func action(close: UIButton) {
         if let image = canvasView.canvas.image {
-            guard let realm = try? Realm(),
-                let noteModel = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) else {return}
+            guard let realm = try? Realm()else {return}
             
-            let coder = NSKeyedUnarchiver(forReadingWith: noteModel.ckMetaData)
-            coder.requiresSecureCoding = true
-            guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
-            coder.finishDecoding()
-            
-            let model = RealmImageModel.getNewModel(sharedZoneID: record.recordID.zoneID, noteRecordName: record.recordID.recordName, image: image)
-            ModelManager.saveNew(model: model)
-            dismiss(animated: true) {
-                self.drawDismissed?(model.id)
+            if let imageModel = realm.object(ofType: RealmImageModel.self, forPrimaryKey: modelID),
+                !imageModel.isPhoto {
+                let imageData = UIImageJPEGRepresentation(image, 1) ?? Data()
+                ModelManager.update(id: modelID, type: RealmImageModel.self, kv: [Schema.Image.image : imageData])
+                dismiss(animated: true) {
+                    self.drawDismissed?(self.modelID)
+                }
+            } else {
+                guard let noteModel = realm.object(ofType: RealmNoteModel.self, forPrimaryKey: noteID) else {return}
+                
+                let coder = NSKeyedUnarchiver(forReadingWith: noteModel.ckMetaData)
+                coder.requiresSecureCoding = true
+                guard let record = CKRecord(coder: coder) else {fatalError("Data poluted!!")}
+                coder.finishDecoding()
+                
+                let model = RealmImageModel.getNewModel(sharedZoneID: record.recordID.zoneID, noteRecordName: record.recordID.recordName, image: image)
+                model.isPhoto = false
+                ModelManager.saveNew(model: model)
+                
+                dismiss(animated: true) {
+                    self.drawDismissed?(model.id)
+                }
             }
         } else {
             dismiss(animated: true)

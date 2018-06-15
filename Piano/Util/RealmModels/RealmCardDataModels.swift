@@ -57,6 +57,7 @@ class RealmImageModel: Object, Recordable {
     @objc dynamic var ckMetaData = Data()
     
     @objc dynamic var isInSharedDB = false
+    @objc dynamic var isPhoto = true
     
     @objc dynamic var noteRecordName = ""
     
