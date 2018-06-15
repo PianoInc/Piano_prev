@@ -74,11 +74,23 @@ extension AlbumReviewController: UIScrollViewDelegate {
     }
     
     private func sizeToFit(with zoom: CGFloat) {
+        // Scale 처리
         guard let imageSize = image?.size else {return}
-        let width = scrollView.bounds.width * zoom
-        let height = imageSize.height * (scrollView.bounds.width / imageSize.width) * zoom
+        var scale = scrollView.bounds.height / imageSize.height
+        var width = (imageSize.width * scale); var height = scrollView.bounds.height
+        if imageSize.width >= imageSize.height {
+            scale = scrollView.bounds.width / imageSize.width
+            width = scrollView.bounds.width; height = (imageSize.height * scale)
+        }
+        
+        // Zoom 처리
+        width = width * zoom
+        height = height * zoom
+        
+        // Point 처리
+        let x = scrollView.bounds.width / 2 - width / 2
         let y = scrollView.bounds.height / 2 - height / 2
-        imageView.frame = CGRect(x: 0, y: (y <= 0) ? 0 : y, width: width, height: height)
+        imageView.frame = CGRect(x: (x <= 0) ? 0 : x, y: (y <= 0) ? 0 : y, width: width, height: height)
     }
     
 }
