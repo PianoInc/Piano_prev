@@ -11,6 +11,7 @@ import Photos
 
 class AlbumReviewController: UIViewController {
     
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var imageView: UIImageView!
     
     var image: UIImage?
@@ -56,3 +57,29 @@ class AlbumReviewController: UIViewController {
     }
     
 }
+
+extension AlbumReviewController: UIScrollViewDelegate {
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        sizeToFit(with: scrollView.zoomScale)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeToFit(with: 1)
+    }
+    
+    private func sizeToFit(with zoom: CGFloat) {
+        guard let imageSize = image?.size else {return}
+        let width = scrollView.bounds.width * zoom
+        let height = imageSize.height * (scrollView.bounds.width / imageSize.width) * zoom
+        let y = scrollView.bounds.height / 2 - height / 2
+        imageView.frame = CGRect(x: 0, y: (y <= 0) ? 0 : y, width: width, height: height)
+    }
+    
+}
+
