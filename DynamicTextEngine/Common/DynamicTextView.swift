@@ -22,6 +22,10 @@ extension DynamicTextView {
         dispatcher.remove(attachmentID: attachmentID)
     }
     
+    public func delete(attachmentID: String) {
+        dispatcher.delete(attachmentID: attachmentID)
+    }
+    
     public func reload(attachmentID: String) {
         dispatcher.reload(attachmentID: attachmentID)
     }
