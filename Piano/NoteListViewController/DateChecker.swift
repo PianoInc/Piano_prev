@@ -85,6 +85,27 @@ class DateChecker {
         return NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false",
                            from as CVarArg, to as CVarArg)
     }
+    
+    func pastOneYear(with count: Int) -> NSPredicate {
+        let today = calendar.startOfDay(for: Date())
+        
+        var components = calendar.dateComponents([.year, .month, .day], from: today)
+        components.year! -= count
+        let to = calendar.date(from: components)!
+        
+        components = calendar.dateComponents([.year, .month, .day], from: today)
+        components.year! -= (count + 1)
+        let from = calendar.date(from: components)!
+        
+        return NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false",
+                           from as CVarArg, to as CVarArg)
+    }
+    
+    func pastYear(with date: Date) -> String {
+        let today = calendar.startOfDay(for: Date())
+        let interval = calendar.dateComponents([.year], from: date, to: today)
+        return String(format: "recentYear".loc, interval.year! + 1)
+    }
 
     //성능 이슈
     //오늘

@@ -71,15 +71,19 @@ class NoteListViewController: UIViewController {
             dataSource.append(holdNotes)
             
             let dateChecker = DateChecker()
-            for (predict, title) in dateChecker.checker {
+            for index in 0... {
+                if fetchedCount == allCount {return dataSource}
+                let (predict, title) = (index <= 4) ?
+                    dateChecker.checker[index] : (dateChecker.pastOneYear(with: index - 4), "")
+                
                 let results = allResults.filter(predict).sorted(byKeyPath: "isModified", ascending: false)
                 fetchedCount += results.count
-                if fetchedCount == allCount {return dataSource}
                 
                 let notes: [Note] = results.map { (noteModel) -> Note in
+                    let sectionTitle = (title.isEmpty) ? dateChecker.pastYear(with: noteModel.isModified) : title
                     let content = String(noteModel.content.prefix(30))
                     let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
-                    return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: title, sectionIdentifier: NotePeriodReusableView.identifier)
+                    return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: sectionTitle, sectionIdentifier: NotePeriodReusableView.identifier)
                 }
                 dataSource.append(notes)
             }
