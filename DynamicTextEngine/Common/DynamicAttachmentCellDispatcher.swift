@@ -42,6 +42,8 @@ class DynamicAttachmentCellDispatcher {
 
     func remove(attachmentID: String) {
         if let attachment = attachments[attachmentID] {
+            guard let textView = superView else {return}
+            textView.textStorage.deleteCharacters(in: NSMakeRange(attachment.currentCharacterIndex, 1))
             attachment.delegate = nil
             needToEndDisplay(attachment: attachment)
         }
