@@ -19,11 +19,14 @@ class NoteListViewController: UIViewController {
     var tempCalendar = true
     var tempHold = true
     
+    private var notificationToken: NotificationToken?
     lazy var dataSource: [[CollectionDatable]] = {
         
         //TODO: type을 바라보며 데이터 소스 세팅하기
         var dataSource: [[CollectionDatable]] = []
-        guard let type = self.type else { return dataSource }
+        guard let type = self.type else {
+            return dataSource
+        }
         
         switch type {
         case .all:
@@ -47,7 +50,7 @@ class NoteListViewController: UIViewController {
             //1단계: all인 경우, 휴지통에 있거나, 잠금에 있는 것들을 제외한 모든 것들을 우선 fetch하고 카운트를 기록한다.
             let allPredicate = NSPredicate(format: "isLocked == false AND isInTrash == false")
             let allResults = realm.objects(RealmNoteModel.self).filter(allPredicate)
-            
+
             let allCount = allResults.count
             var fetchedCount = 0
             
@@ -67,42 +70,24 @@ class NoteListViewController: UIViewController {
             }
             dataSource.append(holdNotes)
             
-            //TODO: struct만들어서 오늘 날짜를 받으면, 오늘, 어제, .... 순으로 predicate,sectionTitle를 리턴하도록 만들기
-            //i에 따라서 섹션 타이틀
-            
-            //오늘, 어제, 이전 7일, 이전 30일, 월별, 년도별
-            
-            //section 3: 오늘 날짜
-            var calendar = Calendar.current
-            calendar.timeZone = NSTimeZone.local
-            
-            let date = Date(timeIntervalSinceNow: -60 * 60 * 24 * 0)
-            let dateFrom = calendar.startOfDay(for: date)
-            
-            var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: dateFrom)
-            components.day! += 1
-            let dateTo = calendar.date(from: components)!
-            
-            let todayPredicate = NSPredicate(format: "(%@ <= isModified) AND (isModified < %@) AND isPinned == false",
-                                             argumentArray: [dateFrom, dateTo])
-            let todayResults = allResults.filter(todayPredicate).sorted(byKeyPath: "isModified", ascending: false)
-            fetchedCount += todayResults.count
-            if fetchedCount == allCount { return dataSource }
-            
-            // 뷰모델로 변환
-            //TODO: shared 방법 Zio에게 물어봐서 적용시키기
-            let todayNotes: [Note] = todayResults.map { (noteModel) -> Note in
-                let content = String(noteModel.content.prefix(30))
-                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
-                return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: "오늘", sectionIdentifier: NotePeriodReusableView.identifier)
+            let dateChecker = DateChecker()
+            for index in 0... {
+                if fetchedCount == allCount {return dataSource}
+                let (predict, title) = (index <= 4) ?
+                    dateChecker.checker[index] : (dateChecker.pastOneYear(with: index - 4), "")
+                
+                let results = allResults.filter(predict).sorted(byKeyPath: "isModified", ascending: false)
+                fetchedCount += results.count
+                
+                let notes: [Note] = results.map { (noteModel) -> Note in
+                    let sectionTitle = (title.isEmpty) ? dateChecker.pastYear(with: noteModel.isModified) : title
+                    let content = String(noteModel.content.prefix(30))
+                    let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                    return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: sectionTitle, sectionIdentifier: NotePeriodReusableView.identifier)
+                }
+                dataSource.append(notes)
             }
-            dataSource.append(holdNotes)
-            
-            
-            //section 4: 어제 날짜
-            
-            
-            
+
         case .custom(let categoryStr):
             //section 0: 새 메모 작성
             //TODO: description에 대한 모델 대입하기
@@ -136,7 +121,6 @@ class NoteListViewController: UIViewController {
         //section 3: 일반 메모들
         //TODO: 여기에 realm Note모델 50~100개 limit으로 해서 넣기
         //방식: 오늘날짜, 어제날짜, 그제 ~ 일주일 전 날짜, 한달전(1월까지), 년도수
-        
         return dataSource
         
     }()
@@ -145,9 +129,12 @@ class NoteListViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigationBar()
-        
         updateCollectionViewInset()
-
+        registerToken()
+    }
+    
+    deinit {
+        notificationToken?.invalidate()
     }
     
     private func setupNavigationBar() {
@@ -178,6 +165,22 @@ class NoteListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? NoteViewController, let type = sender as? NoteViewController.NoteType {
             destinationVC.noteType = type
+        }
+    }
+    
+    func registerToken() {
+        guard let realm = try? Realm() else {return}
+        let results = realm.objects(RealmNoteModel.self)
+        
+        notificationToken = results.observe { [weak self] change in
+            switch change {
+            case .initial(_):
+                break
+            case .update(_, _, _, let mod):
+                break
+            case .error(_):
+                break
+            }
         }
     }
 

@@ -11,6 +11,7 @@ import Photos
 
 class AlbumReviewController: UIViewController {
     
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var imageView: UIImageView!
     
     var image: UIImage?
@@ -56,3 +57,38 @@ class AlbumReviewController: UIViewController {
     }
     
 }
+
+extension AlbumReviewController: UIScrollViewDelegate {
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        sizeToFit(with: scrollView.zoomScale)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeToFit(with: 1)
+    }
+    
+    private func sizeToFit(with zoom: CGFloat) {
+        // Scale 처리
+        guard let imageSize = image?.size else {return}
+        let scale = max(scrollView.bounds.width, scrollView.bounds.height) / max(imageSize.width, imageSize.height)
+        var width = (imageSize.width >= imageSize.height) ? scrollView.bounds.width : (imageSize.width * scale)
+        var height = (imageSize.width >= imageSize.height) ? (imageSize.height * scale) : scrollView.bounds.height
+        
+        // Zoom 처리
+        width = width * zoom
+        height = height * zoom
+        
+        // Point 처리
+        let x = scrollView.bounds.width / 2 - width / 2
+        let y = scrollView.bounds.height / 2 - height / 2
+        imageView.frame = CGRect(x: (x <= 0) ? 0 : x, y: (y <= 0) ? 0 : y, width: width, height: height)
+    }
+    
+}
+
