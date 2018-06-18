@@ -379,7 +379,7 @@ extension NoteViewController: EKEventEditViewDelegate {
         
         if let eventModel = realm.objects(RealmEventModel.self).filter(NSPredicate(format: "event == %@", eventIdentifier)).first {
             if action == .deleted {
-                textView.remove(attachmentID: eventModel.id)
+                textView.delete(attachmentID: eventModel.id)
             } else {
                 textView.reload(attachmentID: eventModel.id)
             }
