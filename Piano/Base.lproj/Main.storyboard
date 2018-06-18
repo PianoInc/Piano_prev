@@ -1189,7 +1189,7 @@
         <!--Note View Controller-->
         <scene sceneID="UqT-Xj-Dqt">
             <objects>
-                <viewController id="ZCD-Nw-QKq" customClass="NoteViewController" customModule="Piano" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NoteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZCD-Nw-QKq" customClass="NoteViewController" customModule="Piano" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PxH-KS-hG9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

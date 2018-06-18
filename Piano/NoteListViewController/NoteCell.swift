@@ -50,7 +50,10 @@ struct Note: CollectionDatable {
     }
     
     func didSelectItem(fromVC viewController: ViewController) {
-//        viewController.performSegue(withIdentifier: NoteViewController.identifier, sender: type)
+        let noteViewCtrl = viewCtrl(type: NoteViewController.self)
+        noteViewCtrl.noteType = noteType
+        noteViewCtrl.noteID = noteType.id
+        viewController.navigationController?.pushViewController(noteViewCtrl, animated: true)
     }
     
 }

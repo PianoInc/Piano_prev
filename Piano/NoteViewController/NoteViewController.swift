@@ -18,8 +18,6 @@ class NoteViewController: UIViewController {
     
     var noteType: NoteType!
     lazy var dataSource: [[CollectionDatable]] = []
-    
-    
 
     @IBOutlet weak var textView: PianoTextView!
     var noteID: String!
@@ -43,7 +41,6 @@ class NoteViewController: UIViewController {
             noteID = id
             textView.noteID = noteID
             textView.becomeFirstResponder()
-            
         case .open(let noteInfo):
             ()
         case .lock(let noteInfo):
@@ -77,7 +74,7 @@ class NoteViewController: UIViewController {
         setNoteContents()
         subscribeToChange()
 
-        
+        willResignActive { [weak self] _ in self?.saveWhenResignActive()}
     }
     
     deinit {
@@ -497,10 +494,6 @@ extension NoteViewController: UITextViewDelegate {
         return [completeButton, copyAllButton]
     }
     
-    @objc func tapComplete(sender: UIBarButtonItem) {
-        textView.resignFirstResponder()
-    }
-    
     @objc func tapCopyAll(sender: UIBarButtonItem) {
         
     }
@@ -617,6 +610,47 @@ extension NoteViewController: UITextViewDelegate {
     
 }
 
+//MARK: Save
+extension NoteViewController {
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        guard parent == nil else {return}
+        saveNote()
+    }
+    
+    @objc private func tapComplete(sender: UIBarButtonItem) {
+        textView.resignFirstResponder()
+        saveNote()
+    }
+    
+    private func saveWhenResignActive() {
+        saveNote()
+    }
+    
+    private func saveNote() {
+        let (string, attributes) = textView.get()
+        let noteID = self.noteID ?? ""
+        guard let data = try? JSONEncoder().encode(attributes) else {isSaving = false;return}
+        let kv: [String: Any] = [Schema.Note.content: string,
+                                 Schema.Note.attributes: data,
+                                 "isModified": Date()]
+
+        ModelManager.update(id: noteID, type: RealmNoteModel.self, kv: kv, completion: nil)
+    }
+    
+    /**
+     ApplicationWillResignActive.
+     - parameter completion : Notice when applicationWillResignActive.
+     */
+    func willResignActive(_ completion: @escaping (Notification) -> ()) {
+        _ = NotificationCenter.default.rx.notification(.UIApplicationWillResignActive).subscribe {
+            guard let noti = $0.element else {return}
+            completion(noti)
+        }
+    }
+    
+}
 
 //MARK: NavigationController
 extension NoteViewController {
