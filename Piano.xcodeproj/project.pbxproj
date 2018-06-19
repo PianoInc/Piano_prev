@@ -33,6 +33,7 @@
 		16CF337F20CA69D800AA606F /* LocalAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF337D20CA69D800AA606F /* LocalAuth.swift */; };
 		16CF338120CA6A0E00AA606F /* Date_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF338020CA6A0E00AA606F /* Date_extension.swift */; };
 		16CF338320CA6EB700AA606F /* AlbumPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CF338220CA6EB700AA606F /* AlbumPhotoCell.xib */; };
+		16D8100B20D8F01400931698 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 16D8100920D8F01300931698 /* InfoPlist.strings */; };
 		16D920A820D34DEC005F4303 /* TextImageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D920A720D34DEC005F4303 /* TextImageListCell.xib */; };
 		56004718BFACAB4352342344 /* Pods_Piano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C004A8803023887369302C /* Pods_Piano.framework */; };
 		6CEDD11D20BD18A0002FB34E /* LocalImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDD11820BD18A0002FB34E /* LocalImageCache.swift */; };
@@ -201,6 +202,9 @@
 		16CF337D20CA69D800AA606F /* LocalAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAuth.swift; sourceTree = "<group>"; };
 		16CF338020CA6A0E00AA606F /* Date_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date_extension.swift; sourceTree = "<group>"; };
 		16CF338220CA6EB700AA606F /* AlbumPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumPhotoCell.xib; sourceTree = "<group>"; };
+		16D8100A20D8F01300931698 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		16D8100C20D8F01A00931698 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		16D8100D20D8F01D00931698 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		16D920A720D34DEC005F4303 /* TextImageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextImageListCell.xib; sourceTree = "<group>"; };
 		5330C18E5AE13D724B6D77DC /* Pods-Piano.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Piano.release.xcconfig"; path = "Pods/Target Support Files/Pods-Piano/Pods-Piano.release.xcconfig"; sourceTree = "<group>"; };
 		6CEDD11820BD18A0002FB34E /* LocalImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalImageCache.swift; sourceTree = "<group>"; };
@@ -734,6 +738,7 @@
 				7C71F7CB20A729E0007DB646 /* Assets.xcassets */,
 				7C71F7CD20A729E0007DB646 /* LaunchScreen.storyboard */,
 				7C71F7C820A729DF007DB646 /* Main.storyboard */,
+				16D8100920D8F01300931698 /* InfoPlist.strings */,
 				7C41879D20C35C4100ED41FB /* Localizable.strings */,
 				7C71F7D020A729E0007DB646 /* Info.plist */,
 			);
@@ -898,6 +903,7 @@
 				7C4187C220C6347200ED41FB /* DeleteButton.xib in Resources */,
 				7CFC3EFF20C12571002C6E09 /* AutoCompleteCollectionView.xib in Resources */,
 				7C41879B20C35C4100ED41FB /* Localizable.strings in Resources */,
+				16D8100B20D8F01400931698 /* InfoPlist.strings in Resources */,
 				7C4187AB20C6176700ED41FB /* RestoreButton.xib in Resources */,
 				7C1F8D0220BE3567001B03AC /* PianoView.xib in Resources */,
 				7C4187A520C6172C00ED41FB /* PinButton.xib in Resources */,
@@ -1122,6 +1128,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		16D8100920D8F01300931698 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				16D8100A20D8F01300931698 /* en */,
+				16D8100C20D8F01A00931698 /* zh-Hans */,
+				16D8100D20D8F01D00931698 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		7C41879D20C35C4100ED41FB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
