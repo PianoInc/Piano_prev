@@ -29,7 +29,6 @@ class TextAddressCell: DynamicAttachmentCell, AttributeModelConfigurable {
         layer.cornerRadius = 9
         mapView.layer.borderColor = UIColor(hex6: "9aa4af").cgColor
         mapView.layer.borderWidth = 0.5
-        duplicate.setTitle("mapCopyAddr".loc, for: .normal)
         
         initConst()
     }
@@ -101,12 +100,45 @@ class TextAddressCell: DynamicAttachmentCell, AttributeModelConfigurable {
             
             self.name.text = data.title
             self.address.text = data.location
+            self.duplicate.setTitle("mapCopyAddr".loc, for: .normal)
         }
     }
     
     @IBAction private func action(copy: UIButton) {
         guard let data = self.mapData else {return}
         UIPasteboard.general.string = data.location
+        
+        let isPhoneX = [UIScreen.main.bounds.width, UIScreen.main.bounds.height].contains(812)
+        
+        guard let naviCtrl = AppNavigator.currentNavigationController else {return}
+        let statusFrame = UIApplication.shared.statusBarFrame
+        let barFrame = naviCtrl.navigationBar.frame
+        let height = isPhoneX ? statusFrame.height + barFrame.height : statusFrame.height
+        
+        let window = UIWindow(frame: CGRect(x: 0, y: 0, width: barFrame.width, height: height))
+        window.windowLevel = UIWindowLevelStatusBar + 1
+        window.makeKeyAndVisible()
+        
+        let alertView = UIView(frame: CGRect(x: 0, y: -height, width: barFrame.width, height: height))
+        alertView.backgroundColor = UIColor(hex6: "007dfb")
+        window.addSubview(alertView)
+        
+        let alertLabel = UILabel(frame: CGRect(x: 5, y: height - 20, width: barFrame.width - 5, height: 20))
+        alertLabel.backgroundColor = .clear
+        alertLabel.textColor = .white
+        alertLabel.font = UIFont.systemFont(ofSize: 12)
+        alertLabel.text = "주소가 복사되었습니다."
+        alertView.addSubview(alertLabel)
+        
+        UIView.animate(withDuration: 0.2) {
+            alertView.frame.origin.y = 0
+        }
+        UIView.animate(withDuration: 0.2, delay: 2.2, options: [.allowUserInteraction], animations: {
+            alertView.frame.origin.y = -height
+        }, completion: { finished in
+            window.removeFromSuperview()
+        })
     }
     
 }
+
