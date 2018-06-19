@@ -89,10 +89,12 @@ class NoteCell: UICollectionViewCell, CollectionDataAcceptable {
             subTitleLabel.text = data.content.sub(firstLineText.count...)
             
             //TODO: 버튼 세팅하기
+            leftStackView.arrangedSubviews.forEach {$0.removeFromSuperview()}
             leftButtons.forEach { leftButton in
                 leftStackView.addArrangedSubview(leftButton)
             }
             
+            rightStackView.arrangedSubviews.forEach {$0.removeFromSuperview()}
             rightButtons.forEach { rightButton in
                 rightStackView.addArrangedSubview(rightButton)
             }
@@ -187,48 +189,56 @@ extension NoteCell {
     @objc func tapPin(_ sender: Any) {
         print("tapPin")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isPinned : true])
     }
     
     @objc func tapUnPin(_ sender: Any) {
         print("tapUnPin")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isPinned : false])
     }
     
     @objc func tapLock(_ sender: Any) {
         print("tapLock")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isLocked : true])
     }
     
     @objc func tapUnlock(_ sender: Any) {
         print("tapUnlock")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isLocked : false])
     }
     
     @objc func tapCategory(_ sender: Any) {
         print("tapChangeCategory")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         // TODO...
     }
     
     @IBAction func tapTrash(_ sender: Any) {
         print("tapTrash")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isInTrash : true])
     }
     
     @IBAction func tapRestore(_ sender: Any) {
         print("tapRestore")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isInTrash : false])
     }
     
     @objc func tapDelete(_ sender: Any) {
         print("tapDelete")
         guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        animateToDefault(0)
         ModelManager.delete(id: id, type: RealmNoteModel.self)
     }
     
@@ -334,10 +344,10 @@ extension NoteCell: UIGestureRecognizerDelegate {
     
 
     
-    func animateToDefault() {
+    func animateToDefault(_ duration: Double = -1) {
         
         isAnimating = true
-        UIView.animate(withDuration: animationDuration, animations: { [weak self] in
+        UIView.animate(withDuration: (duration < 0) ? animationDuration : duration, animations: { [weak self] in
             guard let `self` = self else { return }
             self.innerViewLeadingConstraint.constant = self.originInnerViewLeading
             self.innerViewTrailingConstraint.constant = self.originInnerViewTrailing

@@ -11,7 +11,6 @@
 
 import UIKit
 import MessageUI
-import RealmSwift
 
 class CategoryListViewController: UIViewController {
     
@@ -77,63 +76,6 @@ class CategoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateCollectionViewInset()
-        
-        guard try! Realm().objects(RealmNoteModel.self).isEmpty else {return}
-        
-        let cal = Calendar.current
-        var com = cal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
-        
-        let format = DateFormatter()
-        format.dateFormat = "yyyy MM dd  hh mm ss"
-        
-        let newModel1 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel1.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel1)
-        
-        com.day! -= 1
-        let newModel2 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel2.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel2)
-        
-        com.day! -= 3
-        let newModel3 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel3.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel3)
-        
-        com.day! -= 10
-        let newModel4 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel4.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel4)
-        
-        com.day! -= 40
-        let newModel5 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel5.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel5)
-        
-        com.month! -= 2
-        let newModel8 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel8.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel8)
-        
-        com.year! -= 1
-        let newModel6 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel6.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel6)
-        
-        com.year! -= 2
-        let newModel7 = RealmNoteModel.getNewModel(content: format.string(from: cal.date(from: com)!),
-                                                   categoryRecordName: "")
-        newModel7.isModified = cal.date(from: com)!
-        ModelManager.saveNew(model: newModel7)
-        
-        print(try! Realm().objects(RealmNoteModel.self))
     }
     
     private func updateCollectionViewInset() {

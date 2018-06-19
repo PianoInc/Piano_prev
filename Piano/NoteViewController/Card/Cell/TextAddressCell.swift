@@ -38,7 +38,11 @@ class TextAddressCell: DynamicAttachmentCell, AttributeModelConfigurable {
             $0.leading.equalTo(13.fit)
             $0.trailing.equalTo(-13.fit)
             $0.top.equalTo(13.fit)
-            $0.height.equalTo(130.fit)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                $0.height.equalTo(330.fit)
+            } else {
+                $0.height.equalTo(130.fit)
+            }
         }
         hLine.anchor {
             $0.leading.equalTo(13.fit)

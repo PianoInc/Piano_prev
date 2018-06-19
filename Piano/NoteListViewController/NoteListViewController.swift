@@ -20,9 +20,13 @@ class NoteListViewController: UIViewController {
     var tempHold = true
     
     private var notificationToken: NotificationToken?
+    
     lazy var dataSource: [[CollectionDatable]] = {
-        
         //TODO: type을 바라보며 데이터 소스 세팅하기
+        return createSource()
+    }()
+    
+    private func createSource() -> [[CollectionDatable]] {
         var dataSource: [[CollectionDatable]] = []
         guard let type = self.type else {return dataSource}
         
@@ -48,7 +52,7 @@ class NoteListViewController: UIViewController {
             //1단계: all인 경우, 휴지통에 있거나, 잠금에 있는 것들을 제외한 모든 것들을 우선 fetch하고 카운트를 기록한다.
             let allPredicate = NSPredicate(format: "isLocked == false AND isInTrash == false")
             let allResults = realm.objects(RealmNoteModel.self).filter(allPredicate)
-
+            
             let allCount = allResults.count
             var fetchedCount = 0
             
@@ -85,7 +89,7 @@ class NoteListViewController: UIViewController {
                 }
                 dataSource.append(notes)
             }
-
+            
         case .custom(let categoryStr):
             
             //section 0: 새 메모 작성
@@ -142,7 +146,7 @@ class NoteListViewController: UIViewController {
                 dataSource.append(notes)
             }
             
-       
+            
             
         case .deleted:
             let realm = try! Realm()
@@ -214,8 +218,7 @@ class NoteListViewController: UIViewController {
         //TODO: 여기에 realm Note모델 50~100개 limit으로 해서 넣기
         //방식: 오늘날짜, 어제날짜, 그제 ~ 일주일 전 날짜, 한달전(1월까지), 년도수
         return dataSource
-        
-    }()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -268,11 +271,10 @@ class NoteListViewController: UIViewController {
             switch change {
             case .initial(_):
                 break
-            case .update(_, let deletions, let insertions, let modifications):
-                print(" ")
-                print("deletions :", deletions)
-                print("insertions :", insertions)
-                print("modifications :", modifications)
+            case .update(_, _, _, _):
+                guard let strongSelf = self else {break}
+                strongSelf.dataSource = strongSelf.createSource()
+                strongSelf.collectionView.reloadData()
                 break
             case .error(_):
                 break
