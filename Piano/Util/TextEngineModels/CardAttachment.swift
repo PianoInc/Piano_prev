@@ -57,9 +57,13 @@ class CardAttachment: DynamicTextAttachment {
         case TextImageCell.identifier: break
         case TextImageListCell.identifier: break
         case TextEventCell.identifier:
-            height = 65
+            height = 65.fit
         case TextAddressCell.identifier:
-            height = 200
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                height = 400.fit
+            } else {
+                height = 200.fit
+            }
         default: break
         }
         

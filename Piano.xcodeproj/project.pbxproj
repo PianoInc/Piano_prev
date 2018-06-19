@@ -677,6 +677,7 @@
 		7C64F8AA20B61DF700FAC0E3 /* NoteListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7C4187C020C61CF500ED41FB /* Cell Buttons */,
 				7C41880320C8C23100ED41FB /* DateChecker.swift */,
 				7C7C9C2820B3BD6A004B8994 /* NoteListViewController.swift */,
 				7CB5E9C420BBFC5100B42A55 /* NoteListViewController_extension.swift */,
@@ -685,7 +686,6 @@
 				7C64F8AD20B61F6600FAC0E3 /* NoteCalendarCell.swift */,
 				7C64F8AF20B6200100FAC0E3 /* NoteCell.swift */,
 				7C2F5F2220BF8CC20005B112 /* NoteGestureRecognizer.swift */,
-				7C4187C020C61CF500ED41FB /* Cell Buttons */,
 			);
 			path = NoteListViewController;
 			sourceTree = "<group>";
