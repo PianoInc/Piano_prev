@@ -24,9 +24,7 @@ class NoteListViewController: UIViewController {
         
         //TODO: type을 바라보며 데이터 소스 세팅하기
         var dataSource: [[CollectionDatable]] = []
-        guard let type = self.type else {
-            return dataSource
-        }
+        guard let type = self.type else {return dataSource}
         
         switch type {
         case .all:
@@ -89,6 +87,7 @@ class NoteListViewController: UIViewController {
             }
 
         case .custom(let categoryStr):
+            
             //section 0: 새 메모 작성
             //TODO: description에 대한 모델 대입하기
             let noteCreate = [NoteCreate(type: .create(categoryStr), title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
@@ -104,19 +103,112 @@ class NoteListViewController: UIViewController {
             //        }
             
             
-            //section 2: 고정 메모
-            //TODO: tag도 필터링해줘야함
+            let realm = try! Realm()
             
+            let allPredicate = NSPredicate(format: "tags CONTAINS '\(categoryStr)' AND isLocked == false AND isInTrash == false")
+            let allResults = realm.objects(RealmNoteModel.self).filter(allPredicate)
+            let allCount = allResults.count
+            var fetchedCount = 0
+            
+            //section 2: 고정 메모
+            //고정 메모의 경우, 1단계로 필터한 것에서 다시 필터를 돌려 isPinned = true인 것들을 찾아낸다.
+            let holdPredicate = NSPredicate(format: "isPinned == true")
+            let holdResults = allResults.filter(holdPredicate).sorted(byKeyPath: "isModified", ascending: false)
+            fetchedCount += holdResults.count
+            if fetchedCount == allCount { return dataSource }
+            
+            let holdNotes: [Note] = holdResults.map { (noteModel) -> Note in
+                let content = String(noteModel.content.prefix(30))
+                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: true)),content: content, footnote: dateStr, sectionTitle: "고정된 메모", sectionIdentifier: NotePeriodReusableView.identifier)
+            }
+            dataSource.append(holdNotes)
+            
+            let dateChecker = DateChecker()
+            for index in 0... {
+                if fetchedCount == allCount {return dataSource}
+                let (predict, title) = (index <= 4) ?
+                    dateChecker.checker[index] : (dateChecker.pastOneYear(with: index - 4), "")
+                
+                let results = allResults.filter(predict).sorted(byKeyPath: "isModified", ascending: false)
+                fetchedCount += results.count
+                
+                let notes: [Note] = results.map { (noteModel) -> Note in
+                    let sectionTitle = (title.isEmpty) ? dateChecker.pastYear(with: noteModel.isModified) : title
+                    let content = String(noteModel.content.prefix(30))
+                    let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                    return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: sectionTitle, sectionIdentifier: NotePeriodReusableView.identifier)
+                }
+                dataSource.append(notes)
+            }
+            
+       
             
         case .deleted:
-            ()
+            let realm = try! Realm()
+            
+            let delPredicate = NSPredicate(format: "isInTrash == true")
+            let delResults = realm.objects(RealmNoteModel.self).filter(delPredicate).sorted(byKeyPath: "isModified", ascending: false)
+            let allCount = delResults.count
+            var fetchedCount = 0
+            
+            // 휴지통 메모
+            let dateChecker = DateChecker()
+            for index in 0... {
+                if fetchedCount == allCount {return dataSource}
+                let (predict, title) = (index <= 4) ?
+                    dateChecker.checker[index] : (dateChecker.pastOneYear(with: index - 4), "")
+                
+                let results = delResults.filter(predict).sorted(byKeyPath: "isModified", ascending: false)
+                fetchedCount += results.count
+                
+                let notes: [Note] = results.map { (noteModel) -> Note in
+                    let sectionTitle = (title.isEmpty) ? dateChecker.pastYear(with: noteModel.isModified) : title
+                    let content = String(noteModel.content.prefix(30))
+                    let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                    return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: sectionTitle, sectionIdentifier: NotePeriodReusableView.identifier)
+                }
+                dataSource.append(notes)
+            }
         case .locked:
-            //section 0: 새 메모 작성
-            //TODO: description에 대한 모델 대입하기
-            let noteCreate: [CollectionDatable] = [NoteCreate(type: .create(""), title: "새 메모 작성", description: "누구에게 투표했나요? 피아노한테만 알려주세요!")]
-            dataSource.append(noteCreate)
+            let realm = try! Realm()
+            
+            let lockPredicate = NSPredicate(format: "isLocked == true")
+            let lockResults = realm.objects(RealmNoteModel.self).filter(lockPredicate).sorted(byKeyPath: "isModified", ascending: false)
+            let allCount = lockResults.count
+            var fetchedCount = 0
+            
+            // 핀 메모
+            let holdPredicate = NSPredicate(format: "isPinned == true")
+            let holdResults = lockResults.filter(holdPredicate).sorted(byKeyPath: "isModified", ascending: false)
+            fetchedCount += holdResults.count
+            if fetchedCount == allCount { return dataSource }
+            let holdNotes: [Note] = holdResults.map { (noteModel) -> Note in
+                let content = String(noteModel.content.prefix(30))
+                let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: true)),content: content, footnote: dateStr, sectionTitle: "고정된 메모", sectionIdentifier: NotePeriodReusableView.identifier)
+            }
+            dataSource.append(holdNotes)
+            
+            // 고정 메모
+            let dateChecker = DateChecker()
+            for index in 0... {
+                if fetchedCount == allCount {return dataSource}
+                let (predict, title) = (index <= 4) ?
+                    dateChecker.checker[index] : (dateChecker.pastOneYear(with: index - 4), "")
+                
+                let results = lockResults.filter(predict).sorted(byKeyPath: "isModified", ascending: false)
+                fetchedCount += results.count
+                
+                let notes: [Note] = results.map { (noteModel) -> Note in
+                    let sectionTitle = (title.isEmpty) ? dateChecker.pastYear(with: noteModel.isModified) : title
+                    let content = String(noteModel.content.prefix(30))
+                    let dateStr = DateFormatter.formatter.string(from: noteModel.isModified)
+                    return Note(noteType: .open(NoteViewController.NoteInfo(id: noteModel.id, isShared: false, isPinned: false)),content: content, footnote: dateStr, sectionTitle: sectionTitle, sectionIdentifier: NotePeriodReusableView.identifier)
+                }
+                dataSource.append(notes)
+            }
         }
-
         
         //section 3: 일반 메모들
         //TODO: 여기에 realm Note모델 50~100개 limit으로 해서 넣기
@@ -176,7 +268,11 @@ class NoteListViewController: UIViewController {
             switch change {
             case .initial(_):
                 break
-            case .update(_, _, _, let mod):
+            case .update(_, let deletions, let insertions, let modifications):
+                print(" ")
+                print("deletions :", deletions)
+                print("insertions :", insertions)
+                print("modifications :", modifications)
                 break
             case .error(_):
                 break
