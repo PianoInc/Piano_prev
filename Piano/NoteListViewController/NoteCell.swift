@@ -170,7 +170,6 @@ extension NoteCell {
             buttons.append(trashButton)
             
         case .trash:
-            
             guard let deleteButton = self.createSubviewIfNeeded(DeleteButton.self) else {break}
             deleteButton.addTarget(self, action: #selector(NoteCell.tapDelete(_:)), for: .touchUpInside)
             buttons.append(deleteButton)
@@ -185,50 +184,53 @@ extension NoteCell {
         return buttons
     }
     
-    @objc func tapDelete(_ sender: Any) {
-        
+    @objc func tapPin(_ sender: Any) {
+        print("tapPin")
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isPinned : true])
+    }
+    
+    @objc func tapUnPin(_ sender: Any) {
+        print("tapUnPin")
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isPinned : false])
     }
     
     @objc func tapLock(_ sender: Any) {
         print("tapLock")
-        guard let data = self.data as? Note else { return }
-        let id = data.noteType.id
-        //TODO: id값으로 해당 메모 잠금시키기
-    }
-    
-    @objc func tapUnPin(_ sender: Any) {
-        
-    }
-    
-    @objc func tapPin(_ sender: Any) {
-        print("tapPin")
-        guard let data = self.data as? Note else { return }
-        let id = data.noteType.id
-        //TODO: id값으로 해당 메모 고정시키기
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isLocked : true])
     }
     
     @objc func tapUnlock(_ sender: Any) {
+        print("tapUnlock")
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isLocked : false])
     }
     
     @objc func tapCategory(_ sender: Any) {
         print("tapChangeCategory")
-        guard let data = self.data as? Note else { return }
-        let id = data.noteType.id
-        //TODO: id값으로 해당 메모 카테고리 바꾸기(AppNavigator 활용하여 화면 띄우기)
-    }
-    
-    
-    
-    @IBAction func tapRestore(_ sender: Any) {
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        // TODO...
     }
     
     @IBAction func tapTrash(_ sender: Any) {
         print("tapTrash")
-        guard let data = self.data as? Note else { return }
-        let id = data.noteType.id
-        //TODO: id값으로 해당 메모 휴지통으로 보내기
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isInTrash : true])
     }
     
+    @IBAction func tapRestore(_ sender: Any) {
+        print("tapRestore")
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        ModelManager.update(id: id, type: RealmNoteModel.self, kv: [Schema.Note.isInTrash : false])
+    }
+    
+    @objc func tapDelete(_ sender: Any) {
+        print("tapDelete")
+        guard let data = self.data as? Note, let id = data.noteType.id else { return }
+        ModelManager.delete(id: id, type: RealmNoteModel.self)
+    }
     
 }
 
