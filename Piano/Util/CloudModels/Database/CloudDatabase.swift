@@ -14,6 +14,10 @@ class CloudPublicDatabase: RxCloudDatabase {
     public override init(database: CKDatabase) {
         super.init(database: database)
 
+        /*
+         Public database는 latest event record만 사용하기 때문에 해당
+         레코드에 대한 subscription만 등록
+         */
         saveQuerySubscription(for: RealmRecordTypeString.latestEvent.rawValue)
     }
 
@@ -27,6 +31,11 @@ class CloudPrivateDatabase: RxCloudDatabase {
     public override init(database: CKDatabase) {
         super.init(database: database)
 
+        /*
+         Private database에서 사용하는 tags, note, image
+         레코드에 대한 subscription 등록
+         */
+        
         saveQuerySubscription(for: RealmTagsModel.recordTypeString)
         saveQuerySubscription(for: RealmNoteModel.recordTypeString)
         saveQuerySubscription(for: RealmImageModel.recordTypeString)
@@ -43,6 +52,11 @@ class CloudSharedDatabase: RxCloudDatabase {
     public override init(database: CKDatabase) {
         super.init(database: database)
 
+        /*
+         Share database는 query subscription을 등록할 수 없기 때문에
+         database subscription 등록
+         */
+        
         saveDatabaseSubscription()
     }
 

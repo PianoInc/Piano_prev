@@ -72,11 +72,16 @@ class RxCloudDatabase {
         database.add(operation)
     }
 
+    /**
+     Internal save function.
+     Cloud에 업로드시 발생할 수 있는 에러중 zone not found error와 Merge conflict error에 대해서 Handle한다.
+     */
     func upload(record: CKRecord, ancestorRecord: CKRecord? = nil, completion: @escaping CloudSaveHandler) {
         let cloudCompletion: CloudSaveHandler = { [weak self] conflicted, error in
             guard error == nil else {
                 guard let ckError = error as? CKError else {return completion(nil, error)}
 
+                //Zone not found시 존을 만들고 다시 upload를 요청한다.
                 if ckError.isZoneNotFound() && self?.database.databaseScope == .private {
                     let zone = CKRecordZone(zoneName: RxCloudDatabase.privateRecordZoneName)
                     self?.createZoneWithID(zoneID: zone.zoneID) { error in
@@ -87,6 +92,7 @@ class RxCloudDatabase {
                 } else {
                     let (wrappedAncestor, wrappedClient, wrappedServer) = ckError.getMergeRecords()
 
+                    //머지 conflict시 ConflictResolver.swift에 있는 merge 메소드를 콜한다. 클라이언트 버전이 우선일경우 서버에 다시 업로드하고 아닐경우 클라이언트 버전을 sync한다.
                     guard let clientRecord = wrappedClient,
                             let serverRecord = wrappedServer,
                             let ancestorRecord = ancestorRecord ?? wrappedAncestor ?? nil else {return completion(nil,error)}

@@ -101,6 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     //This only happens whenever the change has occured from other environment!!
+    ///클라우드로부터 등록한 subscription중 변화가 있는 subscription의 ID를 받는다. 이를 이용해 알맞는 database의 handleNotification() 메소드를 통해 변한 레코드를 추출한다.
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("got noti!")
         guard let dict = userInfo as? [String: NSObject],

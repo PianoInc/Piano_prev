@@ -36,6 +36,34 @@ enum Diff3Block {
     case conflict(NSRange, NSRange, NSRange)// o a b
 }
 
+/*
+ Diff3 Logic
+ 
+ O, A, B의 String을 받는다.
+ O와 A를 비교해 editscript(O-A ed), O와 B를 비교해 editscript(O-B ed)를 생성한다.
+ 
+ O-A ed와 O-B ed를 비교하여
+ range가 겹치는 경우(conflict)들을 찾아낸다.
+ 
+ Conflict의 경우들
+ add-add
+ add-delete
+ add-change
+ delete-add
+ delete-delete
+ delete-change
+ change-add
+ change-delete
+ change-change
+ 
+ 
+ 이때 Change-Change를 conflict로 간주한다.
+ 
+ line diff의 경우 이를 conflict로 놔두고
+ character diff의 경우 첫번째 change의 마지막 index에 두번째 change를 반영
+ 즉 conflict를 change-add로 변경시켜 적용한다.
+ */
+
 
 class Diff3Maker {
     
@@ -56,6 +84,16 @@ class Diff3Maker {
         self.bDiffMaker = DiffMaker(aString: ancestor, bString: b, separator: separator)
     }
     
+    /**
+     Conflict를 구하기 위해서 edge dictionary를 구축한다.
+     Graph는 vertex(1개의 diff chunk)와 edge(Conflict하는 vertex array)로 이루어진다.
+     
+     결국 edges Dictionary의 key는 diff chunk index가 되고 value는 해당 diff chunk와 conflict하는
+     diff chunk index의 array가 된다.
+     
+     !이때 diff chunk index는 obDiffChunk의 경우 0~obDiffChunks.count-1만큼 부여받고
+     oaDiffChunk의 경우 obDiffChunks.count~oaDiffChunks.count+obDiffChunks.count를 부여받는다
+     */
     private func constructEdges() {
         stride(from: 0, through: oaDiffChunks.count + obDiffChunks.count, by: 1).forEach { self.edges[$0] = [] }
         
@@ -85,6 +123,11 @@ class Diff3Maker {
         }
     }
     
+    /**
+     edges dictionary를 기반으로 conflict Array를 채워나간다.
+     DFS를 기반으로 서치한다.
+     Diffchunk에 이어진 edge가 존재한다면 그 chunk들이 합쳐서 한 conflict를 형성한다.
+     */
     private func fillConflicts() {
         var visited = stride(from: 0, through: oaDiffChunks.count+obDiffChunks.count, by: 1).map{_ in return false}
         
@@ -118,6 +161,7 @@ class Diff3Maker {
         
     }
     
+    ///Original string, a String, b String간의 편한 index변환을 위해서 미리 a와 b사이의 offset을 구해놓는다.
     private func getOffsets() {
         self.offsetArray = [Int](repeating: 0, count: obDiffChunks.count)
         
@@ -145,6 +189,13 @@ class Diff3Maker {
         }
     }
     
+    /*
+     위에서 설명한 diff3을 적용시키는 메소드들
+     Conflict array를 기반으로 diff3chunk들을 생성한다.
+     
+     mergeInLineLevel과 mergeInWordLevel의 차이는
+     위에 서술되었듯이 conflict를 다루는 방식이다.
+     */
     
     func mergeInLineLevel() -> [Diff3Block] {
         var diff3Chunks: [Diff3Block] = []

@@ -30,10 +30,11 @@ class NoteSynchronizer {
     enum SynchronizerError: Error {
         case saveError
     }
-    
+
+    ///각 block에 맞춰서 textView의 textStorage에 변화 반영
     private func sync(with blocks: [Diff3Block], and attributedString: NSAttributedString) {
         var offset = 0
-        
+
         blocks.forEach {
             switch $0 {
             case .add(let index, let range):
@@ -50,6 +51,8 @@ class NoteSynchronizer {
             default: break
             }
         }
+        
+        //animating background layer 시작
         DispatchQueue.main.async { [weak self] in
             self?.textView.startDisplayLink()
         }
@@ -119,6 +122,11 @@ class NoteSynchronizer {
         database.unregister(synchronizer: self)
     }
     
+    /**
+     record의 content를 현재 textview에 반영한다.
+     Diff3Maker의 mergeInLineLevel을 통해 Diff3chunk들을 얻는다.
+     이때 conflict난 block들에 대해선 wordLevel로 다시 diff3을 진행한다.
+     */
     func serverContentChanged(_ record: CKRecord) {
         guard let noteModel = record.parseRecord(isShared: isShared) as? RealmNoteModel else {return}
         
@@ -202,6 +210,10 @@ class NoteSynchronizer {
         }
     }
     
+    /**
+     ancsetor, my, server record를 diff3하여 현재 textview에 반영한다.
+     diff3의 로직은 serverChanged메소드와 동일하다.
+     */
     func resolveConflict(ancestorRecord: CKRecord, myRecord: CKRecord, serverRecord: CKRecord, completion: @escaping  (Bool) -> ()) {
         
         let myModified = myRecord.modificationDate ?? Date(timeIntervalSince1970: 0)

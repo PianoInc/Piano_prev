@@ -46,6 +46,7 @@ struct Pair {
     let x: Int
     let y: Int
     
+    ///점과 점사이의 거리가 1일때 true
     func isAdjacent(to pair: Pair) -> Bool {
         let absX = abs(x-pair.x)
         let absY = abs(y-pair.y)
@@ -66,6 +67,7 @@ extension Pair: Hashable {
     
 }
 
+/// [http://www.xmailserver.org/diff2.pdf](http://www.xmailserver.org/diff2.pdf) 의 구현체
 class DiffMaker {
     
     let aChunks: [String]
@@ -84,6 +86,8 @@ class DiffMaker {
     let bRealRanges: [NSRange]
     let startOffset: Int
     
+    ///aString -> bString까지 가는데 최소한의 edit script를 구한다. separator는 각 string을 어떻게 chunk로 나눌지에 대한 parameter이다. separator가 empty일 경우 각 character를 하나의 chunk로 간주한다.
+    
     init(aString: String, bString: String, separator: String = "\n") {
         self.separator = separator
         let aInitialChunks = separator.isEmpty ? aString.map(String.init): aString.components(separatedBy: separator)
@@ -92,11 +96,13 @@ class DiffMaker {
         let aChunks = aInitialChunks.enumerated().map{ $0.offset == (aInitialChunks.count - 1) ? $0.element : $0.element + separator}
         let bChunks = bInitialChunks.enumerated().map{ $0.offset == (bInitialChunks.count - 1) ? $0.element : $0.element + separator}
         
+        //separator로 나눈 chunk들
         self.aChunks = aChunks
         self.bChunks = bChunks
         
         var lowerBound = 0
         
+        //후에 chunk index가 아닌 real index를 구하기 위해 미리 indexing을 해놓는다.
         self.aRealRanges = self.aChunks.map{
             let range = NSMakeRange(lowerBound, $0.count)
             lowerBound += $0.count
@@ -115,6 +121,7 @@ class DiffMaker {
         let max = aChunks.count+bChunks.count
         var offset  = 0
         
+        //offset은 a와 b가 같은 최대 prefix index
         while offset < aChunks.count && offset < bChunks.count && aChunks[offset] == bChunks[offset] {
             offset += 1
         }
@@ -133,6 +140,7 @@ class DiffMaker {
         
     }
     
+    ///chunk range -> real range
     func realRange(from range: NSRange, inA: Bool) -> NSRange {
         let realRanges = inA ? aRealRanges : bRealRanges
         
@@ -141,12 +149,15 @@ class DiffMaker {
         return NSMakeRange(lowerBound, upperBound - lowerBound)
     }
     
+    ///chunk index -> chunk range
     func realIndex(from index: Int, inA: Bool) -> Int {
         let realRange = inA ? aRealRanges : bRealRanges
         
         return index == 0 ? 0 : realRange[index-1].upperBound
     }
     
+    
+    ///논문 6페이지의 edit script구하는 logic
     private func fillPath() {
         guard !(aChunks.isEmpty && bChunks.isEmpty) else {return}
         for d in 1...(m+n) {
@@ -195,6 +206,8 @@ class DiffMaker {
         }
     }
     
+    
+    ///fillPath()가 채운 path array를 기반으로 edit script 작성
     private func getPath() -> [DiffBlock] {
         guard !(aChunks.isEmpty && bChunks.isEmpty) else {return []}
         var currentPair = Pair(x: m, y: n)
@@ -279,13 +292,14 @@ class DiffMaker {
         return chunks
     }
     
-    
+    ///Chunk index기반의 editscript 작성
     func parseTwoStrings() -> [DiffBlock] {
         fillPath()
         //merge adjacent blocks
         return getPath()
     }
     
+    ///Real index기반의 editscript 작성
     func parseWithoutLineInterpreted() -> [DiffBlock] {
         return parseTwoStrings().map {
             

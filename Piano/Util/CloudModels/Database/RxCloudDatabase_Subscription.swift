@@ -6,7 +6,9 @@
 import CloudKit
 
 extension RxCloudDatabase {
+    
     //for public & private. Shared DB doesn't accept this subscription
+    ///Query subscription. 레코드 타입에 등록한 쿼리의 결과의 변화가 생기면 notification이 내려오는 subscription.
     func saveQuerySubscription(for recordType: String) {
         let subscriptionKey = "ckQuerySubscriptionSaved\(recordType)\(database.databaseScope.string)"
         let alreadySaved = UserDefaults.standard.bool(forKey: subscriptionKey)
@@ -32,6 +34,7 @@ extension RxCloudDatabase {
     }
 
 
+    ///Database에 변화가일어날때 notification이 내려오는 subscription
     func saveDatabaseSubscription() {
         let subscriptionKey = "ckDatabaseSubscription\(database.databaseScope.string)"
         let alreadySaved = UserDefaults.standard.bool(forKey: subscriptionKey)

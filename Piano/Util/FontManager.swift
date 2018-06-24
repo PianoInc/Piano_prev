@@ -14,10 +14,13 @@ class FontManager {
 
     private init() {}
 
+    ///각 상황에맞는 font descriptor를 얻기 위해 종류별 Font 객체들
     private var customFont = UIFont.systemFont(ofSize: 17)
     private var customBoldFont = UIFont.boldSystemFont(ofSize: 17)
     private var customExtraBoldFont = UIFont.systemFont(ofSize: 17, weight: .heavy)
 
+    
+    ///Descriptor getter들. Italic의 경우는 특정한 rotation matrix를 통해 descriptor를 얻는다.
     private func getFontDescriptor() -> UIFontDescriptor {
         return customFont.fontDescriptor
     }
@@ -36,6 +39,7 @@ class FontManager {
         return customBoldFont.fontDescriptor.withMatrix(matrix)
     }
 
+    ///FontTraits(bold, italic등)에 따른 descriptor 리턴
     private func getDescriptor(from traits: FontTraits) -> UIFontDescriptor {
         if traits.contains(.bold) && traits.contains(.italic){
             return getBoldItalicFontDescriptor()
@@ -48,6 +52,7 @@ class FontManager {
         }
     }
     
+    ///Size가 .title1일 경우 extra bold폰트 descriptor를 사용하는 룰때문에 존재하는 메소드. extra bold폰트 descriptor 리턴
     private func getDescriptor(by size: FontSizeCategory) -> UIFontDescriptor {
         return size == .title1 ? customExtraBoldFont.fontDescriptor: customBoldFont.fontDescriptor
     }
@@ -72,6 +77,7 @@ class FontManager {
         }
     }
 
+    ///Font attribute에 해당하는 font 리턴
     func font(for attribute: PianoFontAttribute) -> UIFont {
         
         let size = getSize(from: attribute.sizeCategory)
